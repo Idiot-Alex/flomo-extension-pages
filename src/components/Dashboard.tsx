@@ -1,4 +1,4 @@
-import { CircleUser, Menu, Search } from "lucide-react"
+import { CircleUser, Menu, } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import {
@@ -14,7 +14,6 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
@@ -27,25 +26,25 @@ export function Dashboard() {
       <header className="sticky top-0 flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6">
         <nav className="hidden flex-col gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6">
           <a
-            href="#"
+            href="/"
             className="text-foreground transition-colors hover:text-foreground"
           >
             主页
           </a>
           <a
-            href="#"
+            href="/plans"
             className="text-muted-foreground transition-colors hover:text-foreground"
           >
             套餐计划
           </a>
           <a
-            href="#"
+            href="/register"
             className="text-muted-foreground transition-colors hover:text-foreground"
           >
             注册
           </a>
           <a
-            href="#"
+            href="/login"
             className="text-muted-foreground transition-colors hover:text-foreground"
           >
             登录
@@ -65,25 +64,25 @@ export function Dashboard() {
           <SheetContent side="left">
             <nav className="grid gap-6 text-lg font-medium">
               <a
-                href="#"
+                href="/"
                 className="text-foreground hover:text-foreground"
               >
                 主页
               </a>
               <a
-                href="#"
+                href="/plans"
                 className="text-muted-foreground hover:text-foreground"
               >
                 套餐计划
               </a>
               <a
-                href="#"
+                href="/register"
                 className="text-muted-foreground hover:text-foreground"
               >
                 注册
               </a>
               <a
-                href="#"
+                href="/login"
                 className="text-muted-foreground hover:text-foreground"
               >
                 登录

@@ -9,51 +9,47 @@ import {
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 
-export function LoginForm() {
+export function Register() {
   return (
     <Card className="mx-auto max-w-sm">
       <CardHeader>
-        <CardTitle className="text-xl">Sign Up</CardTitle>
+        <CardTitle className="text-xl">注册</CardTitle>
         <CardDescription>
-          Enter your information to create an account
+          输入您的信息创建账户
         </CardDescription>
       </CardHeader>
       <CardContent>
         <div className="grid gap-4">
-          <div className="grid grid-cols-2 gap-4">
             <div className="grid gap-2">
-              <Label htmlFor="first-name">First name</Label>
-              <Input id="first-name" placeholder="Max" required />
-            </div>
-            <div className="grid gap-2">
-              <Label htmlFor="last-name">Last name</Label>
-              <Input id="last-name" placeholder="Robinson" required />
-            </div>
+              <Label htmlFor="email">邮箱</Label>
+              <div className="flex">
+                <Input
+                  id="email"
+                  type="email"
+                  placeholder="m@example.com"
+                  required
+                />
+                <Button type="submit" className="">
+                  发送验证码
+                </Button>
+              </div>
           </div>
           <div className="grid gap-2">
-            <Label htmlFor="email">Email</Label>
-            <Input
-              id="email"
-              type="email"
-              placeholder="m@example.com"
-              required
-            />
-          </div>
-          <div className="grid gap-2">
-            <Label htmlFor="password">Password</Label>
+            <Label htmlFor="password">密码</Label>
             <Input id="password" type="password" />
           </div>
+          <div className="grid gap-4">
+            <Label htmlFor="first-name">邮箱验证码</Label>
+            <Input id="first-name" placeholder="xxxxxx" required />
+          </div>
           <Button type="submit" className="w-full">
-            Create an account
-          </Button>
-          <Button variant="outline" className="w-full">
-            Sign up with GitHub
+            注册账户
           </Button>
         </div>
         <div className="mt-4 text-center text-sm">
-          Already have an account?{" "}
-          <a href="#" className="underline">
-            Sign in
+          已经有了账户?{" "}
+          <a href="/login" className="underline">
+            登录
           </a>
         </div>
       </CardContent>
