@@ -14,10 +14,14 @@ import {
   InputOTPSlot,
 } from "@/components/ui/input-otp"
 import { REGEXP_ONLY_DIGITS_AND_CHARS } from "input-otp"
-import * as yup from 'yup'
-import { useFormik } from 'formik'
+import * as yup from "yup"
+import { useFormik } from "formik"
+import { Toaster } from "@/components/ui/toaster"
+import { useToast } from "@/components/ui/use-toast"
 
 export function Register() {
+  const { toast } = useToast()
+
   const schema = yup.object({
     email: yup.string().required().email(),
     password: yup.string().required().min(6),
@@ -39,8 +43,18 @@ export function Register() {
 
   const handleInputOtp = (value: string) => {
     formik.setFieldValue('code', value)
-    console.log(typeof formik.values)
   }
+
+  const onSendEmailCode = () => {
+    if (formik.errors.email) {
+      console.log(formik.errors.email)
+      toast({
+        variant: "destructive",
+        description: formik.errors.email.toString()
+      })
+    }
+  }
+  
   const onRegister = () => {
     
   }
@@ -66,16 +80,16 @@ export function Register() {
                   value={formik.values.email}
                   onChange={formik.handleChange}
                 />
-                <Button type="submit" className="">
+                <Button type="submit" className="" onClick={onSendEmailCode}>
                   发送验证码
                 </Button>
               </div>
-              <Label className="text-red-400">{ formik.errors.email ?? '' }</Label>
+              <Label className="text-red-400">{ <>{formik.errors.email}</> ?? '' }</Label>
           </div>
           <div className="grid gap-2">
             <Label htmlFor="password">密码</Label>
             <Input name="password" type="password" value={formik.values.password} onChange={formik.handleChange}/>
-              <Label className="text-red-400">{ formik.errors.password ?? '' }</Label>
+              <Label className="text-red-400">{ <>{formik.errors.password}</> ?? '' }</Label>
           </div>
           <div className="grid gap-4">
             <Label htmlFor="first-name">邮箱验证码</Label>
@@ -95,7 +109,7 @@ export function Register() {
                 <InputOTPSlot index={5} />
               </InputOTPGroup>
             </InputOTP>
-            <Label className="text-red-400">{ formik.errors.code ?? '' }</Label>
+            <Label className="text-red-400">{ <>{formik.errors.code}</> ?? '' }</Label>
           </div>
           <Button type="submit" className="w-full" onClick={onRegister}>
             注册账户
@@ -107,6 +121,7 @@ export function Register() {
             登录
           </a>
         </div>
+        <Toaster />
       </CardContent>
     </Card>
   )
