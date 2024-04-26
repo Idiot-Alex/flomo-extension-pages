@@ -14,8 +14,36 @@ import {
   InputOTPSlot,
 } from "@/components/ui/input-otp"
 import { REGEXP_ONLY_DIGITS_AND_CHARS } from "input-otp"
+import * as yup from 'yup'
+import { useFormik } from 'formik'
 
 export function Register() {
+  const schema = yup.object({
+    email: yup.string().required().email(),
+    password: yup.string().required().min(6),
+    code: yup.string().required().length(6),
+  })
+
+  const formik = useFormik({
+    initialValues: {
+      email: '',
+      password: '',
+      code: '',
+    },
+    validateOnChange: true,
+    validationSchema: schema,
+    onSubmit: (values: any) => {
+      console.log(values)
+    },
+  })
+
+  const handleInputOtp = (value: string) => {
+    formik.setFieldValue('code', value)
+    console.log(typeof formik.values)
+  }
+  const onRegister = () => {
+    
+  }
   
   return (
     <Card className="mx-auto max-w-sm">
@@ -29,27 +57,34 @@ export function Register() {
         <div className="grid gap-4">
             <div className="grid gap-2">
               <Label htmlFor="email">邮箱</Label>
-              <div className="flex">
+              <div className="flex space-x-2">
                 <Input
-                  id="email"
+                  name="email"
                   type="email"
                   placeholder="m@example.com"
                   required
+                  value={formik.values.email}
+                  onChange={formik.handleChange}
                 />
                 <Button type="submit" className="">
                   发送验证码
                 </Button>
               </div>
+              <Label className="text-red-400">{ formik.errors.email ?? '' }</Label>
           </div>
           <div className="grid gap-2">
             <Label htmlFor="password">密码</Label>
-            <Input id="password" type="password" />
+            <Input name="password" type="password" value={formik.values.password} onChange={formik.handleChange}/>
+              <Label className="text-red-400">{ formik.errors.password ?? '' }</Label>
           </div>
           <div className="grid gap-4">
             <Label htmlFor="first-name">邮箱验证码</Label>
             <InputOTP
+              name="code"
               maxLength={6}
               pattern={REGEXP_ONLY_DIGITS_AND_CHARS}
+              value={formik.values.code}
+              onChange={handleInputOtp}
             >
               <InputOTPGroup>
                 <InputOTPSlot index={0} />
@@ -60,8 +95,9 @@ export function Register() {
                 <InputOTPSlot index={5} />
               </InputOTPGroup>
             </InputOTP>
+            <Label className="text-red-400">{ formik.errors.code ?? '' }</Label>
           </div>
-          <Button type="submit" className="w-full">
+          <Button type="submit" className="w-full" onClick={onRegister}>
             注册账户
           </Button>
         </div>
