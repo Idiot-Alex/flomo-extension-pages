@@ -14,26 +14,9 @@ import {
   InputOTPSlot,
 } from "@/components/ui/input-otp"
 import { REGEXP_ONLY_DIGITS_AND_CHARS } from "input-otp"
-import { toTypedSchema } from '@vee-validate/yup'
-import * as yup from 'yup'
-import { useForm } from 'vee-validate'
 
 export function Register() {
-  const schema = toTypedSchema(
-    yup.object({
-      email: yup.string().required().email(),
-      password: yup.string().required().min(6),
-      code: yup.string().required().length(6),
-    })
-  )
-  const { errors, defineField } = useForm({
-    validationSchema: schema
-  })
-  const [email, emailAttr] = defineField('email')
-  const [password, passwordAttr] = defineField('password')
-  const [code, codeAttr] = defineField('code')
-
-
+  
   return (
     <Card className="mx-auto max-w-sm">
       <CardHeader>
@@ -48,7 +31,6 @@ export function Register() {
               <Label htmlFor="email">邮箱</Label>
               <div className="flex">
                 <Input
-                  
                   id="email"
                   type="email"
                   placeholder="m@example.com"
