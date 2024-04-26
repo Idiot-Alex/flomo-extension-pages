@@ -8,8 +8,32 @@ import {
 } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import {
+  InputOTP,
+  InputOTPGroup,
+  InputOTPSlot,
+} from "@/components/ui/input-otp"
+import { REGEXP_ONLY_DIGITS_AND_CHARS } from "input-otp"
+import { toTypedSchema } from '@vee-validate/yup'
+import * as yup from 'yup'
+import { useForm } from 'vee-validate'
 
 export function Register() {
+  const schema = toTypedSchema(
+    yup.object({
+      email: yup.string().required().email(),
+      password: yup.string().required().min(6),
+      code: yup.string().required().length(6),
+    })
+  )
+  const { errors, defineField } = useForm({
+    validationSchema: schema
+  })
+  const [email, emailAttr] = defineField('email')
+  const [password, passwordAttr] = defineField('password')
+  const [code, codeAttr] = defineField('code')
+
+
   return (
     <Card className="mx-auto max-w-sm">
       <CardHeader>
@@ -24,6 +48,7 @@ export function Register() {
               <Label htmlFor="email">邮箱</Label>
               <div className="flex">
                 <Input
+                  
                   id="email"
                   type="email"
                   placeholder="m@example.com"
@@ -40,7 +65,19 @@ export function Register() {
           </div>
           <div className="grid gap-4">
             <Label htmlFor="first-name">邮箱验证码</Label>
-            <Input id="first-name" placeholder="xxxxxx" required />
+            <InputOTP
+              maxLength={6}
+              pattern={REGEXP_ONLY_DIGITS_AND_CHARS}
+            >
+              <InputOTPGroup>
+                <InputOTPSlot index={0} />
+                <InputOTPSlot index={1} />
+                <InputOTPSlot index={2} />
+                <InputOTPSlot index={3} />
+                <InputOTPSlot index={4} />
+                <InputOTPSlot index={5} />
+              </InputOTPGroup>
+            </InputOTP>
           </div>
           <Button type="submit" className="w-full">
             注册账户
