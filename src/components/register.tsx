@@ -16,10 +16,9 @@ import {
 import { REGEXP_ONLY_DIGITS_AND_CHARS } from "input-otp"
 import * as yup from "yup"
 import { useFormik } from "formik"
-import { Toaster } from "@/components/ui/toaster"
 import { useToast } from "@/components/ui/use-toast"
 import { useEffect, useState } from "react"
-import { sendEmailCode } from "@/lib/api"
+import { register, sendEmailCode } from "@/lib/api"
 import { ApiRes } from "@/lib/type"
 
 export function Register() {
@@ -106,7 +105,31 @@ export function Register() {
   }
   
   const onRegister = () => {
-    
+    if (!formik.isValid) {
+      toast({
+        variant: "destructive",
+        description: '请按照提示信息输入正确信息'
+      })
+      return
+    }
+    const params = {
+      email: formik.values.email,
+      password: formik.values.password,
+      code: formik.values.code,
+      codeId: codeId
+    }
+    register(params).then((res: ApiRes) => {
+      if (res.success) {
+        toast({
+          description: res.msg
+        })
+        formik.resetForm()
+      } else {
+        toast({
+          description: res.msg
+        })
+      }
+    })
   }
   
   return (
@@ -171,7 +194,6 @@ export function Register() {
             登录
           </a>
         </div>
-        <Toaster />
       </CardContent>
     </Card>
   )
