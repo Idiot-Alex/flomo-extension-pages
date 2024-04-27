@@ -13,8 +13,10 @@ import * as yup from "yup"
 import { useToast } from "@/components/ui/use-toast"
 import { login } from "@/lib/api"
 import { ApiRes } from "@/lib/type"
+import { useNavigate } from "react-router-dom"
 
 export function Login() {
+  const navigate = useNavigate()
   const { toast } = useToast()
   
   const schema = yup.object({
@@ -50,6 +52,7 @@ export function Login() {
           description: res.msg
         })
         // 跳转到首页
+        navigate('/')
       } else {
         toast({
           variant: "destructive",
