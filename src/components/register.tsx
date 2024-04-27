@@ -135,7 +135,7 @@ export function Register() {
   return (
     <Card className="mx-auto max-w-sm">
       <CardHeader>
-        <CardTitle className="text-xl">注册</CardTitle>
+        <CardTitle className="text-xl">注册 <a href="/">Flomo Extension</a></CardTitle>
         <CardDescription>
           输入您的信息创建账户
         </CardDescription>
@@ -191,7 +191,7 @@ export function Register() {
         <div className="mt-4 text-center text-sm">
           已经有了账户?{" "}
           <a href="/login" className="underline">
-            登录
+            立即登录
           </a>
         </div>
       </CardContent>
