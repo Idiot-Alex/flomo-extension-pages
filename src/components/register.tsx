@@ -18,6 +18,9 @@ import * as yup from "yup"
 import { useFormik } from "formik"
 import { Toaster } from "@/components/ui/toaster"
 import { useToast } from "@/components/ui/use-toast"
+import { useEffect, useState } from "react"
+import { sendEmailCode } from "@/lib/api"
+import { ApiRes } from "@/lib/type"
 
 export function Register() {
   const { toast } = useToast()
@@ -41,18 +44,65 @@ export function Register() {
     },
   })
 
+  const [codeId, setCodeId] = useState('')
+  const [countingDown, setCountingDown] = useState(false)
+  const [countDown, setCountDown] = useState(60)
+
+  useEffect(() => {
+    if (countingDown) {
+      let timer: any = null
+      
+      const handleTimer = () => {
+        if (countDown > 0) {
+          setCountDown(countDown - 1)
+        } else {
+          clearInterval(timer)
+          setCountingDown(false)
+          setCountDown(60)
+        }
+      }
+      timer = setInterval(handleTimer, 1000)
+
+      return () => {
+        clearInterval(timer)
+      }
+    }
+  }, [countDown, countingDown])
+
   const handleInputOtp = (value: string) => {
     formik.setFieldValue('code', value)
   }
 
   const onSendEmailCode = () => {
     if (formik.errors.email) {
-      console.log(formik.errors.email)
       toast({
         variant: "destructive",
         description: formik.errors.email.toString()
       })
+      return
     }
+    const params = {
+      email: formik.values.email,
+      type: 'Register',
+    }
+    sendEmailCode(params).then((res: ApiRes) => {
+      if (res.success) {
+        toast({
+          description: res.msg
+        })
+        setCodeId(res.data.codeId)
+        setCountingDown(true)
+      } else {
+        let msg = res.msg
+        if (res.data?.message) {
+          msg = `${msg}: ${res.data.message}`
+        }
+        toast({
+          variant: "destructive",
+          description: msg
+        })
+      }
+    })
   }
   
   const onRegister = () => {
@@ -80,8 +130,8 @@ export function Register() {
                   value={formik.values.email}
                   onChange={formik.handleChange}
                 />
-                <Button type="submit" className="" onClick={onSendEmailCode}>
-                  发送验证码
+                <Button type="submit" className="" disabled={countingDown} onClick={onSendEmailCode}>
+                  发送验证码{ countDown === 60 ? '' : `${countDown} s` }
                 </Button>
               </div>
               <Label className="text-red-400">{ <>{formik.errors.email}</> ?? '' }</Label>
