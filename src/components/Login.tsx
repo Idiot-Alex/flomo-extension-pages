@@ -8,8 +8,57 @@ import {
 } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import { useFormik } from "formik"
+import * as yup from "yup"
+import { useToast } from "@/components/ui/use-toast"
+import { login } from "@/lib/api"
+import { ApiRes } from "@/lib/type"
 
 export function Login() {
+  const { toast } = useToast()
+  
+  const schema = yup.object({
+    email: yup.string().required().email(),
+    password: yup.string().required().min(6),
+  })
+
+  const formik = useFormik({
+    initialValues: {
+      email: '',
+      password: '',
+    },
+    validationSchema: schema,
+    onSubmit: () => {}
+  })
+
+  const onLogin = () => {
+    if (!formik.isValid) {
+      toast({
+        variant: "destructive",
+        description: '请按照提示信息输入正确信息'
+      })
+      return
+    }
+    const params = {
+      email: formik.values.email,
+      password: formik.values.password,
+    }
+    login(params).then((res: ApiRes) => {
+      if (res.success) {
+        formik.resetForm()
+        toast({
+          description: res.msg
+        })
+        // 跳转到首页
+      } else {
+        toast({
+          variant: "destructive",
+          description: res.msg
+        })
+      }
+    })
+  }
+
   return (
     <Card className="mx-auto max-w-sm">
       <CardHeader>
@@ -26,8 +75,11 @@ export function Login() {
               id="email"
               type="email"
               placeholder="m@example.com"
+              value={formik.values.email}
+              onChange={formik.handleChange}
               required
             />
+            <Label className="text-red-400">{ <>{formik.errors.email}</> ?? '' }</Label>
           </div>
           <div className="grid gap-2">
             <div className="flex items-center">
@@ -36,9 +88,10 @@ export function Login() {
                 忘记密码?
               </a>
             </div>
-            <Input id="password" type="password" required />
+            <Input id="password" type="password" required value={formik.values.password} onChange={formik.handleChange} />
+            <Label className="text-red-400">{ <>{formik.errors.password}</> ?? '' }</Label>
           </div>
-          <Button type="submit" className="w-full">
+          <Button type="submit" className="w-full" onClick={onLogin}>
             登录
           </Button>
         </div>
