@@ -1,28 +1,28 @@
-import { Button } from "@/components/ui/button"
+import { Button } from '@/components/ui/button'
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
+} from '@/components/ui/card'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
 import {
   InputOTP,
   InputOTPGroup,
   InputOTPSlot,
-} from "@/components/ui/input-otp"
-import { REGEXP_ONLY_DIGITS_AND_CHARS } from "input-otp"
-import * as yup from "yup"
-import { useFormik } from "formik"
-import { useToast } from "@/components/ui/use-toast"
-import { useEffect, useState } from "react"
-import { register, sendEmailCode } from "@/lib/api"
-import { ApiRes } from "@/lib/type"
+} from '@/components/ui/input-otp'
+import { REGEXP_ONLY_DIGITS_AND_CHARS } from 'input-otp'
+import * as yup from 'yup'
+import { useFormik } from 'formik'
+import { useToast } from '@/components/ui/use-toast'
+import { useEffect, useState } from 'react'
+import { resetPwd, sendEmailCode } from '@/lib/api'
+import { ApiRes } from '@/lib/type'
 import CryptoJS from 'crypto-js'
 
-export function Register() {
+export function ResetPwd() {
   const { toast } = useToast()
 
   const schema = yup.object({
@@ -76,14 +76,14 @@ export function Register() {
   const onSendEmailCode = () => {
     if (formik.errors.email) {
       toast({
-        variant: "destructive",
+        variant: 'destructive',
         description: formik.errors.email.toString()
       })
       return
     }
     const params = {
       email: formik.values.email,
-      type: 'Register',
+      type: 'ResetPwd',
     }
     sendEmailCode(params).then((res: ApiRes) => {
       if (res.success) {
@@ -98,17 +98,17 @@ export function Register() {
           msg = `${msg}: ${res.data.message}`
         }
         toast({
-          variant: "destructive",
+          variant: 'destructive',
           description: msg
         })
       }
     })
   }
   
-  const onRegister = () => {
+  const onResetPwd = () => {
     if (!formik.isValid) {
       toast({
-        variant: "destructive",
+        variant: 'destructive',
         description: '请按照提示信息输入正确信息'
       })
       return
@@ -120,7 +120,7 @@ export function Register() {
       code: formik.values.code,
       codeId: codeId
     }
-    register(params).then((res: ApiRes) => {
+    resetPwd(params).then((res: ApiRes) => {
       if (res.success) {
         toast({
           description: res.msg
@@ -138,9 +138,9 @@ export function Register() {
   return (
     <Card className="mx-auto mt-16 max-w-sm">
       <CardHeader>
-        <CardTitle className="text-xl">注册 <a href="/">Flomo Extension</a></CardTitle>
+        <CardTitle className="text-xl">重置密码 <a href="/">Flomo Extension</a></CardTitle>
         <CardDescription>
-          输入您的信息创建账户
+          输入您的信息重置账户密码
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -163,7 +163,7 @@ export function Register() {
               <Label className="text-red-400">{ <>{formik.errors.email}</> ?? '' }</Label>
           </div>
           <div className="grid gap-2">
-            <Label htmlFor="password">密码</Label>
+            <Label htmlFor="password">新密码</Label>
             <Input name="password" type="password" value={formik.values.password} onChange={formik.handleChange}/>
               <Label className="text-red-400">{ <>{formik.errors.password}</> ?? '' }</Label>
           </div>
@@ -187,12 +187,12 @@ export function Register() {
             </InputOTP>
             <Label className="text-red-400">{ <>{formik.errors.code}</> ?? '' }</Label>
           </div>
-          <Button type="submit" className="w-full" onClick={onRegister}>
-            注册账户
+          <Button type="submit" className="w-full" onClick={onResetPwd}>
+            重置账户密码
           </Button>
         </div>
         <div className="mt-4 text-center text-sm">
-          已经有了账户?{" "}
+          密码已经重置成功?{" "}
           <a href="/login" className="underline">
             立即登录
           </a>

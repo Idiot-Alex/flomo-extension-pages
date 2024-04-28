@@ -14,3 +14,7 @@ export async function register(data: any): Promise<ApiRes> {
 export async function login(data: any): Promise<ApiRes> {
   return await instance.post('/api/user/login', data)
 }
+
+export async function resetPwd(data: any): Promise<ApiRes> {
+  return await instance.post('/api/user/reset-pwd', data)
+}

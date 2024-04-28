@@ -93,7 +93,7 @@ export function Login() {
           <div className="grid gap-2">
             <div className="flex items-center">
               <Label htmlFor="password">密码</Label>
-              <a href="#" className="ml-auto inline-block text-sm underline">
+              <a href="/reset-pwd" className="ml-auto inline-block text-sm underline">
                 忘记密码?
               </a>
             </div>

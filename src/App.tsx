@@ -6,6 +6,7 @@ import { Toaster } from './components/ui/toaster'
 import { Login } from './components/Login'
 import { Plans } from './components/Plans'
 import { Home } from './components/Home'
+import { ResetPwd } from './components/ResetPwd'
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           </Route>
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/reset-pwd" element={<ResetPwd />} />
         </Routes>
       </BrowserRouter>
       <Toaster />
