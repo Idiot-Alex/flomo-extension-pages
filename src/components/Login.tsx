@@ -16,6 +16,7 @@ import { ApiRes } from '@/lib/type'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { setUser } from '@/store/actions'
+import CryptoJS from 'crypto-js'
 
 export function Login() {
   const dispatch = useDispatch()
@@ -44,9 +45,10 @@ export function Login() {
       })
       return
     }
+    const hash = CryptoJS.SHA256(formik.values.password).toString()
     const params = {
       email: formik.values.email,
-      password: formik.values.password,
+      password: hash,
     }
     login(params).then((res: ApiRes) => {
       if (res.success) {

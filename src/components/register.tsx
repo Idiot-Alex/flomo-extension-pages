@@ -112,9 +112,10 @@ export function Register() {
       })
       return
     }
+    const hash = CryptoJS.SHA256(formik.values.password).toString()
     const params = {
       email: formik.values.email,
-      password: formik.values.password,
+      password: hash,
       code: formik.values.code,
       codeId: codeId
     }
