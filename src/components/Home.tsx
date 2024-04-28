@@ -7,20 +7,18 @@ export function Home() {
   return (
     <>
       <div className="mx-auto grid w-full max-w-6xl gap-2">
-        <h1 className="text-3xl font-semibold">Settings</h1>
+        <h1 className="text-3xl font-semibold">Flomo Extension 说明</h1>
       </div>
       <div className="mx-auto grid w-full max-w-6xl items-start gap-6 md:grid-cols-[180px_1fr] lg:grid-cols-[250px_1fr]">
         <nav
           className="grid gap-4 text-sm text-muted-foreground" x-chunk="dashboard-04-chunk-0"
         >
-          <a href="#" className="font-semibold text-primary">
-            General
-          </a>
-          <a href="#">Security</a>
-          <a href="#">Integrations</a>
-          <a href="#">Support</a>
-          <a href="#">Organizations</a>
-          <a href="#">Advanced</a>
+          <a href="#" className="font-semibold text-primary">Flomo Extension 介绍</a>
+          <a href="#" className="text-primary">安装说明</a>
+          <a href="#" className="text-primary">使用说明</a>
+          <a href="#" className="text-primary">Support</a>
+          <a href="#" className="text-primary">Organizations</a>
+          <a href="#" className="text-primary">Advanced</a>
         </nav>
         <div className="grid gap-6">
           <Card x-chunk="dashboard-04-chunk-1">
