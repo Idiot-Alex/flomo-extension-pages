@@ -2,31 +2,26 @@ import { CircleUser, Menu, } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
 import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card'
-import { Checkbox } from '@/components/ui/checkbox'
-import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
-import { Input } from '@/components/ui/input'
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
 import { useSelector } from 'react-redux'
-import { Outlet, useNavigate } from 'react-router-dom'
+import { Outlet, useNavigate, useLocation } from 'react-router-dom'
 
 export function Dashboard() {
+  const location = useLocation()
   const navigate = useNavigate()
   const user = useSelector((state: any) => {
     return state.user
   })
+
+  const isActive = (path: string) => {
+    return location.pathname === path
+  }
 
   const onLogout = () => {
     localStorage.clear()
@@ -39,25 +34,25 @@ export function Dashboard() {
         <nav className="hidden flex-col gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6">
           <a
             href="/"
-            className="text-foreground transition-colors hover:text-foreground"
+            className={`${isActive('/') ? 'text-foreground' : 'text-muted-foreground'} transition-colors hover:text-foreground`}
           >
             主页
           </a>
           <a
             href="/plans"
-            className="text-muted-foreground transition-colors hover:text-foreground"
+            className={`${isActive('/plans') ? 'text-foreground' : 'text-muted-foreground'} transition-colors hover:text-foreground`}
           >
             套餐计划
           </a>
           <a
             href="/register"
-            className="text-muted-foreground transition-colors hover:text-foreground"
+            className={`${isActive('/register') ? 'text-foreground' : 'text-muted-foreground'} transition-colors hover:text-foreground`}
           >
             注册
           </a>
           <a
             href="/login"
-            className="text-muted-foreground transition-colors hover:text-foreground"
+            className={`${isActive('/login') ? 'text-foreground' : 'text-muted-foreground'} transition-colors hover:text-foreground`}
           >
             登录
           </a>
