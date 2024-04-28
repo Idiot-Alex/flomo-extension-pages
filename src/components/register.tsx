@@ -1,25 +1,25 @@
-import { Button } from "@/components/ui/button"
+import { Button } from '@/components/ui/button'
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
+} from '@/components/ui/card'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
 import {
   InputOTP,
   InputOTPGroup,
   InputOTPSlot,
-} from "@/components/ui/input-otp"
-import { REGEXP_ONLY_DIGITS_AND_CHARS } from "input-otp"
-import * as yup from "yup"
-import { useFormik } from "formik"
-import { useToast } from "@/components/ui/use-toast"
-import { useEffect, useState } from "react"
-import { register, sendEmailCode } from "@/lib/api"
-import { ApiRes } from "@/lib/type"
+} from '@/components/ui/input-otp'
+import { REGEXP_ONLY_DIGITS_AND_CHARS } from 'input-otp'
+import * as yup from 'yup'
+import { useFormik } from 'formik'
+import { useToast } from '@/components/ui/use-toast'
+import { useEffect, useState } from 'react'
+import { register, sendEmailCode } from '@/lib/api'
+import { ApiRes } from '@/lib/type'
 import CryptoJS from 'crypto-js'
 
 export function Register() {
@@ -76,7 +76,7 @@ export function Register() {
   const onSendEmailCode = () => {
     if (formik.errors.email) {
       toast({
-        variant: "destructive",
+        variant: 'destructive',
         description: formik.errors.email.toString()
       })
       return
@@ -98,7 +98,7 @@ export function Register() {
           msg = `${msg}: ${res.data.message}`
         }
         toast({
-          variant: "destructive",
+          variant: 'destructive',
           description: msg
         })
       }
@@ -108,7 +108,7 @@ export function Register() {
   const onRegister = () => {
     if (!formik.isValid) {
       toast({
-        variant: "destructive",
+        variant: 'destructive',
         description: '请按照提示信息输入正确信息'
       })
       return
