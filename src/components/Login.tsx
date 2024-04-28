@@ -67,7 +67,7 @@ export function Login() {
   }
 
   return (
-    <Card className="mx-auto max-w-sm">
+    <Card className="mx-auto mt-16 max-w-sm">
       <CardHeader>
         <CardTitle className="text-2xl">登录 <a href="/">Flomo Extension</a></CardTitle>
         <CardDescription>
