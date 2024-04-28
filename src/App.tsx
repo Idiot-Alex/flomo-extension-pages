@@ -1,12 +1,12 @@
 import './App.css'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import { Dashboard } from './components/Dashboard'
-import { Register } from './components/Register'
-import { Toaster } from './components/ui/toaster'
-import { Login } from './components/Login'
-import { Plans } from './components/Plans'
-import { Home } from './components/Home'
-import { ResetPwd } from './components/ResetPwd'
+import { Toaster } from '@/components/ui/toaster'
+import { Dashboard } from '@/components/Dashboard'
+import { Register } from '@/components/Register'
+import { Login } from '@/components/Login'
+import { Plans } from '@/components/Plans'
+import { Home } from '@/components/Home'
+import { ResetPwd } from '@/components/ResetPwd'
 
 function App() {
   return (
