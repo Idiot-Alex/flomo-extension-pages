@@ -1,21 +1,24 @@
-import { Button } from "@/components/ui/button"
+import { Button } from '@/components/ui/button'
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { useFormik } from "formik"
-import * as yup from "yup"
-import { useToast } from "@/components/ui/use-toast"
-import { login } from "@/lib/api"
-import { ApiRes } from "@/lib/type"
-import { useNavigate } from "react-router-dom"
+} from '@/components/ui/card'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
+import { useFormik } from 'formik'
+import * as yup from 'yup'
+import { useToast } from '@/components/ui/use-toast'
+import { login } from '@/lib/api'
+import { ApiRes } from '@/lib/type'
+import { useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { setUser } from '@/store/actions'
 
 export function Login() {
+  const dispatch = useDispatch()
   const navigate = useNavigate()
   const { toast } = useToast()
   
@@ -51,6 +54,7 @@ export function Login() {
         toast({
           description: res.msg
         })
+        dispatch(setUser(res.data))
         // 跳转到首页
         navigate('/')
       } else {
