@@ -43,33 +43,33 @@ export function Plans() {
     }
   ]
 
-  const proPlans = [
-    {
-      color: 'bg-sky-500',
-      title: '数据安全，放心使用',
-      desc: '不会存储任何 flomo 笔记数据',
-    },
-    {
-      color: 'bg-sky-500',
-      title: '需要注册并登录账号',
-      desc: '使用邮箱账号注册或者登录',
-    },
-    {
-      color: 'bg-sky-500',
-      title: '每日使用次数无限制',
-      desc: '使用插件保存 flomo 笔记次数',
-    },
-    {
-      color: 'bg-sky-500',
-      title: '¥4.9 一个月',
-      desc: '每月仅需 4.9 元',
-    },
-    {
-      color: 'bg-sky-500',
-      title: '后续升级服务免费享受',
-      desc: '更多功能一网打尽',
-    }
-  ]
+  // const proPlans = [
+  //   {
+  //     color: 'bg-sky-500',
+  //     title: '数据安全，放心使用',
+  //     desc: '不会存储任何 flomo 笔记数据',
+  //   },
+  //   {
+  //     color: 'bg-sky-500',
+  //     title: '需要注册并登录账号',
+  //     desc: '使用邮箱账号注册或者登录',
+  //   },
+  //   {
+  //     color: 'bg-sky-500',
+  //     title: '每日使用次数无限制',
+  //     desc: '使用插件保存 flomo 笔记次数',
+  //   },
+  //   {
+  //     color: 'bg-sky-500',
+  //     title: '¥4.9 一个月',
+  //     desc: '每月仅需 4.9 元',
+  //   },
+  //   {
+  //     color: 'bg-sky-500',
+  //     title: '后续升级服务免费享受',
+  //     desc: '更多功能一网打尽',
+  //   }
+  // ]
 
   const renderPlan = (plans: Array<any>) => {
     return (
