@@ -4,6 +4,8 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover
 import { Label } from '@/components/ui/label'
 import { useSelector } from 'react-redux'
 import { useToast } from '@/components/ui/use-toast'
+import { createOrder } from '@/lib/api'
+import { ApiRes } from '@/lib/type'
 
 export function Plans() {
   const user = useSelector((state: any) => {
@@ -47,8 +49,8 @@ export function Plans() {
     },
     {
       color: 'bg-sky-500',
-      title: '¥2.9 一个月',
-      desc: '每月仅需 2.9 元',
+      title: '¥5.0 一个月',
+      desc: '限时折扣，满五赠一，花 5 个月的钱，享受 6 个月的服务',
     }
   ]
 
@@ -107,20 +109,20 @@ export function Plans() {
     },
     {
       title: '半年',
-      month: 6,
+      month: 5,
       price: 30,
       payPrice: 25,
     },
     {
       title: '一年',
-      month: 12,
+      month: 10,
       price: 60,
       payPrice: 50,
     },
   ]
 
   const renderPay = () => {
-    const toPay = (params: any) => {
+    const toPay = (payData: any) => {
       if (!user.email) {
         toast({
           variant: "destructive",
@@ -128,7 +130,22 @@ export function Plans() {
         })
         return
       }
-      console.log(params)
+      const params = {
+        email: user.email,
+        title: `Flomo Extension套餐${payData.title}`,
+        month: payData.month,
+        price: payData.payPrice,
+      }
+      createOrder(params).then((res: ApiRes) => {
+        if (res.success) {
+          window.open(res.data)
+        } else {
+          toast({
+            variant: "destructive",
+            description: res.msg
+          })
+        }
+      })
     }
     return (
       payList.map((item, i) => (
