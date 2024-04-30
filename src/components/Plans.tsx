@@ -1,6 +1,15 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
+import { Label } from '@/components/ui/label'
+import { useSelector } from 'react-redux'
+import { useToast } from '@/components/ui/use-toast'
 
 export function Plans() {
+  const user = useSelector((state: any) => {
+    return state.user
+  })
+  const { toast } = useToast()
 
   const freePlans = [
     {
@@ -89,6 +98,58 @@ export function Plans() {
     )
   }
 
+  const payList = [
+    {
+      title: '一个月',
+      month: 1,
+      price: 5,
+      payPrice: 5,
+    },
+    {
+      title: '半年',
+      month: 6,
+      price: 30,
+      payPrice: 25,
+    },
+    {
+      title: '一年',
+      month: 12,
+      price: 60,
+      payPrice: 50,
+    },
+  ]
+
+  const renderPay = () => {
+    const toPay = (params: any) => {
+      if (!user.email) {
+        toast({
+          variant: "destructive",
+          description: '请先登录账号才能继续支付...'
+        })
+        return
+      }
+      console.log(params)
+    }
+    return (
+      payList.map((item, i) => (
+        <div key={i} className="grid grid-cols-3 items-center gap-4">
+          <Label htmlFor="width">{item.title}</Label>
+          {
+            item.price === item.payPrice ?
+            <Label htmlFor="width">
+              <b className="text-2xl">¥{item.payPrice}</b>
+            </Label> : 
+            <Label htmlFor="width" className="flex flex-col">
+              <s className="text-gray-400">¥{item.price}</s>
+              <b className="text-2xl">¥{item.payPrice}</b>
+            </Label>
+          }
+          <Button className="w-full" onClick={() => toPay(item)}>去支付</Button>
+        </div>
+      ))
+    )
+  }
+
   return (
     <>
       <div className="mx-auto grid w-full max-w-6xl gap-2">
@@ -104,6 +165,7 @@ export function Plans() {
           </CardHeader>
           <CardContent>
             { renderPlan(freePlans) }
+            <Button className="w-full">立即使用</Button>
           </CardContent>
         </Card>
         <Card className="mx-auto max-w-sm">
@@ -115,6 +177,24 @@ export function Plans() {
           </CardHeader>
           <CardContent>
             { renderPlan(payPlans) }
+            <Popover>
+              <PopoverTrigger asChild>
+                <Button className="w-full">立即购买</Button>
+              </PopoverTrigger>
+              <PopoverContent className="w-80">
+                <div className="grid gap-4">
+                  <div className="space-y-2">
+                    <h4 className="font-medium leading-none">套餐选择</h4>
+                    <p className="text-sm text-muted-foreground">
+                      请选择下面任意一个套餐前往支付
+                    </p>
+                  </div>
+                  <div className="grid gap-2">
+                    { renderPay() }
+                  </div>
+                </div>
+              </PopoverContent>
+            </Popover>
           </CardContent>
         </Card>
         {/* <Card className="mx-auto max-w-sm">
