@@ -28,6 +28,10 @@ export function Dashboard() {
     navigate('/login')
   }
 
+  const onAccount = () => {
+    navigate('/account')
+  }
+
   return (
     <div className="flex min-h-screen w-full flex-col">
       <header className="sticky top-0 flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6">
@@ -91,7 +95,7 @@ export function Dashboard() {
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
-              <DropdownMenuItem>我的账户</DropdownMenuItem>
+              <DropdownMenuItem onClick={onAccount}>我的账户</DropdownMenuItem>
               <DropdownMenuSeparator />
               <DropdownMenuItem onClick={onLogout}>退出登录</DropdownMenuItem>
             </DropdownMenuContent>

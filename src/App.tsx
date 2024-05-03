@@ -7,6 +7,7 @@ import { Login } from '@/components/Login'
 import { Plans } from '@/components/Plans'
 import { Home } from '@/components/Home'
 import { ResetPwd } from '@/components/ResetPwd'
+import { Account } from '@/components/Account'
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path="/" element={<Dashboard />} >
             <Route index element={<Home />} />
             <Route path='plans' element={<Plans />} />
+            <Route path="/account" element={<Account />} />
           </Route>
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />

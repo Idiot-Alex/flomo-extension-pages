@@ -25,7 +25,7 @@ export function Home() {
         </nav>
         <div className="grid gap-6">
           {
-            location.search.indexOf('instruction') > -1 ?
+            (location.search.indexOf('instruction') > -1) || !location.search ?
             <Card x-chunk="dashboard-04-chunk-1">
               <CardHeader>
                 <CardTitle>Flomo Extension 是什么？</CardTitle>
