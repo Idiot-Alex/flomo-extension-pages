@@ -26,7 +26,7 @@ export function Plans() {
     },
     {
       color: 'bg-sky-100',
-      title: '每日使用次数 1',
+      title: '每日使用次数 2',
       desc: '使用插件保存 flomo 笔记次数',
     },
   ]
@@ -177,7 +177,7 @@ export function Plans() {
           <CardHeader>
             <CardTitle className="text-2xl">Free 套餐</CardTitle>
             <CardDescription>
-              无需注册账号，每日 1 次机会免费使用插件保存笔记
+              无需注册账号，每日 2 次机会免费使用插件保存笔记
             </CardDescription>
           </CardHeader>
           <CardContent>
