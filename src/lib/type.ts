@@ -3,3 +3,5 @@ export interface ApiRes {
   msg: string,
   data?: any,
 }
+
+export const FLOMO_EXTENSION_FILE_URL = 'https://flomo-extension-r2.idiotalex.com/flomo-extension-1.0.0-chrome.zip'

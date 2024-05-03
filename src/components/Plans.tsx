@@ -5,13 +5,17 @@ import { Label } from '@/components/ui/label'
 import { useSelector } from 'react-redux'
 import { useToast } from '@/components/ui/use-toast'
 import { createOrder } from '@/lib/api'
-import { ApiRes } from '@/lib/type'
+import { ApiRes, FLOMO_EXTENSION_FILE_URL } from '@/lib/type'
 
 export function Plans() {
   const user = useSelector((state: any) => {
     return state.user
   })
   const { toast } = useToast()
+
+  const onDownload = () => {
+    window.open(FLOMO_EXTENSION_FILE_URL)
+  }
 
   const freePlans = [
     {
@@ -182,7 +186,7 @@ export function Plans() {
           </CardHeader>
           <CardContent>
             { renderPlan(freePlans) }
-            <Button className="w-full">立即使用</Button>
+            <Button onClick={onDownload} className="w-full">立即下载使用</Button>
           </CardContent>
         </Card>
         <Card className="mx-auto max-w-sm">
