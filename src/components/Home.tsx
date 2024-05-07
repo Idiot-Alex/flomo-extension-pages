@@ -1,7 +1,7 @@
 import { Button } from '@/components/ui/button'
 import { Card, CardHeader, CardTitle, CardContent, CardFooter } from '@/components/ui/card'
 import { useNavigate, useLocation } from 'react-router-dom'
-import { FLOMO_EXTENSION_FILE_URL } from '@/lib/type'
+import { FLOMO_EXTENSION_FILE_URL, FLOMO_EXTENSION_WEB_STORE_URL } from '@/lib/type'
 import { Separator } from '@/components/ui/separator'
 
 export function Home() {
@@ -15,6 +15,9 @@ export function Home() {
 
   const onDownload = () => {
     window.open(FLOMO_EXTENSION_FILE_URL)
+  }
+  const onWebStore = () => {
+    window.open(FLOMO_EXTENSION_WEB_STORE_URL)
   }
 
   return (
@@ -50,6 +53,7 @@ export function Home() {
               </CardContent>
               <CardFooter className="border-t px-6 py-4">
                 <Button onClick={onDownload}>立即下载插件</Button>
+                <Button onClick={onWebStore} className="ml-2">浏览器扩展商店安装</Button>
               </CardFooter>
             </Card> : ''
           }

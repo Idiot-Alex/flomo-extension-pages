@@ -1,11 +1,11 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import { Label } from '@/components/ui/label'
 import { useSelector } from 'react-redux'
 import { useToast } from '@/components/ui/use-toast'
 import { createOrder } from '@/lib/api'
-import { ApiRes, FLOMO_EXTENSION_FILE_URL } from '@/lib/type'
+import { ApiRes, FLOMO_EXTENSION_FILE_URL, FLOMO_EXTENSION_WEB_STORE_URL } from '@/lib/type'
 
 export function Plans() {
   const user = useSelector((state: any) => {
@@ -15,6 +15,9 @@ export function Plans() {
 
   const onDownload = () => {
     window.open(FLOMO_EXTENSION_FILE_URL)
+  }
+  const onWebStore = () => {
+    window.open(FLOMO_EXTENSION_WEB_STORE_URL)
   }
 
   const freePlans = [
@@ -186,8 +189,11 @@ export function Plans() {
           </CardHeader>
           <CardContent>
             { renderPlan(freePlans) }
-            <Button onClick={onDownload} className="w-full">立即下载使用</Button>
           </CardContent>
+          <CardFooter className="border-t px-6 py-4">
+            <Button onClick={onDownload}>立即下载使用</Button>
+            <Button onClick={onWebStore} className="ml-2">浏览器扩展商店安装</Button>
+          </CardFooter>
         </Card>
         <Card className="mx-auto max-w-sm">
           <CardHeader>
@@ -198,6 +204,8 @@ export function Plans() {
           </CardHeader>
           <CardContent>
             { renderPlan(payPlans) }
+          </CardContent>
+          <CardFooter className="border-t px-6 py-4">
             <Popover>
               <PopoverTrigger asChild>
                 <Button className="w-full">立即购买</Button>
@@ -216,7 +224,7 @@ export function Plans() {
                 </div>
               </PopoverContent>
             </Popover>
-          </CardContent>
+          </CardFooter>
         </Card>
         {/* <Card className="mx-auto max-w-sm">
           <CardHeader>
