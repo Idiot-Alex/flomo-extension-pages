@@ -3,6 +3,21 @@ import { Card, CardHeader, CardTitle, CardContent, CardFooter } from '@/componen
 import { useNavigate, useLocation } from 'react-router-dom'
 import { FLOMO_EXTENSION_FILE_URL, FLOMO_EXTENSION_WEB_STORE_URL } from '@/lib/type'
 import { Separator } from '@/components/ui/separator'
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from '@/components/ui/carousel'
+import Autoplay from 'embla-carousel-autoplay'
+import { useRef } from 'react'
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from '@/components/ui/accordion'
 
 export function Home() {
   const location = useLocation()
@@ -18,6 +33,44 @@ export function Home() {
   }
   const onWebStore = () => {
     window.open(FLOMO_EXTENSION_WEB_STORE_URL)
+  }
+
+  const plugin = useRef(
+    Autoplay({ delay: 2000, stopOnInteraction: true })
+  )
+
+  const showImages = () => {
+    const imgList = [
+      '/flomo-extension-home-1.png',
+      '/flomo-extension-guide-1.png',
+      '/flomo-extension-setting-1.png',
+      '/flomo-extension-login-1.png',
+    ]
+   
+    return (
+      <Carousel
+        plugins={[plugin.current]}
+        className="w-full max-w-xs"
+        onMouseEnter={plugin.current.stop}
+        onMouseLeave={plugin.current.reset}
+      >
+        <CarouselContent>
+          {imgList.map((img, index) => (
+            <CarouselItem key={index} className="lg:basis">
+              <div className="p-1">
+                <Card>
+                  <CardContent className="flex aspect-square items-center justify-center p-6">
+                    <img src={img} alt="flomo extension image" />
+                  </CardContent>
+                </Card>
+              </div>
+            </CarouselItem>
+          ))}
+        </CarouselContent>
+        <CarouselPrevious />
+        <CarouselNext />
+      </Carousel>
+    )
   }
 
   return (
@@ -50,6 +103,14 @@ export function Home() {
                 <div className="grid gap-3 mb-4">
                   <p>本插件是为了方便在浏览器上使用时可以随时同步到 flomo 平台而生，简而言之，Flomo Extension 是一个在浏览器上记录 flomo 笔记的插件。</p>
                 </div>
+                <div className="grid gap-3 mt-4">
+                  <p>插件运行截图：</p>
+                </div>
+                <div className="grid gap-3 mb-4 justify-center">
+                  {
+                    showImages()
+                  }
+                </div>
               </CardContent>
               <CardFooter className="border-t px-6 py-4">
                 <Button onClick={onDownload}>立即下载插件</Button>
@@ -64,16 +125,39 @@ export function Home() {
                 <CardTitle>如何安装 Flomo Extension</CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="grid gap-3 mb-4">
-                  <p>本插件目前只能离线安装：</p>
-                  <p>1. 下载插件的安装文件 zip，下载完成后自行解压</p>
-                  <p>2. 打开 Chrome 浏览器，进入 chrome://extensions/</p>
-                  <p>3. 开启页面右上角的 “开发者模式”</p>
-                  <p>4. 点击 “加载已解压的扩展程序” 并选择解压的文件夹</p>
-                  <p>5. 在浏览器的工具栏中点击该插件，即可正常使用</p>
-                </div>
+                <Accordion type="single" collapsible className="w-full">
+                  <AccordionItem value="item-1">
+                    <AccordionTrigger className="p-4">离线安装</AccordionTrigger>
+                    <AccordionContent>
+                      <div className="grid gap-3 mb-4 p-4">
+                        <p>离线安装步骤：</p>
+                        <p>1. 点击下面【立即下载插件】按钮下载插件的安装文件 zip，下载完成后自行解压</p>
+                        <p>2. 打开 Chrome 浏览器，进入 chrome://extensions/</p>
+                        <p>3. 开启页面右上角的 “开发者模式”</p>
+                        <p>4. 点击 “加载已解压的扩展程序” 并选择解压的文件夹</p>
+                        <p>5. 在浏览器的工具栏中点击该插件，即可正常使用</p>
+                      </div>
+                    </AccordionContent>
+                  </AccordionItem>
+                  <AccordionItem value="item-2">
+                    <AccordionTrigger className="p-4">浏览器应用商店安装</AccordionTrigger>
+                    <AccordionContent>
+                      <div className="grid gap-3 mb-4 p-4">
+                        <p>在线安装步骤：</p>
+                        <p>1. 点击下面【浏览器扩展商店安装】按钮跳转到浏览器应用商店扩展页面</p>
+                        <p>2. 按照提示完成安装</p>
+                        <p>
+                          <img src="/flomo-extension-webstore.png" alt="webstore.png"/>
+                        </p>
+                      </div>
+                    </AccordionContent>
+                  </AccordionItem>
+                </Accordion>
               </CardContent>
-              <CardFooter className="border-t px-6 py-4"></CardFooter>
+              <CardFooter className="border-t px-6 py-4">
+                <Button onClick={onDownload}>立即下载插件</Button>
+                <Button onClick={onWebStore} className="ml-2">浏览器扩展商店安装</Button>
+              </CardFooter>
             </Card> : ''
           }
           {
