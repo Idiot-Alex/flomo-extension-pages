@@ -107,6 +107,10 @@ export function Home() {
                   <p>插件运行截图：</p>
                 </div>
                 <div className="grid gap-3 mb-4 justify-center">
+                  <img src="/flomo-extension-shot-1.svg"/>
+                  <img src="/flomo-extension-shot-2.svg"/>
+                </div>
+                <div className="grid gap-3 mb-4 justify-center">
                   {
                     showImages()
                   }
@@ -164,16 +168,15 @@ export function Home() {
             location.search.indexOf('usage') > -1 ?
             <Card x-chunk="dashboard-04-chunk-2">
               <CardHeader>
-                <CardTitle>如何安装 Flomo Extension</CardTitle>
+                <CardTitle>如何使用 Flomo Extension</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="grid gap-3 mb-4">
-                  <p>本插件目前只能离线安装：</p>
-                  <p>1. 下载插件的安装文件 zip，下载完成后自行解压</p>
-                  <p>2. 打开 Chrome 浏览器，进入 chrome://extensions/</p>
-                  <p>3. 开启页面右上角的 “开发者模式”</p>
-                  <p>4. 点击 “加载已解压的扩展程序” 并选择解压的文件夹</p>
-                  <p>5. 在浏览器的工具栏中点击该插件，即可正常使用</p>
+                  <p>1. 下载并安装 flomo extension 扩展，参考这里：<a href="/?action=install"><b>安装说明</b></a></p>
+                  <p>2. 点击 flomo extension 扩展，登录自己的账号</p>
+                  <p>3. 在【写笔记】页面输入笔记内容，点击【保存 flomo 笔记】按钮</p>
+                  <p>4. 若笔记保存不成功，需要按照提示打开 flomo 页面并登录自己的账号（非会员账号也行）</p>
+                  <p>5. 若当天的免费次数用完，点击<a href="/plans">这里</a>升级 <b>PRO</b> 套餐</p>
                 </div>
               </CardContent>
               <CardFooter className="border-t px-6 py-4"></CardFooter>
