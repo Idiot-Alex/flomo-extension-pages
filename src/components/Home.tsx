@@ -107,8 +107,9 @@ export function Home() {
                   <p>插件运行截图：</p>
                 </div>
                 <div className="grid gap-3 mb-4 justify-center">
-                  <img src="/flomo-extension-shot-1.svg"/>
-                  <img src="/flomo-extension-shot-2.svg"/>
+                  <img src="/flomo-extension-feat-1.jpg" className="w-9/12 mx-auto"/>
+                  <img src="/flomo-extension-shot-1.svg" className="w-9/12 mx-auto"/>
+                  <img src="/flomo-extension-shot-2.svg" className="w-9/12 mx-auto"/>
                 </div>
                 <div className="grid gap-3 mb-4 justify-center">
                   {
