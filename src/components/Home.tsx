@@ -41,6 +41,9 @@ export function Home() {
 
   const showImages = () => {
     const imgList = [
+      '/flomo-extension-feat-1.jpg',
+      '/flomo-extension-shot-1.svg',
+      '/flomo-extension-shot-2.svg',
       '/flomo-extension-home-1.png',
       '/flomo-extension-guide-1.png',
       '/flomo-extension-setting-1.png',
@@ -50,7 +53,7 @@ export function Home() {
     return (
       <Carousel
         plugins={[plugin.current]}
-        className="w-full max-w-xs"
+        className="w-full max-w-xl"
         onMouseEnter={plugin.current.stop}
         onMouseLeave={plugin.current.reset}
       >
@@ -104,12 +107,13 @@ export function Home() {
                   <p>本插件是为了方便在浏览器上使用时可以随时同步到 flomo 平台而生，简而言之，Flomo Extension 是一个在浏览器上记录 flomo 笔记的插件。</p>
                 </div>
                 <div className="grid gap-3 mt-4">
-                  <p>插件运行截图：</p>
+                  <p>快速开始：</p>
+                  <video controls>
+                    <source src="/flomo-extension-usage-1.mp4"></source>
+                  </video>
                 </div>
-                <div className="grid gap-3 mb-4 justify-center">
-                  <img src="/flomo-extension-feat-1.jpg" className="w-9/12 mx-auto"/>
-                  <img src="/flomo-extension-shot-1.svg" className="w-9/12 mx-auto"/>
-                  <img src="/flomo-extension-shot-2.svg" className="w-9/12 mx-auto"/>
+                <div className="grid gap-3 mt-4">
+                  <p>插件运行截图：</p>
                 </div>
                 <div className="grid gap-3 mb-4 justify-center">
                   {
