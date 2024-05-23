@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux'
 import { useToast } from '@/components/ui/use-toast'
 import { createOrder } from '@/lib/api'
 import { ApiRes, FLOMO_EXTENSION_FILE_URL, FLOMO_EXTENSION_WEB_STORE_URL } from '@/lib/type'
+import confetti from 'canvas-confetti'
 
 export function Plans() {
   const user = useSelector((state: any) => {
@@ -14,10 +15,20 @@ export function Plans() {
   const { toast } = useToast()
 
   const onDownload = () => {
+    onConfetti()
     window.open(FLOMO_EXTENSION_FILE_URL)
   }
   const onWebStore = () => {
+    onConfetti()
     window.open(FLOMO_EXTENSION_WEB_STORE_URL)
+  }
+
+  const onConfetti = () => {
+    confetti({
+      particleCount: 100,
+      spread: 70,
+      origin: { y: 0.6 }
+    });
   }
 
   const freePlans = [
