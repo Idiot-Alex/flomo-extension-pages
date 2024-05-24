@@ -38,6 +38,7 @@
     "yup": "^1.4.0"
   },
   "devDependencies": {
+    "@types/canvas-confetti": "^1.6.4",
     "@types/crypto-js": "^4.2.2",
     "@types/node": "^20.12.7",
     "@types/react": "^18.2.66",
