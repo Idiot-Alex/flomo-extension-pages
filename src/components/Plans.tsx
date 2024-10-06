@@ -8,7 +8,7 @@ import { createAfdianOrder, createWxOrder } from '@/lib/api'
 import { ApiRes, FLOMO_EXTENSION_FILE_URL, FLOMO_EXTENSION_WEB_STORE_URL, FLOMO_EXTENSION_WEB_URL } from '@/lib/type'
 import confetti from 'canvas-confetti'
 import { useState } from 'react'
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger,} from "@/components/ui/dialog"
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle,} from "@/components/ui/dialog"
 
 
 export function Plans() {
