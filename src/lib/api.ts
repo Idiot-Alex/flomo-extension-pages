@@ -25,6 +25,17 @@ export async function createAfdianOrder(data: any): Promise<ApiRes> {
 
 export async function createWxOrder(data: any): Promise<ApiRes> {
   return await instance.post('/api/ltzf/wx/order/create', data, {
+    timeout: 0,
+  })
+}
+
+/**
+ * 
+ * @param data { orderId: xxx }
+ * @returns 
+ */
+export async function queryOrderStatus(data: string): Promise<ApiRes> {
+  return await instance.post('/api/ltzf/wx/order/query', data, {
     timeout: 1000 * 5,
   })
 }
