@@ -9,6 +9,8 @@ import { ApiRes, FLOMO_EXTENSION_FILE_URL, FLOMO_EXTENSION_WEB_STORE_URL, FLOMO_
 import confetti from 'canvas-confetti'
 import { useState } from 'react'
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle,} from "@/components/ui/dialog"
+import { ToastAction } from '@/components/ui/toast'
+import { useNavigate } from 'react-router-dom'
 
 
 export function Plans() {
@@ -152,11 +154,13 @@ export function Plans() {
   ]
 
   const renderAfdianPay = () => {
+    const navigate = useNavigate()
     const toPay = (payData: any) => {
       if (!user.email) {
         toast({
           variant: "destructive",
-          description: '请先登录账号才能继续支付...'
+          description: '请先登录账号才能继续支付...',
+          action: <ToastAction altText="去登录" onClick={() => navigate('/login')}>去登录</ToastAction>,
         })
         return
       }
@@ -202,13 +206,15 @@ export function Plans() {
     const [showDialog, setShowDialog] = useState(false)
     const [dialogOpen, setDialogOpen] = useState(false)
     const [orderData, setOrderData] = useState({} as any)
+    const navigate = useNavigate()
 
     const toPay = (payData: any) => {
       setIsButtonDisabled(true)
       if (!user.email) {
         toast({
           variant: "destructive",
-          description: '请先登录账号才能继续支付...'
+          description: '请先登录账号才能继续支付...',
+          action: <ToastAction altText="去登录" onClick={() => navigate('/login')}>去登录</ToastAction>,
         })
         setIsButtonDisabled(false)
         return
