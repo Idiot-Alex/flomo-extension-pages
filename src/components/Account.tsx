@@ -1,16 +1,14 @@
 import { Button } from '@/components/ui/button'
 import { Card, CardHeader, CardTitle, CardContent, CardFooter } from '@/components/ui/card'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { useNavigate } from 'react-router-dom'
 import { reloadUser } from '@/lib/api'
-import { setUser } from '@/store/actions'
 
 export function Account() {
-  const dispatch = useDispatch()
   const navigate = useNavigate()
-  const user = useSelector((state: any) => {
+  let user = useSelector((state: any) => {
     return state.user
   })
 
@@ -18,7 +16,7 @@ export function Account() {
   if (user) {
     reloadUser({ email: user.email }).then(res => {
       if (res.success) {
-        dispatch(setUser(res.data))
+        user = res.data
       }
     })
   }
