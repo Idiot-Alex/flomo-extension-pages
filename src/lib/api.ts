@@ -19,6 +19,10 @@ export async function resetPwd(data: any): Promise<ApiRes> {
   return await instance.post('/api/user/reset-pwd', data)
 }
 
+export async function reloadUser(data: any): Promise<ApiRes> {
+  return await instance.post('/api/user/reload', data)
+}
+
 export async function createAfdianOrder(data: any): Promise<ApiRes> {
   return await instance.post('/api/afdian/order/create', data)
 }

@@ -1,15 +1,27 @@
 import { Button } from '@/components/ui/button'
 import { Card, CardHeader, CardTitle, CardContent, CardFooter } from '@/components/ui/card'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { useNavigate } from 'react-router-dom'
+import { reloadUser } from '@/lib/api'
+import { setUser } from '@/store/actions'
 
 export function Account() {
+  const dispatch = useDispatch()
   const navigate = useNavigate()
   const user = useSelector((state: any) => {
     return state.user
   })
+
+  // 重新加载用户信息
+  if (user) {
+    reloadUser({ email: user.email }).then(res => {
+      if (res.success) {
+        dispatch(setUser(res.data))
+      }
+    })
+  }
 
   const toPlan = () => {
     navigate('/plans')
