@@ -1,6 +1,6 @@
 import { Button } from '@/components/ui/button'
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from '@/components/ui/card'
-import { FLOMO_EXTENSION_FILE_URL, FLOMO_EXTENSION_WEB_STORE_URL, FLOMO_EXTENSION_WEB_URL } from '@/lib/type'
+import { FLOMO_EXTENSION_FILE_URL, FLOMO_EXTENSION_WEB_STORE_URL } from '@/lib/type'
 import confetti from 'canvas-confetti'
 import { usePlan } from './ui/use-plan'
 
