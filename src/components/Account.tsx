@@ -5,21 +5,32 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { useNavigate } from 'react-router-dom'
 import { reloadUser } from '@/lib/api'
+import { useEffect, useState } from 'react'
 
 export function Account() {
   const navigate = useNavigate()
-  let user = useSelector((state: any) => {
+  const [userInf, setUserInf] = useState({
+    email: '',
+    plan: '',
+    expiredTime: '',
+  })
+
+  const user = useSelector((state: any) => {
     return state.user
   })
 
   // 重新加载用户信息
-  if (user) {
-    reloadUser({ email: user.email }).then(res => {
-      if (res.success) {
-        user = res.data
-      }
-    })
-  }
+  useEffect(() => {
+    if (user.email) {
+      reloadUser({ email: user.email }).then(res => {
+        if (res.success) {
+          setUserInf(res.data)
+        } else {
+          setUserInf(user)
+        }
+      })
+    }
+  }, [])
 
   const toPlan = () => {
     navigate('/plans')
@@ -41,19 +52,19 @@ export function Account() {
                 <Label>邮箱</Label>
                 <Input type="email" readOnly 
                   className="pl-8 sm:w-[300px] md:w-[200px] lg:w-[300px]"
-                  value={user.email}/>
+                  value={userInf.email}/>
               </div>
               <div className="mb-4">
                 <Label>当前套餐</Label>
                 <Input type="email" readOnly 
                   className="pl-8 sm:w-[300px] md:w-[200px] lg:w-[300px]"
-                  value={user.plan}/>
+                  value={userInf.plan}/>
               </div>
               <div className="mb-4">
                 <Label>套餐到期时间</Label>
                 <Input type="email" readOnly 
                   className="pl-8 sm:w-[300px] md:w-[200px] lg:w-[300px]"
-                  value={new Date(user.expiredTime).toLocaleString()}/>
+                  value={!userInf.expiredTime ? '' : new Date(userInf.expiredTime).toLocaleString()}/>
               </div>
             </form>
           </CardContent>
