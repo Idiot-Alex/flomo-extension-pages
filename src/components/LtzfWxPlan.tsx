@@ -52,7 +52,7 @@ export function LtzfWxPlan() {
       title: '1 个月',
       month: 1,
       price: 5,
-      payPrice: 0.01,
+      payPrice: 0.5,
     },
     {
       title: '半年',
