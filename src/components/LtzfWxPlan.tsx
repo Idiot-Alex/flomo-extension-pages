@@ -48,12 +48,12 @@ export function LtzfWxPlan() {
   ]
 
   const wxPayList = [
-    {
-      title: '1 个月',
-      month: 1,
-      price: 5,
-      payPrice: 0.5,
-    },
+    // {
+    //   title: '1 个月',
+    //   month: 1,
+    //   price: 5,
+    //   payPrice: 0.01,
+    // },
     {
       title: '半年',
       month: 6,
