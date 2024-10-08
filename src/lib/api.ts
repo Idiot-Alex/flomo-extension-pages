@@ -34,8 +34,8 @@ export async function createWxOrder(data: any): Promise<ApiRes> {
  * @param data { orderId: xxx }
  * @returns 
  */
-export async function queryOrderStatus(data: string): Promise<ApiRes> {
-  return await instance.post('/api/ltzf/wx/order/query', data, {
+export async function queryOrderStatus(data: any): Promise<ApiRes> {
+  return await instance.post('/api/order/query', data, {
     timeout: 1000 * 5,
   })
 }
