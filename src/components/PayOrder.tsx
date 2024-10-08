@@ -5,30 +5,32 @@ import { Button } from '@/components/ui/button'
 import { queryOrderStatus } from '@/lib/api'
 
 export function PayOrder() {
+  let count = 0
   const navigate = useNavigate()
 
   const location = useLocation()
   const orderData = location.state
 
   const queryOrderTimer = () => {
+    count++
     // 定时查询订单支付状态
     let timer = setTimeout(() => {
-      toast({
-        description: '正在查询订单支付状态...',
-      })
+      toast({ description: '正在查询订单支付状态...', })
       const data = {
         orderId: orderData.orderId,
       }
       queryOrderStatus(data).then(res => {
-        console.log(res)
         if (res.success && res.data.paySt === 1) {
-          toast({
-            description: '订单支付完成...',
-          })
+          toast({ description: '订单支付完成...', })
           clearTimeout(timer)
           navigate('/account')
         } else {
-          queryOrderTimer()
+          if (count < 20) {
+            queryOrderTimer()
+          } else {
+            toast({ description: '订单查询次数达到上限...', })
+            clearTimeout(timer)
+          }
         }
       })
     }, 3000)
@@ -38,7 +40,7 @@ export function PayOrder() {
     toast({
       variant: "destructive",
       description: '请先选择购买的套餐...',
-      action: <ToastAction altText="去选择套餐" onClick={() => navigate('/plans')}>去选择套餐</ToastAction>,
+      action: <ToastAction className="bg-primary rounded-md px-4 py-2" altText="去选择套餐" onClick={() => navigate('/plans')}>去选择套餐</ToastAction>,
     })
   } else {
     queryOrderTimer()

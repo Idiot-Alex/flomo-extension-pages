@@ -78,7 +78,7 @@ export function LtzfWxPlan() {
         toast({
           variant: "destructive",
           description: '请先登录账号才能继续支付...',
-          action: <ToastAction altText="去登录" onClick={() => navigate('/login')}>去登录</ToastAction>,
+          action: <ToastAction className="bg-primary rounded-md px-4 py-2" altText="去登录" onClick={() => navigate('/login')}>去登录</ToastAction>,
         })
         setIsButtonDisabled(false)
         return

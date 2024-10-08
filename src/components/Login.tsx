@@ -69,48 +69,50 @@ export function Login() {
   }
 
   return (
-    <Card className="mx-auto mt-16 max-w-sm">
-      <CardHeader>
-        <CardTitle className="text-2xl">登录 <a href="/">Flomo Extension</a></CardTitle>
-        <CardDescription>
-          输入邮箱和密码登录您的账户
-        </CardDescription>
-      </CardHeader>
-      <CardContent>
-        <div className="grid gap-4">
-          <div className="grid gap-2">
-            <Label htmlFor="email">邮箱</Label>
-            <Input
-              id="email"
-              type="email"
-              placeholder="m@example.com"
-              value={formik.values.email}
-              onChange={formik.handleChange}
-              required
-            />
-            <Label className="text-red-400">{ <>{formik.errors.email}</> ?? '' }</Label>
-          </div>
-          <div className="grid gap-2">
-            <div className="flex items-center">
-              <Label htmlFor="password">密码</Label>
-              <a href="/reset-pwd" className="ml-auto inline-block text-sm underline">
-                忘记密码?
-              </a>
+    <div className="h-screen w-full flex">
+      <Card className="flex-1 mx-auto my-auto mt-16 max-w-sm">
+        <CardHeader>
+          <CardTitle className="text-2xl">登录 <a href="/">Flomo Extension</a></CardTitle>
+          <CardDescription>
+            输入邮箱和密码登录您的账户
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="grid gap-4">
+            <div className="grid gap-2">
+              <Label htmlFor="email">邮箱</Label>
+              <Input
+                id="email"
+                type="email"
+                placeholder="m@example.com"
+                value={formik.values.email}
+                onChange={formik.handleChange}
+                required
+              />
+              <Label className="text-red-400">{ <>{formik.errors.email}</> ?? '' }</Label>
             </div>
-            <Input id="password" type="password" required value={formik.values.password} onChange={formik.handleChange} />
-            <Label className="text-red-400">{ <>{formik.errors.password}</> ?? '' }</Label>
+            <div className="grid gap-2">
+              <div className="flex items-center">
+                <Label htmlFor="password">密码</Label>
+                <a href="/reset-pwd" className="ml-auto inline-block text-sm underline">
+                  忘记密码?
+                </a>
+              </div>
+              <Input id="password" type="password" required value={formik.values.password} onChange={formik.handleChange} />
+              <Label className="text-red-400">{ <>{formik.errors.password}</> ?? '' }</Label>
+            </div>
+            <Button type="submit" className="w-full" onClick={onLogin}>
+              登录
+            </Button>
           </div>
-          <Button type="submit" className="w-full" onClick={onLogin}>
-            登录
-          </Button>
-        </div>
-        <div className="mt-4 text-center text-sm">
-          还没有账号?{" "}
-          <a href="/register" className="underline">
-            立即注册
-          </a>
-        </div>
-      </CardContent>
-    </Card>
+          <div className="mt-4 text-center text-sm">
+            还没有账号?{" "}
+            <a href="/register" className="underline">
+              立即注册
+            </a>
+          </div>
+        </CardContent>
+      </Card>
+    </div>
   )
 }

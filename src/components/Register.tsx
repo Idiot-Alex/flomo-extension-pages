@@ -136,68 +136,70 @@ export function Register() {
   }
   
   return (
-    <Card className="mx-auto mt-16 max-w-sm">
-      <CardHeader>
-        <CardTitle className="text-xl">注册 <a href="/">Flomo Extension</a></CardTitle>
-        <CardDescription>
-          输入您的信息创建账户
-        </CardDescription>
-      </CardHeader>
-      <CardContent>
-        <div className="grid gap-4">
-            <div className="grid gap-2">
-              <Label htmlFor="email">邮箱</Label>
-              <div className="flex space-x-2">
-                <Input
-                  name="email"
-                  type="email"
-                  placeholder="m@example.com"
-                  required
-                  value={formik.values.email}
-                  onChange={formik.handleChange}
-                />
-                <Button type="submit" className="" disabled={countingDown} onClick={onSendEmailCode}>
-                  发送验证码{ countDown === 60 ? '' : `${countDown} s` }
-                </Button>
-              </div>
-              <Label className="text-red-400">{ <>{formik.errors.email}</> ?? '' }</Label>
-          </div>
-          <div className="grid gap-2">
-            <Label htmlFor="password">密码</Label>
-            <Input name="password" type="password" value={formik.values.password} onChange={formik.handleChange}/>
-              <Label className="text-red-400">{ <>{formik.errors.password}</> ?? '' }</Label>
-          </div>
+    <div className="h-screen w-full flex">
+      <Card className="flex-1 mx-auto my-auto mt-16 max-w-sm">
+        <CardHeader>
+          <CardTitle className="text-xl">注册 <a href="/">Flomo Extension</a></CardTitle>
+          <CardDescription>
+            输入您的信息创建账户
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
           <div className="grid gap-4">
-            <Label htmlFor="first-name">邮箱验证码</Label>
-            <InputOTP
-              name="code"
-              maxLength={6}
-              pattern={REGEXP_ONLY_DIGITS_AND_CHARS}
-              value={formik.values.code}
-              onChange={handleInputOtp}
-            >
-              <InputOTPGroup>
-                <InputOTPSlot index={0} />
-                <InputOTPSlot index={1} />
-                <InputOTPSlot index={2} />
-                <InputOTPSlot index={3} />
-                <InputOTPSlot index={4} />
-                <InputOTPSlot index={5} />
-              </InputOTPGroup>
-            </InputOTP>
-            <Label className="text-red-400">{ <>{formik.errors.code}</> ?? '' }</Label>
+              <div className="grid gap-2">
+                <Label htmlFor="email">邮箱</Label>
+                <div className="flex space-x-2">
+                  <Input
+                    name="email"
+                    type="email"
+                    placeholder="m@example.com"
+                    required
+                    value={formik.values.email}
+                    onChange={formik.handleChange}
+                  />
+                  <Button type="submit" className="" disabled={countingDown} onClick={onSendEmailCode}>
+                    发送验证码{ countDown === 60 ? '' : `${countDown} s` }
+                  </Button>
+                </div>
+                <Label className="text-red-400">{ <>{formik.errors.email}</> ?? '' }</Label>
+            </div>
+            <div className="grid gap-2">
+              <Label htmlFor="password">密码</Label>
+              <Input name="password" type="password" value={formik.values.password} onChange={formik.handleChange}/>
+                <Label className="text-red-400">{ <>{formik.errors.password}</> ?? '' }</Label>
+            </div>
+            <div className="grid gap-4">
+              <Label htmlFor="first-name">邮箱验证码</Label>
+              <InputOTP
+                name="code"
+                maxLength={6}
+                pattern={REGEXP_ONLY_DIGITS_AND_CHARS}
+                value={formik.values.code}
+                onChange={handleInputOtp}
+              >
+                <InputOTPGroup>
+                  <InputOTPSlot index={0} />
+                  <InputOTPSlot index={1} />
+                  <InputOTPSlot index={2} />
+                  <InputOTPSlot index={3} />
+                  <InputOTPSlot index={4} />
+                  <InputOTPSlot index={5} />
+                </InputOTPGroup>
+              </InputOTP>
+              <Label className="text-red-400">{ <>{formik.errors.code}</> ?? '' }</Label>
+            </div>
+            <Button type="submit" className="w-full" onClick={onRegister}>
+              注册账户
+            </Button>
           </div>
-          <Button type="submit" className="w-full" onClick={onRegister}>
-            注册账户
-          </Button>
-        </div>
-        <div className="mt-4 text-center text-sm">
-          已经有了账户?{" "}
-          <a href="/login" className="underline">
-            立即登录
-          </a>
-        </div>
-      </CardContent>
-    </Card>
+          <div className="mt-4 text-center text-sm">
+            已经有了账户?{" "}
+            <a href="/login" className="underline">
+              立即登录
+            </a>
+          </div>
+        </CardContent>
+      </Card>
+    </div>
   )
 }
