@@ -37,7 +37,7 @@ export function PayOrder() {
   }
 
   if (!orderData?.orderId || 
-    (!orderData.data?.QRcode_url || !orderData.data?.img)) {
+    (!orderData.data?.QRcode_url && !orderData.data?.img)) {
     toast({
       variant: "destructive",
       description: '请先选择购买的套餐...',
