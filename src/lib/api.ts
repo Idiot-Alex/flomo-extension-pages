@@ -33,8 +33,14 @@ export async function createWxOrder(data: any): Promise<ApiRes> {
   })
 }
 
+export async function createAliOrder(data: any): Promise<ApiRes> {
+  return await instance.post('/api/zpay/ali/order/create', data, {
+    timeout: 0,
+  })
+}
+
 /**
- * 
+ * 查询订单状态
  * @param data { orderId: xxx }
  * @returns 
  */

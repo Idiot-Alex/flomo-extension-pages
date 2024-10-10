@@ -1,6 +1,7 @@
 import { FreePlan } from './FreePlan'
-import { AfdianPlan } from './AfdianPlan'
+// import { AfdianPlan } from './AfdianPlan'
 import { LtzfWxPlan } from './LtzfWxPlan'
+import { ZpayAliPlan } from './ZpayAliPlan'
 
 export function Plans() {
 
@@ -12,7 +13,8 @@ export function Plans() {
       <div className="mx-auto grid w-full max-w-6xl items-start gap-2 md:grid-cols-3 lg:grid-cols-3">
         <FreePlan />
         <LtzfWxPlan />
-        <AfdianPlan />
+        <ZpayAliPlan />
+        {/* <AfdianPlan /> */}
       </div>
     </>
   )

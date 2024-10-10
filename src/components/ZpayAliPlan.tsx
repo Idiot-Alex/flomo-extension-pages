@@ -1,25 +1,24 @@
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import { Popover, PopoverTrigger, PopoverContent } from '@/components/ui/popover'
 import { Button } from '@/components/ui/button'
-import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from '@/components/ui/card'
-import { createWxOrder } from '@/lib/api'
-import { FLOMO_EXTENSION_WEB_URL, ApiRes } from '@/lib/type'
-import { Label } from '@radix-ui/react-dropdown-menu'
-import { ToastAction } from '@radix-ui/react-toast'
+import { usePlan } from '@/components/ui/use-plan'
+import { useSelector } from 'react-redux'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { toast } from './ui/use-toast'
-import { useSelector } from 'react-redux'
-import { usePlan } from './ui/use-plan'
+import { toast } from '@/components/ui/use-toast'
+import { ToastAction } from '@/components/ui/toast'
+import { ApiRes, FLOMO_EXTENSION_WEB_URL } from '@/lib/type'
+import { createAliOrder } from '@/lib/api'
+import { Label } from '@/components/ui/label'
 
-export function LtzfWxPlan() {
-
+export function ZpayAliPlan() {
   const user = useSelector((state: any) => {
     return state.user
   })
 
   const plan = usePlan()
 
-  const wxPlans = [
+  const aliPlans = [
     {
       color: 'bg-sky-500',
       title: '数据安全，放心使用',
@@ -42,18 +41,18 @@ export function LtzfWxPlan() {
     },
     {
       color: 'bg-sky-500',
-      title: '微信支付，更加方便',
+      title: '支付宝支付，更加方便',
       desc: '更多功能敬请期待...',
     }
   ]
 
-  const wxPayList = [
-    // {
-    //   title: '1 个月',
-    //   month: 1,
-    //   price: 5,
-    //   payPrice: 0.01,
-    // },
+  const aliPayList = [
+    {
+      title: '1 个月',
+      month: 1,
+      price: 5,
+      payPrice: 0.01,
+    },
     {
       title: '半年',
       month: 6,
@@ -68,7 +67,7 @@ export function LtzfWxPlan() {
     },
   ]
 
-  const renderWxPay = () => {
+  const renderAliPay = () => {
     const [isButtonDisabled, setIsButtonDisabled] = useState(false)
     const navigate = useNavigate()
 
@@ -93,7 +92,7 @@ export function LtzfWxPlan() {
         price: payData.payPrice,
         returnUrl: FLOMO_EXTENSION_WEB_URL,
       }
-      createWxOrder(params).then((res: ApiRes) => {
+      createAliOrder(params).then((res: ApiRes) => {
         setIsButtonDisabled(false)
         if (res.success) {
           toast({
@@ -101,7 +100,7 @@ export function LtzfWxPlan() {
           })
           const orderData = {
             ...res.data,
-            channel: 'wx',
+            channel: 'ali',
             title: params.title,
             price: params.price,
           }
@@ -126,7 +125,7 @@ export function LtzfWxPlan() {
 
     return (<>
       {
-        wxPayList.map((item, i) => (
+        aliPayList.map((item, i) => (
           <div key={i} className="grid grid-cols-3 items-center gap-4 border-b pb-4">
             <Label>{item.title}</Label>
             {
@@ -148,15 +147,15 @@ export function LtzfWxPlan() {
   }
 
   return (<>
-    <Card className="mx-auto max-w-sm bg-blanchedalmond">
+    <Card className="mx-auto max-w-sm bg-sky-100">
       <CardHeader>
-        <CardTitle className="text-2xl">Pay 套餐（微信支付渠道）</CardTitle>
+        <CardTitle className="text-2xl">Pay 套餐（支付宝渠道）</CardTitle>
         <CardDescription>
           需要注册账号并付费，每日 <b className="text-zinc-600">无限</b> 次使用插件保存笔记
         </CardDescription>
       </CardHeader>
       <CardContent>
-        { plan.renderPlan(wxPlans) }
+        { plan.renderPlan(aliPlans) }
       </CardContent>
       <CardFooter className="border-t px-6 py-4">
         <Popover>
@@ -172,7 +171,7 @@ export function LtzfWxPlan() {
                 </p>
               </div>
               <div className="grid gap-2">
-                { renderWxPay() }
+                { renderAliPay() }
               </div>
             </div>
           </PopoverContent>

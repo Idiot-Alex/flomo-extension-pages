@@ -50,12 +50,18 @@ export function PayOrder() {
     <>
       <div className="mx-auto grid w-full max-w-6xl gap-2">
         <h1 className="text-3xl font-semibold"><a href="/">Flomo Extension</a> 支付二维码</h1>
+        <p>请使用 <b>{orderData.channel === 'wx' ? '微信' : '支付宝'}</b> 完成支付</p>
       </div>
       { 
         orderData ? (
           <div className="mx-auto grid w-full max-w-6xl">
             <div className="flex flex-col">
-              <img src={orderData.data?.QRcode_url} alt="支付二维码" className="w-80" />
+              {
+                orderData.channel === 'wx' ? 
+                <img src={orderData.data?.QRcode_url} alt="支付二维码" className="w-80" /> :
+                <img src={orderData.data?.img} alt="支付二维码" className="w-80" />
+              }
+              
               <p>订单号：{orderData.orderId}</p>
               <p>交易描述：{orderData.title}</p>
               <p>
