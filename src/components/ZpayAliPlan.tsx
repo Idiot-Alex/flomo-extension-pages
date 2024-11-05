@@ -37,7 +37,7 @@ export function ZpayAliPlan() {
     {
       color: 'bg-sky-500',
       title: '原价 ¥5.0 一个月',
-      desc: '限时特价，¥10.0 半年会员，¥15.0 一年会员，赶紧冲哇',
+      desc: '限时特价，优惠多多，赶紧冲哇',
     },
     {
       color: 'bg-sky-500',
@@ -47,23 +47,23 @@ export function ZpayAliPlan() {
   ]
 
   const aliPayList = [
-    // {
-    //   title: '1 个月',
-    //   month: 1,
-    //   price: 5,
-    //   payPrice: 0.01,
-    // },
+    {
+      title: '1 个月',
+      month: 1,
+      price: 5,
+      payPrice: 1.9,
+    },
     {
       title: '半年',
       month: 6,
       price: 30,
-      payPrice: 10,
+      payPrice: 5.9,
     },
     {
       title: '一年',
       month: 12,
       price: 60,
-      payPrice: 15,
+      payPrice: 9.9,
     },
   ]
 
