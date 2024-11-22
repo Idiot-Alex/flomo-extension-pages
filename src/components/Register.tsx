@@ -139,7 +139,7 @@ export function Register() {
     const res = await oauthGoogleRegister()
     const { data } = res
     
-    const popup = window.open(data.url, 'Google 注册', 'width=600,height=600')
+    window.open(data.url, 'Google 注册', 'width=600,height=600')
 
     window.addEventListener('message', (event) => {
       if (event.data.type === 'google-oauth-callback') {

@@ -74,7 +74,7 @@ export function Login() {
     const { data } = res
     
     // 2. 打开登录弹窗
-    const popup = window.open(data.url, 'Google 登录', 'width=600,height=600')
+    window.open(data.url, 'Google 登录', 'width=600,height=600')
     
     // 3. 监听登录结果
     window.addEventListener('message', (event) => {
