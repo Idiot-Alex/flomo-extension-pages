@@ -18,12 +18,14 @@ import * as yup from 'yup'
 import { useFormik } from 'formik'
 import { useToast } from '@/components/ui/use-toast'
 import { useEffect, useState } from 'react'
-import { register, sendEmailCode } from '@/lib/api'
+import { oauthGoogleRegister, register, sendEmailCode } from '@/lib/api'
 import { ApiRes } from '@/lib/type'
 import CryptoJS from 'crypto-js'
+import { useNavigate } from 'react-router-dom'
 
 export function Register() {
   const { toast } = useToast()
+  const navigate = useNavigate()
 
   const schema = yup.object({
     email: yup.string().required().email(),
@@ -39,9 +41,7 @@ export function Register() {
     },
     validateOnChange: true,
     validationSchema: schema,
-    onSubmit: (values: any) => {
-      console.log(values)
-    },
+    onSubmit: () => {},
   })
 
   const [codeId, setCodeId] = useState('')
@@ -135,6 +135,36 @@ export function Register() {
     })
   }
   
+  const onGoogleRegister = async () => {
+    const res = await oauthGoogleRegister()
+    const { data } = res
+    
+    const popup = window.open(data.url, 'Google 注册', 'width=600,height=600')
+
+    window.addEventListener('message', (event) => {
+      if (event.data.type === 'google-oauth-callback') {
+        // 注册成功,处理用户数据
+        const res = event.data.data
+        if (res.success) {
+          // 存储用户数据,更新界面等
+          toast({
+            description: res.msg
+          })
+          // 跳转到登录
+          navigate('/login')
+        } else {
+          toast({
+            variant: "destructive",
+            description: res.msg
+          })
+        }
+      } else if (event.data.type === 'google-oauth-error') {
+        // 处理登录错误
+        console.error('注册失败:', event.data.error)
+      }
+    })
+  }
+
   return (
     <div className="h-screen w-full flex">
       <Card className="flex-1 mx-auto my-auto mt-16 max-w-sm">
@@ -161,12 +191,12 @@ export function Register() {
                     发送验证码{ countDown === 60 ? '' : `${countDown} s` }
                   </Button>
                 </div>
-                <Label className="text-red-400">{ <>{formik.errors.email}</> ?? '' }</Label>
+                <Label className="text-red-400">{ formik.errors.email || '' }</Label>
             </div>
             <div className="grid gap-2">
               <Label htmlFor="password">密码</Label>
               <Input name="password" type="password" value={formik.values.password} onChange={formik.handleChange}/>
-                <Label className="text-red-400">{ <>{formik.errors.password}</> ?? '' }</Label>
+                <Label className="text-red-400">{ formik.errors.password || '' }</Label>
             </div>
             <div className="grid gap-4">
               <Label htmlFor="first-name">邮箱验证码</Label>
@@ -186,10 +216,14 @@ export function Register() {
                   <InputOTPSlot index={5} />
                 </InputOTPGroup>
               </InputOTP>
-              <Label className="text-red-400">{ <>{formik.errors.code}</> ?? '' }</Label>
+              <Label className="text-red-400">{ formik.errors.code || '' }</Label>
             </div>
             <Button type="submit" className="w-full" onClick={onRegister}>
               注册账户
+            </Button>
+            <Button variant="secondary" type="submit" className="w-full" onClick={onGoogleRegister}>
+              <img className="w-4 h-4 m-4" src="/google_logo.png" alt="Google 登录" />
+              <span>使用 Google 注册</span>
             </Button>
           </div>
           <div className="mt-4 text-center text-sm">

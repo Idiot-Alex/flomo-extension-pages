@@ -53,6 +53,13 @@ export async function queryOrderStatus(data: any): Promise<ApiRes> {
 // oauth google login
 export async function oauthGoogleLogin(): Promise<ApiRes> { 
   return await instance.post('/api/oauth/google/login', {}, {
-    timeout: 1000 * 3,
+    timeout: 1000 * 5,
+  })
+}
+
+// oauth google register
+export async function oauthGoogleRegister(): Promise<ApiRes> { 
+  return await instance.post('/api/oauth/google/register', {}, {
+    timeout: 1000 * 5,
   })
 }

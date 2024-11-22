@@ -70,17 +70,17 @@ export function Login() {
 
   const onGoogleLogin = async() => {
     // 1. 获取登录链接
-    const res = await oauthGoogleLogin();
-    const { data } = res;
+    const res = await oauthGoogleLogin()
+    const { data } = res
     
     // 2. 打开登录弹窗
-    const popup = window.open(data.url, 'Google 登录', 'width=600,height=600');
+    const popup = window.open(data.url, 'Google 登录', 'width=600,height=600')
     
     // 3. 监听登录结果
     window.addEventListener('message', (event) => {
       if (event.data.type === 'google-oauth-callback') {
         // 登录成功,处理用户数据
-        const res = event.data.data;
+        const res = event.data.data
         if (res.success) {
           // 存储用户数据,更新界面等
           toast({
@@ -97,9 +97,9 @@ export function Login() {
         }
       } else if (event.data.type === 'google-oauth-error') {
         // 处理登录错误
-        console.error('登录失败:', event.data.error);
+        console.error('登录失败:', event.data.error)
       }
-    });
+    })
   }
 
   return (
