@@ -11,7 +11,7 @@ import { Label } from '@/components/ui/label'
 import { useFormik } from 'formik'
 import * as yup from 'yup'
 import { useToast } from '@/components/ui/use-toast'
-import { login } from '@/lib/api'
+import { login, oauthGoogleLogin } from '@/lib/api'
 import { ApiRes } from '@/lib/type'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
@@ -68,6 +68,40 @@ export function Login() {
     })
   }
 
+  const onGoogleLogin = async() => {
+    // 1. 获取登录链接
+    const res = await oauthGoogleLogin();
+    const { data } = res;
+    
+    // 2. 打开登录弹窗
+    const popup = window.open(data.url, 'Google 登录', 'width=600,height=600');
+    
+    // 3. 监听登录结果
+    window.addEventListener('message', (event) => {
+      if (event.data.type === 'google-oauth-callback') {
+        // 登录成功,处理用户数据
+        const res = event.data.data;
+        if (res.success) {
+          // 存储用户数据,更新界面等
+          toast({
+            description: res.msg
+          })
+          dispatch(setUser(res.data))
+          // 跳转到首页
+          navigate('/')
+        } else {
+          toast({
+            variant: "destructive",
+            description: res.msg
+          })
+        }
+      } else if (event.data.type === 'google-oauth-error') {
+        // 处理登录错误
+        console.error('登录失败:', event.data.error);
+      }
+    });
+  }
+
   return (
     <div className="h-screen w-full flex">
       <Card className="flex-1 mx-auto my-auto mt-16 max-w-sm">
@@ -89,7 +123,7 @@ export function Login() {
                 onChange={formik.handleChange}
                 required
               />
-              <Label className="text-red-400">{ <>{formik.errors.email}</> ?? '' }</Label>
+              <Label className="text-red-400">{ formik.errors.email || '' }</Label>
             </div>
             <div className="grid gap-2">
               <div className="flex items-center">
@@ -99,10 +133,14 @@ export function Login() {
                 </a>
               </div>
               <Input id="password" type="password" required value={formik.values.password} onChange={formik.handleChange} />
-              <Label className="text-red-400">{ <>{formik.errors.password}</> ?? '' }</Label>
+              <Label className="text-red-400">{ formik.errors.password || '' }</Label>
             </div>
             <Button type="submit" className="w-full" onClick={onLogin}>
               登录
+            </Button>
+            <Button variant="secondary" type="submit" className="w-full" onClick={onGoogleLogin}>
+              <img className="w-4 h-4 m-4" src="/google_logo.png" alt="Google 登录" />
+              <span>使用 Google 登录</span>
             </Button>
           </div>
           <div className="mt-4 text-center text-sm">
