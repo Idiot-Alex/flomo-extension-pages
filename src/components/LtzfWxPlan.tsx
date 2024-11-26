@@ -37,8 +37,8 @@ export function LtzfWxPlan() {
     },
     {
       color: 'bg-sky-500',
-      title: '原价 ¥5.0 一个月',
-      desc: '限时特价，优惠多多，赶紧冲哇',
+      title: '优惠价 ¥1.9 一个月',
+      desc: '限时特价，年付更便宜，赶紧冲哇',
     },
     {
       color: 'bg-sky-500',

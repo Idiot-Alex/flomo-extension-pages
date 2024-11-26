@@ -3,49 +3,57 @@ import { ToastAction } from '@/components/ui/toast'
 import { toast } from '@/components/ui/use-toast'
 import { Button } from '@/components/ui/button'
 import { queryOrderStatus } from '@/lib/api'
+import { useEffect, useRef } from 'react'
 
 export function PayOrder() {
-  let count = 0
+  const countRef = useRef(0)
+  const timerRef = useRef<NodeJS.Timeout>()
   const navigate = useNavigate()
-
   const location = useLocation()
   const orderData = location.state
 
   const queryOrderTimer = () => {
-    count++
+    countRef.current++
     // 定时查询订单支付状态
-    let timer = setTimeout(() => {
-      toast({ description: '正在查询订单支付状态...', })
+    timerRef.current = setTimeout(() => {
+      toast({ description: '正在查询订单支付状态...' })
       const data = {
         orderId: orderData.orderId,
       }
       queryOrderStatus(data).then(res => {
         if (res.success && res.data.paySt === 1) {
-          toast({ description: '订单支付完成...', })
-          clearTimeout(timer)
+          toast({ description: '订单支付完成...' })
           navigate('/account')
         } else {
-          if (count < 20) {
+          if (countRef.current < 20) {
             queryOrderTimer()
           } else {
-            toast({ description: '订单查询次数达到上限...', })
-            clearTimeout(timer)
+            toast({ description: '订单查询次数达到上限...' })
           }
         }
       })
     }, 3000)
   }
 
-  if (!orderData?.orderId || 
-    (!orderData.data?.QRcode_url && !orderData.data?.img)) {
-    toast({
-      variant: "destructive",
-      description: '请先选择购买的套餐...',
-      action: <ToastAction className="bg-primary rounded-md px-4 py-2" altText="去选择套餐" onClick={() => navigate('/plans')}>去选择套餐</ToastAction>,
-    })
-  } else {
-    queryOrderTimer()
-  }
+  useEffect(() => {
+    if (!orderData?.orderId || 
+      (!orderData.data?.QRcode_url && !orderData.data?.img)) {
+      toast({
+        variant: "destructive",
+        description: '请先选择购买的套餐...',
+        action: <ToastAction className="bg-primary rounded-md px-4 py-2" altText="去选择套餐" onClick={() => navigate('/plans')}>去选择套餐</ToastAction>,
+      })
+    } else {
+      queryOrderTimer()
+    }
+
+    // 清理函数：组件卸载或路由变化时清除定时器
+    return () => {
+      if (timerRef.current) {
+        clearTimeout(timerRef.current)
+      }
+    }
+  }, [orderData, navigate]) // 依赖项包含 orderData 和 navigate
 
   return (
     <>

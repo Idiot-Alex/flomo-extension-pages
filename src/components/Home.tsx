@@ -107,8 +107,14 @@ export function Home() {
                   <p>本插件是为了方便在浏览器上使用时可以随时同步到 flomo 平台而生，简而言之，Flomo Extension 是一个在浏览器上记录 flomo 笔记的插件。</p>
                 </div>
                 <div className="grid gap-3 mt-4">
+                  <p>新特性 Google 账号登录：</p>
+                  <video className="w-80" controls autoPlay muted playsInline>
+                    <source src="/flomo-extension-google-login.mp4"></source>
+                  </video>
+                </div>
+                <div className="grid gap-3 mt-4">
                   <p>快速开始：</p>
-                  <video controls>
+                  <video className="w-[80%]" controls autoPlay muted playsInline>
                     <source src="/flomo-extension-usage-1.mp4"></source>
                   </video>
                 </div>
