@@ -8,7 +8,8 @@ import { Plans } from '@/components/Plans'
 import { Home } from '@/components/Home'
 import { ResetPwd } from '@/components/ResetPwd'
 import { Account } from '@/components/Account'
-import { PayOrder } from './components/PayOrder'
+import { PayOrder } from '@/components/PayOrder'
+import { NotFound } from '@/components/NotFound'
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path="/reset-pwd" element={<ResetPwd />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
       <Toaster />

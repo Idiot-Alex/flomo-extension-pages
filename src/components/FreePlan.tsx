@@ -12,7 +12,7 @@ export function FreePlan() {
     {
       color: 'bg-sky-500',
       title: '数据安全，放心使用',
-      desc: '不会存储任何 flomo 笔记数据',
+      desc: '不会存储用户任何 flomo 笔记数据',
     },
     {
       color: 'bg-sky-100',
