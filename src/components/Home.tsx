@@ -81,7 +81,7 @@ export function Home() {
       <div className="mx-auto grid w-full max-w-6xl gap-2">
         <h1 className="text-3xl font-semibold">Flomo Extension 说明</h1>
       </div>
-      <div className="mx-auto grid w-full max-w-6xl items-start gap-6 md:grid-cols-[180px_1fr] lg:grid-cols-[250px_1fr]">
+      <div className="overflow-hidden h-[calc(100vh-200px)] mx-auto grid w-full max-w-6xl items-start gap-6 md:grid-cols-[180px_1fr] lg:grid-cols-[250px_1fr]">
         <nav className="grid gap-4 text-sm text-muted-foreground" x-chunk="dashboard-04-chunk-0">
           <a onClick={() => onAction('instruction')} className="font-semibold text-primary cursor-pointer">Flomo Extension 介绍</a>
           <a onClick={() => onAction('install')} className="text-primary cursor-pointer">安装说明</a>
@@ -89,7 +89,7 @@ export function Home() {
           <a onClick={() => onAction('sale')} className="text-primary cursor-pointer">售后服务</a>
           <a onClick={() => onAction('privacy')} className="text-primary cursor-pointer">隐私政策</a>
         </nav>
-        <div className="grid gap-6">
+        <div className="grid gap-6 overflow-y-auto h-[100%]">
           {
             (location.search.indexOf('instruction') > -1) || !location.search ?
             <Card x-chunk="dashboard-04-chunk-1">
