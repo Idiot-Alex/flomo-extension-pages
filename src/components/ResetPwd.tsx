@@ -160,12 +160,12 @@ export function ResetPwd() {
                   发送验证码{ countDown === 60 ? '' : `${countDown} s` }
                 </Button>
               </div>
-              <Label className="text-red-400">{ <>{formik.errors.email}</> ?? '' }</Label>
+              <Label className="text-red-400"><>{formik.errors.email ?? ''}</></Label>
           </div>
           <div className="grid gap-2">
             <Label htmlFor="password">新密码</Label>
             <Input name="password" type="password" value={formik.values.password} onChange={formik.handleChange}/>
-              <Label className="text-red-400">{ <>{formik.errors.password}</> ?? '' }</Label>
+              <Label className="text-red-400"><>{formik.errors.password ?? ''}</></Label>
           </div>
           <div className="grid gap-4">
             <Label htmlFor="first-name">邮箱验证码</Label>
@@ -185,7 +185,7 @@ export function ResetPwd() {
                 <InputOTPSlot index={5} />
               </InputOTPGroup>
             </InputOTP>
-            <Label className="text-red-400">{ <>{formik.errors.code}</> ?? '' }</Label>
+            <Label className="text-red-400"><>{formik.errors.code ?? ''}</></Label>
           </div>
           <Button type="submit" className="w-full" onClick={onResetPwd}>
             重置账户密码
