@@ -31,7 +31,7 @@ export function ResetPwd() {
     code: yup.string().required().length(6),
   })
 
-  const formik = useFormik({
+  const formik = useFormik<any>({
     initialValues: {
       email: '',
       password: '',
@@ -160,7 +160,7 @@ export function ResetPwd() {
                   发送验证码{ countDown === 60 ? '' : `${countDown} s` }
                 </Button>
               </div>
-              <Label className="text-red-400">{formik.errors.email ?? ''}</Label>
+              <Label className="text-red-400"><>{formik.errors.email ?? ''}</></Label>
           </div>
           <div className="grid gap-2">
             <Label htmlFor="password">新密码</Label>
