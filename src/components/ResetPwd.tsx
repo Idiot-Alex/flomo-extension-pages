@@ -15,7 +15,7 @@ import {
 } from '@/components/ui/input-otp'
 import { REGEXP_ONLY_DIGITS_AND_CHARS } from 'input-otp'
 import * as yup from 'yup'
-import { useFormik } from 'formik'
+import { FormikValues, useFormik } from 'formik'
 import { useToast } from '@/components/ui/use-toast'
 import { useEffect, useState } from 'react'
 import { resetPwd, sendEmailCode } from '@/lib/api'
@@ -31,7 +31,7 @@ export function ResetPwd() {
     code: yup.string().required().length(6),
   })
 
-  const formik = useFormik<any>({
+  const formik = useFormik<FormikValues>({
     initialValues: {
       email: '',
       password: '',
@@ -160,12 +160,12 @@ export function ResetPwd() {
                   发送验证码{ countDown === 60 ? '' : `${countDown} s` }
                 </Button>
               </div>
-              <Label className="text-red-400"><>{formik.errors.email ?? ''}</></Label>
+              <Label className="text-red-400"><>{formik.errors.email || ''}</></Label>
           </div>
           <div className="grid gap-2">
             <Label htmlFor="password">新密码</Label>
             <Input name="password" type="password" value={formik.values.password} onChange={formik.handleChange}/>
-              <Label className="text-red-400"><>{formik.errors.password ?? ''}</></Label>
+              <Label className="text-red-400"><>{formik.errors.password || ''}</></Label>
           </div>
           <div className="grid gap-4">
             <Label htmlFor="first-name">邮箱验证码</Label>
