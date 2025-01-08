@@ -5,8 +5,7 @@ const instance = axios.create({
   timeout: 3000,
   headers: {
     'Content-Type': 'application/json;charset=UTF-8',
-  },
-  withCredentials: true,
+  }
 })
 
 instance.interceptors.request.use(config => {
