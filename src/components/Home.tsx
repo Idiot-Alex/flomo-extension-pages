@@ -41,13 +41,9 @@ export function Home() {
 
   const showImages = () => {
     const imgList = [
-      '/flomo-extension-feat-1.jpg',
-      '/flomo-extension-shot-1.svg',
-      '/flomo-extension-shot-2.svg',
-      '/flomo-extension-home-1.png',
-      '/flomo-extension-guide-1.png',
-      '/flomo-extension-setting-1.png',
-      '/flomo-extension-login-1.png',
+      '/flomo-extension-shot1.png',
+      '/flomo-extension-shot2.png',
+      '/flomo-extension-shot3.png',
     ]
    
     return (
