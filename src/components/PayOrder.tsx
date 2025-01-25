@@ -1,4 +1,6 @@
 import { useLocation, useNavigate } from 'react-router-dom'
+import { Header } from './Header'
+import { Footer } from './Footer'
 import { ToastAction } from '@/components/ui/toast'
 import { toast } from '@/components/ui/use-toast'
 import { Button } from '@/components/ui/button'
@@ -57,35 +59,58 @@ export function PayOrder() {
 
   return (
     <>
-      <div className="mx-auto grid w-full max-w-6xl gap-2">
-        <h1 className="text-3xl font-semibold"><a href="/">Flomo Extension</a> 支付二维码</h1>
-        <p>请使用 <b>{orderData.channel === 'wx' ? '微信' : '支付宝'}</b> 完成支付</p>
+      <Header />
+      <div className="container mx-auto px-4 py-8">
+        <div className="max-w-md mx-auto">
+          <div className="text-center mb-6">
+            <h1 className="text-2xl font-bold mb-2"><a href="/">Flomo Extension</a> 支付二维码</h1>
+            <p className="text-base text-gray-600">请使用 <b>{orderData.channel === 'wx' ? '微信' : '支付宝'}</b> 完成支付</p>
+          </div>
+          
+          { 
+            orderData ? (
+              <div className="bg-white rounded-lg shadow-lg p-4">
+                <div className="flex flex-col items-center space-y-4">
+                  {
+                    orderData.channel === 'wx' ? 
+                    <img src={orderData.data?.QRcode_url} alt="支付二维码" className="w-56 h-56" /> :
+                    <img src={orderData.data?.img} alt="支付二维码" className="w-56 h-56" />
+                  }
+                  
+                  <div className="w-full space-y-3">
+                    <div className="flex justify-between text-sm">
+                      <span className="text-gray-600">订单号：</span>
+                      <span className="font-medium">{orderData.orderId}</span>
+                    </div>
+                    <div className="flex justify-between text-sm">
+                      <span className="text-gray-600">交易描述：</span>
+                      <span className="font-medium">{orderData.title}</span>
+                    </div>
+                    <div className="flex justify-between text-sm">
+                      <span className="text-gray-600">交易金额：</span>
+                      <span className="text-xl font-bold text-green-600">¥{orderData.price}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <div className="bg-white rounded-lg shadow-lg p-6">
+                <div className="flex flex-col items-center space-y-4">
+                  <p className="text-lg text-gray-600">没有需要支付的订单</p>
+                  <Button 
+                    className="w-48" 
+                    color="orange" 
+                    onClick={() => navigate('/plans')}
+                  >
+                    去选择套餐
+                  </Button>
+                </div>
+              </div>
+            )
+          }
+        </div>
       </div>
-      { 
-        orderData ? (
-          <div className="mx-auto grid w-full max-w-6xl">
-            <div className="flex flex-col">
-              {
-                orderData.channel === 'wx' ? 
-                <img src={orderData.data?.QRcode_url} alt="支付二维码" className="w-80" /> :
-                <img src={orderData.data?.img} alt="支付二维码" className="w-80" />
-              }
-              
-              <p>订单号：{orderData.orderId}</p>
-              <p>交易描述：{orderData.title}</p>
-              <p>
-                交易金额：
-                <b className="text-2xl">¥{orderData.price}</b>
-              </p>
-            </div>
-          </div>
-        ) : (
-          <div className="flex flex-col">
-            <p>没有需要支付的订单, 去选择套餐？</p>
-            <Button className="w-20" color="orange" onClick={() => navigate('/plans')}>立即前往</Button>
-          </div>
-        )
-      }
+      <Footer />
     </>
   )
 }
