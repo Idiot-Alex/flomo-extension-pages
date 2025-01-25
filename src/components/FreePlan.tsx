@@ -45,7 +45,7 @@ export function FreePlan() {
   }
 
   return (
-    <Card className="mx-auto max-w-sm bg-lightgrey">
+    <Card className="mx-auto w-full max-w-sm bg-gradient-to-b from-white to-blue-50 shadow-lg hover:shadow-xl transition-shadow border-t-4 border-blue-500">
       <CardHeader>
         <CardTitle className="text-2xl">Free 套餐</CardTitle>
         <CardDescription>

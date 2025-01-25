@@ -148,9 +148,9 @@ export function LtzfWxPlan() {
   }
 
   return (<>
-    <Card className="mx-auto max-w-sm bg-blanchedalmond">
+    <Card className="mx-auto w-full max-w-sm bg-gradient-to-b from-white to-green-50 shadow-lg hover:shadow-xl transition-shadow border-t-4 border-green-500">
       <CardHeader>
-        <CardTitle className="text-2xl">Pay 套餐（微信支付渠道）</CardTitle>
+        <CardTitle className="text-2xl">Pay 套餐（微信支付）</CardTitle>
         <CardDescription>
           需要注册账号并付费，每日 <b className="text-zinc-600">无限</b> 次使用插件保存笔记
         </CardDescription>
