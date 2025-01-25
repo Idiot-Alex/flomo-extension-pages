@@ -17,8 +17,16 @@ export function Footer() {
           >
             隐私政策
           </a>
-          <a href="/terms" className="text-gray-600 hover:text-gray-900">服务条款</a>
-          <a href="/contact" className="text-gray-600 hover:text-gray-900">联系我们</a>
+          <a 
+            href="/terms" 
+            onClick={(e) => {
+              e.preventDefault()
+              navigate('/terms')
+            }} 
+            className="text-gray-600 hover:text-gray-900 cursor-pointer"
+          >
+            服务条款
+          </a>
         </div>
         <p className="text-gray-500 text-sm">
           © 2025 Flomo Extension. All rights reserved.
