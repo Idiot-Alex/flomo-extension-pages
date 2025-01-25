@@ -11,6 +11,7 @@ import { ResetPwd } from '@/components/ResetPwd'
 import { Account } from '@/components/Account'
 import { PayOrder } from '@/components/PayOrder'
 import { NotFound } from '@/components/NotFound'
+import { Privacy } from '@/components/Privacy'
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path="/reset-pwd" element={<ResetPwd />} />
+          <Route path="/privacy" element={<Privacy />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
