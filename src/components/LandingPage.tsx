@@ -63,7 +63,7 @@ export function LandingPage() {
               <Button 
                 variant="outline" 
                 className="px-8 py-4 text-lg"
-                onClick={() => navigate('/dashboard')}
+                onClick={() => navigate('/guide')}
               >
                 了解更多
               </Button>
@@ -141,7 +141,7 @@ export function LandingPage() {
           <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
             <Button 
               className="px-12 py-6 text-xl"
-              onClick={() => navigate('/dashboard')}
+              onClick={() => navigate('/guide')}
             >
               免费试用
             </Button>
