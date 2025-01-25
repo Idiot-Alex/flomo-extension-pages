@@ -77,55 +77,56 @@ export function LandingPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold text-center mb-12">核心功能</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <motion.div
-              variants={cardVariants}
-              initial="offscreen"
-              whileInView="onscreen"
-              viewport={{ once: true, amount: 0.8 }}
-            >
-              <motion.div whileHover="hover" variants={hoverVariants}>
-                <Card className="p-6">
-                  <h3 className="text-xl font-semibold mb-4">无需会员</h3>
-                  <p className="text-gray-600">
-                    无需 Flomo 会员，即可在任意网页保存笔记
-                  </p>
-                </Card>
+            {/* Feature Cards */}
+            {[
+              {
+                title: "无需 Flomo 会员",
+                description: "即可在任意网页保存笔记",
+                icon: "📝"
+              },
+              {
+                title: "多端同步",
+                description: "与 Flomo 无缝集成，数据实时同步",
+                icon: "🔄"
+              },
+              {
+                title: "智能分类",
+                description: "自动标签分类，轻松管理笔记",
+                icon: "🏷️"
+              },
+              {
+                title: "快速记录",
+                description: "一键保存网页内容，快速记录灵感",
+                icon: "⚡"
+              },
+              {
+                title: "安全可靠",
+                description: "数据加密存储，保障隐私安全",
+                icon: "🔒"
+              },
+              {
+                title: "跨平台支持",
+                description: "支持 Chrome、Edge 等主流浏览器",
+                icon: "🌐"
+              }
+            ].map((feature, index) => (
+              <motion.div
+                key={feature.title}
+                variants={cardVariants}
+                initial="offscreen"
+                whileInView="onscreen"
+                viewport={{ once: true, amount: 0.8 }}
+                transition={{ delay: index * 0.1 }}
+              >
+                <motion.div whileHover="hover" variants={hoverVariants}>
+                  <Card className="p-8 h-full flex flex-col">
+                    <div className="text-4xl mb-4">{feature.icon}</div>
+                    <h3 className="text-xl font-semibold mb-4">{feature.title}</h3>
+                    <p className="text-gray-600 flex-1">{feature.description}</p>
+                  </Card>
+                </motion.div>
               </motion.div>
-            </motion.div>
-
-            <motion.div
-              variants={cardVariants}
-              initial="offscreen"
-              whileInView="onscreen"
-              viewport={{ once: true, amount: 0.8 }}
-              transition={{ delay: 0.2 }}
-            >
-              <motion.div whileHover="hover" variants={hoverVariants}>
-                <Card className="p-6">
-                  <h3 className="text-xl font-semibold mb-4">多端同步</h3>
-                  <p className="text-gray-600">
-                    与 Flomo 无缝集成，数据实时同步
-                  </p>
-                </Card>
-              </motion.div>
-            </motion.div>
-
-            <motion.div
-              variants={cardVariants}
-              initial="offscreen"
-              whileInView="onscreen"
-              viewport={{ once: true, amount: 0.8 }}
-              transition={{ delay: 0.4 }}
-            >
-              <motion.div whileHover="hover" variants={hoverVariants}>
-                <Card className="p-6">
-                  <h3 className="text-xl font-semibold mb-4">智能分类</h3>
-                  <p className="text-gray-600">
-                    自动标签分类，轻松管理笔记
-                  </p>
-                </Card>
-              </motion.div>
-            </motion.div>
+            ))}
           </div>
         </div>
       </div>
