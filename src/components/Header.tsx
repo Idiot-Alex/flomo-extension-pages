@@ -33,6 +33,9 @@ export function Header() {
         <a href="/" className={`${isActive('/') ? 'text-foreground font-medium underline underline-offset-4' : 'text-muted-foreground'} transition-colors hover:text-foreground`}>
           主页
         </a>
+        <a href="/guide" className={`${isActive('/guide') ? 'text-foreground font-medium underline underline-offset-4' : 'text-muted-foreground'} transition-colors hover:text-foreground`}>
+          使用说明
+        </a>
         <a href="/plans" className={`${isActive('/plans') ? 'text-foreground font-medium underline underline-offset-4' : 'text-muted-foreground'} transition-colors hover:text-foreground`}>
           套餐计划
         </a>

@@ -13,6 +13,7 @@ import { PayOrder } from '@/components/PayOrder'
 import { NotFound } from '@/components/NotFound'
 import { Privacy } from '@/components/Privacy'
 import { Terms } from '@/components/Terms'
+import { Guide } from './components/Guide'
 
 function App() {
   return (
@@ -21,7 +22,6 @@ function App() {
         <Routes>
           <Route path="/dashboard" element={<Dashboard />} >
             <Route index element={<Home />} />
-            <Route path='plans' element={<Plans />} />
             <Route path="account" element={<Account />} />
             <Route path="pay-order" element={<PayOrder />} />
           </Route>
@@ -31,6 +31,8 @@ function App() {
           <Route path="/reset-pwd" element={<ResetPwd />} />
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/terms" element={<Terms />} />
+          <Route path="/guide" element={<Guide />} />
+          <Route path='/plans' element={<Plans />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
