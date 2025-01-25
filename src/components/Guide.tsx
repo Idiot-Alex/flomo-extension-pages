@@ -3,7 +3,6 @@ import { Footer } from '@/components/Footer'
 import { Button } from '@/components/ui/button'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { FLOMO_EXTENSION_FILE_URL, FLOMO_EXTENSION_WEB_STORE_URL } from '@/lib/type'
-import Autoplay from 'embla-carousel-autoplay'
 import { useRef, useState, useEffect } from 'react'
 
 export function Guide() {
@@ -56,10 +55,6 @@ export function Guide() {
   const onWebStore = () => {
     window.open(FLOMO_EXTENSION_WEB_STORE_URL)
   }
-
-  const plugin = useRef(
-    Autoplay({ delay: 2000, stopOnInteraction: true })
-  )
 
   const showImages = () => {
     const imgList = [
