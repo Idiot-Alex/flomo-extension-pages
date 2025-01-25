@@ -1,12 +1,10 @@
 import './App.css'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { Toaster } from '@/components/ui/toaster'
-import { Dashboard } from '@/components/Dashboard'
 import { LandingPage } from '@/components/LandingPage'
 import { Register } from '@/components/Register'
 import { Login } from '@/components/Login'
 import { Plans } from '@/components/Plans'
-import { Home } from '@/components/Home'
 import { ResetPwd } from '@/components/ResetPwd'
 import { Account } from '@/components/Account'
 import { PayOrder } from '@/components/PayOrder'
@@ -20,9 +18,6 @@ function App() {
     <>
       <BrowserRouter>
         <Routes>
-          <Route path="/dashboard" element={<Dashboard />} >
-            <Route index element={<Home />} />
-          </Route>
           <Route path="/" element={<LandingPage />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
