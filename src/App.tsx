@@ -22,8 +22,6 @@ function App() {
         <Routes>
           <Route path="/dashboard" element={<Dashboard />} >
             <Route index element={<Home />} />
-            <Route path="account" element={<Account />} />
-            <Route path="pay-order" element={<PayOrder />} />
           </Route>
           <Route path="/" element={<LandingPage />} />
           <Route path="/register" element={<Register />} />
@@ -33,6 +31,8 @@ function App() {
           <Route path="/terms" element={<Terms />} />
           <Route path="/guide" element={<Guide />} />
           <Route path='/plans' element={<Plans />} />
+          <Route path="/pay-order" element={<PayOrder />} />
+          <Route path="/account" element={<Account />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
