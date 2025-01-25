@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { FLOMO_EXTENSION_WEB_STORE_URL } from '@/lib/type'
 import { motion } from 'framer-motion'
+import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
 
 const cardVariants = {
@@ -36,6 +37,7 @@ export function LandingPage() {
 
   return (
     <div className="min-h-screen bg-cover bg-center" style={{ backgroundImage: "url('/landing-bg.jpg')" }}>
+      <Header />
       {/* Overlay */}
       <div className="absolute inset-0 bg-black/50"></div>
       
