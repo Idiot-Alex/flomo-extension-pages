@@ -111,26 +111,20 @@ export function Guide() {
                     onClick={() => onAction('install')}
                     className={`${activeSection === 'install' ? 'bg-accent font-medium' : 'text-muted-foreground'} flex items-center px-4 py-2 text-sm rounded-lg transition-colors hover:bg-accent/50 cursor-pointer`}
                   >
-                    安装说明
+                    安装使用说明
                   </a>
                   <a
-                    onClick={() => onAction('usage')}
-                    className={`${activeSection === 'usage' ? 'bg-accent font-medium' : 'text-muted-foreground'} flex items-center px-4 py-2 text-sm rounded-lg transition-colors hover:bg-accent/50 cursor-pointer`}
+                    onClick={() => onAction('sale')}
+                    className={`${activeSection === 'sale' ? 'bg-accent font-medium' : 'text-muted-foreground'} flex items-center px-4 py-2 text-sm rounded-lg transition-colors hover:bg-accent/50 cursor-pointer`}
                   >
-                    使用说明
+                    售后服务
                   </a>
-                    <a
-                      onClick={() => onAction('sale')}
-                      className={`${activeSection === 'sale' ? 'bg-accent font-medium' : 'text-muted-foreground'} flex items-center px-4 py-2 text-sm rounded-lg transition-colors hover:bg-accent/50 cursor-pointer`}
-                    >
-                      售后服务
-                    </a>
-                    <a
-                      onClick={() => onAction('faq')}
-                      className={`${activeSection === 'faq' ? 'bg-accent font-medium' : 'text-muted-foreground'} flex items-center px-4 py-2 text-sm rounded-lg transition-colors hover:bg-accent/50 cursor-pointer`}
-                    >
-                      常见问题
-                    </a>
+                  <a
+                    onClick={() => onAction('faq')}
+                    className={`${activeSection === 'faq' ? 'bg-accent font-medium' : 'text-muted-foreground'} flex items-center px-4 py-2 text-sm rounded-lg transition-colors hover:bg-accent/50 cursor-pointer`}
+                  >
+                    常见问题
+                  </a>
                 </div>
                 <div className="space-y-2">
                   <Button 
@@ -193,16 +187,10 @@ export function Guide() {
                       </div>
                     </div>
                   </div>
-                </section>
-              ) : null}
-
-              {/* Usage Section */}
-              {location.search.indexOf('usage') > -1 ? (
-                <section id="usage" className="content-section space-y-6">
                   <h2 className="text-2xl font-bold">如何使用 Flomo Extension</h2>
                   <div className="prose prose-sm max-w-none">
                     <div className="grid gap-3 mb-4">
-                      <p>1. 下载并安装 flomo extension 扩展，参考这里：<a href="/?action=install"><b>安装说明</b></a></p>
+                      <p>1. 下载并安装 flomo extension 扩展，参考这里：<a href="/guide?action=install"><b>安装说明</b></a></p>
                       <p>2. 点击 flomo extension 扩展，登录自己的账号</p>
                       <p>3. 在【写笔记】页面输入笔记内容，点击【保存 flomo 笔记】按钮</p>
                       <p>4. 若笔记保存不成功，需要按照提示打开 flomo 页面并登录自己的账号（非会员账号也行）</p>

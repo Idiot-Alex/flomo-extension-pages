@@ -8,7 +8,7 @@ import { Footer } from '@/components/Footer'
 
 const cardVariants = {
   offscreen: {
-    y: 50,
+    y: 20,
     opacity: 0
   },
   onscreen: {
@@ -73,9 +73,9 @@ export function LandingPage() {
       </div>
 
       {/* Features Section */}
-      <div className="bg-white/95 backdrop-blur-sm py-20">
+      <div className="bg-white/95 backdrop-blur-sm py-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-center mb-12">核心功能</h2>
+          <h2 className="text-3xl font-bold text-center mb-6">核心功能</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* Feature Cards */}
             {[
