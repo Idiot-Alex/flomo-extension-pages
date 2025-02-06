@@ -72,6 +72,24 @@ export function LandingPage() {
         </div>
       </div>
 
+      {/* 功能截图 */}
+      <div className="bg-white/95 backdrop-blur-sm py-10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl font-bold text-center mb-6">功能截图</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <motion.div whileHover={{ scale: 1.05, transition: { duration: 0.2 } }}>
+              <img src="/flomo-extension-shot1.png" alt="功能截图 1" className="rounded-lg shadow-lg w-full" />
+            </motion.div>
+            <motion.div whileHover={{ scale: 1.05, transition: { duration: 0.2 } }}>
+              <img src="/flomo-extension-shot2.png" alt="功能截图 2" className="rounded-lg shadow-lg w-full" />
+            </motion.div>
+            <motion.div whileHover={{ scale: 1.05, transition: { duration: 0.2 } }}>
+              <img src="/flomo-extension-shot3.png" alt="功能截图 3" className="rounded-lg shadow-lg w-full" />
+            </motion.div>
+          </div>
+        </div>
+      </div>
+
       {/* Features Section */}
       <div className="bg-white/95 backdrop-blur-sm py-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
