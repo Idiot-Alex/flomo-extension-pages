@@ -5,8 +5,6 @@ const pages = [
   '/',
   '/login',
   '/register',
-  '/reset-pwd',
-  '/account',
   '/plans',
   '/guide',
   '/terms',
