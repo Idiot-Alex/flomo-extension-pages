@@ -1,12 +1,11 @@
 import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
 import { Button } from '@/components/ui/button'
-import { useNavigate, useLocation } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { FLOMO_EXTENSION_FILE_URL, FLOMO_EXTENSION_WEB_STORE_URL } from '@/lib/type'
 import { useRef, useState, useEffect } from 'react'
 
 export function Guide() {
-  const location = useLocation()
   {/* 新增 metadata 设置 */}
   useEffect(() => {
     document.title = 'Flomo Extension 使用指南 - 浏览器插件安装使用教程'
