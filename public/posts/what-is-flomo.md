@@ -5,8 +5,6 @@ category: 指南
 coverImage: flomo-extension-shot1.png
 ---
 
-## 什么是 flomo？
-
 flomo 是一款专注于记录灵感和想法的轻量级笔记工具。它的设计理念是让记录变得简单、快速，帮助用户更好地捕捉和整理日常的灵感和思考。
 
 ### flomo 的核心特点

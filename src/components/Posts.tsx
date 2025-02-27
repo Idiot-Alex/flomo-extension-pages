@@ -215,21 +215,7 @@ const PostModal = memo(function PostModal({
           </div>
           <div className="space-y-6">
             <div 
-              className="prose prose-lg max-w-none
-                prose-headings:font-bold
-                prose-h1:text-3xl
-                prose-h2:text-2xl
-                prose-h3:text-xl
-                prose-p:text-gray-700
-                prose-a:text-blue-600 hover:prose-a:text-blue-800
-                prose-blockquote:border-l-4 prose-blockquote:border-gray-300 prose-blockquote:pl-4
-                prose-code:bg-gray-100 prose-code:px-1 prose-code:rounded
-                prose-img:rounded-lg
-                prose-ul:list-disc prose-ol:list-decimal
-                prose-li:marker:text-gray-500
-                prose-table:border-collapse prose-table:w-full
-                prose-th:bg-gray-100 prose-th:p-2
-                prose-td:border prose-td:p-2"
+              className="prose"
               dangerouslySetInnerHTML={{ __html: post.content }}
             />
           </div>
