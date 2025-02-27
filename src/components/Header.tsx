@@ -29,6 +29,7 @@ export function Header() {
 
   return (
     <header className="z-50 sticky top-0 flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6">
+      <img alt="flomo extension logo" src="/favicon.png" className="h-20 mt-8 border rounded-[4rem] border-gray-300" />
       <nav className="hidden flex-col gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6">
         <a href="/" className={`${isActive('/') ? 'text-foreground font-medium underline underline-offset-4' : 'text-muted-foreground'} transition-colors hover:text-foreground`}>
           主页

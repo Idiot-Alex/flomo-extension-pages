@@ -18,7 +18,7 @@ export function Plans() {
             <p className="mt-3 text-lg text-muted-foreground">选择最适合您的套餐，开启高效记录之旅</p>
           </div>
           
-          <div className="mx-auto max-w-7xl grid gap-8 md:grid-cols-2 lg:grid-cols-3 mb-16">
+          <div className="mx-auto max-w-5xl grid gap-12 md:grid-cols-1 lg:grid-cols-3 mb-16">
             <div className="hover:-translate-y-2 transition-transform duration-300">
               <FreePlan />
             </div>
