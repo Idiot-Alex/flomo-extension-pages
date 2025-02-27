@@ -36,13 +36,13 @@ export function LandingPage() {
   const navigate = useNavigate()
 
   return (
-    <div className="min-h-screen bg-cover bg-center" style={{ backgroundImage: "url('/landing-bg.jpg')" }}>
+    <div className="min-h-screen bg-cover bg-center">
       <Header />
       {/* Overlay */}
       <div className="absolute inset-0 bg-black/50"></div>
       
       {/* Hero Section */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 relative z-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 relative z-10 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg">
         <div className="text-center">
           <h1 className="text-5xl font-bold text-white mb-6">
             无需会员，任意网页保存 Flomo 笔记
@@ -149,8 +149,56 @@ export function LandingPage() {
         </div>
       </div>
 
+      {/* 用户评价 Section */}
+      <div className="bg-white/95 backdrop-blur-sm py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl font-bold text-center mb-8">用户评价</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[
+              {
+                name: "张*",
+                comment: "这个扩展极大地提高了我的工作效率，强烈推荐！",
+                rating: 5
+              },
+              {
+                name: "李**",
+                comment: "界面简洁易用，与Flomo完美集成，非常满意。",
+                rating: 5
+              },
+              {
+                name: "王*",
+                comment: "跨平台支持做得很好，在多个设备上都能无缝使用。",
+                rating: 4
+              }
+            ].map((review, index) => (
+              <motion.div
+                key={review.name}
+                variants={cardVariants}
+                initial="offscreen"
+                whileInView="onscreen"
+                viewport={{ once: true, amount: 0.8 }}
+                transition={{ delay: index * 0.1 }}
+              >
+                <motion.div whileHover="hover" variants={hoverVariants}>
+                  <Card className="p-8 h-full flex flex-col">
+                    <div className="flex items-center mb-4">
+                      <div className="text-yellow-400 text-xl">
+                        {'★'.repeat(review.rating)}
+                        {'☆'.repeat(5 - review.rating)}
+                      </div>
+                      <div className="ml-2 font-semibold">{review.name}</div>
+                    </div>
+                    <p className="text-gray-600 flex-1">{review.comment}</p>
+                  </Card>
+                </motion.div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </div>
+
       {/* CTA Section */}
-      <div className="py-20 relative z-10">
+      <div className="py-20 relative z-10 bg-cover bg-center" style={{ backgroundImage: "url('/landing-bg.jpg')" }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl font-bold mb-6">立即开始使用</h2>
           <p className="text-xl text-gray-600 mb-8">
