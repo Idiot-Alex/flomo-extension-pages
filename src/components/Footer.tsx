@@ -17,16 +17,6 @@ export function Footer() {
           >
             隐私政策
           </a>
-          <a 
-            href="/terms" 
-            onClick={(e) => {
-              e.preventDefault()
-              navigate('/terms')
-            }} 
-            className="text-gray-600 hover:text-gray-900 cursor-pointer"
-          >
-            服务条款
-          </a>
           <a href="https://txc.qq.com/products/648748" className="text-gray-600 hover:text-gray-900 cursor-pointer">
             问题反馈
           </a>

@@ -2,6 +2,7 @@ import { Button } from '@/components/ui/button'
 import { Card, CardHeader, CardTitle, CardContent, CardFooter } from '@/components/ui/card'
 import { Header } from './Header'
 import { Footer } from './Footer'
+import { Terms } from './Terms'
 import { useSelector } from 'react-redux'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -129,6 +130,7 @@ export function Account() {
             </div>
           </motion.div>
         </div>
+        <Terms />
       </div>
       <Footer />
     </>

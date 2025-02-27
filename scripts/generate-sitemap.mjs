@@ -7,7 +7,6 @@ const pages = [
   '/register',
   '/plans',
   '/guide',
-  '/terms',
   '/privacy'
 ];
 
