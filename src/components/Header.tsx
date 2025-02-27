@@ -38,7 +38,7 @@ export function Header() {
           使用说明
         </a>
         <a href="/plans" className={`${isActive('/plans') ? 'text-white bg-primary rounded-lg px-3 py-1.5 font-medium transition-all duration-300' : 'text-muted-foreground hover:text-foreground'} transition-colors`}>
-          套餐计划
+          价格套餐
         </a>
         {!user.email && (
           <a href="/register" className={`${isActive('/register') ? 'text-white bg-primary rounded-lg px-3 py-1.5 font-medium transition-all duration-300' : 'text-muted-foreground hover:text-foreground'}`}>注册</a>
