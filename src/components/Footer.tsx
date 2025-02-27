@@ -27,6 +27,9 @@ export function Footer() {
           >
             服务条款
           </a>
+          <a href="https://txc.qq.com/products/648748" className="text-muted-foreground hover:text-foreground">
+            问题反馈
+          </a>
         </div>
         <p className="text-gray-500 text-sm">
           © 2025 Flomo Extension. All rights reserved.
