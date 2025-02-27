@@ -10,7 +10,8 @@ import { Account } from '@/components/Account'
 import { PayOrder } from '@/components/PayOrder'
 import { NotFound } from '@/components/NotFound'
 import { Privacy } from '@/components/Privacy'
-import { Guide } from './components/Guide'
+import { Guide } from '@/components/Guide'
+import { Posts } from '@/components/Posts'
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route path="/reset-pwd" element={<ResetPwd />} />
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/guide" element={<Guide />} />
+          <Route path="/posts" element={<Posts />} />
           <Route path='/plans' element={<Plans />} />
           <Route path="/pay-order" element={<PayOrder />} />
           <Route path="/account" element={<Account />} />

@@ -40,6 +40,9 @@ export function Header() {
         <a href="/plans" className={`${isActive('/plans') ? 'text-white bg-primary rounded-lg px-3 py-1.5 font-medium transition-all duration-300' : 'text-muted-foreground hover:text-foreground'} transition-colors`}>
           价格套餐
         </a>
+        <a href="/posts" className={`${isActive('/posts') ? 'text-white bg-primary rounded-lg px-3 py-1.5 font-medium transition-all duration-300' : 'text-muted-foreground hover:text-foreground'} transition-colors`}>
+          文章
+        </a>
         {!user.email && (
           <a href="/register" className={`${isActive('/register') ? 'text-white bg-primary rounded-lg px-3 py-1.5 font-medium transition-all duration-300' : 'text-muted-foreground hover:text-foreground'}`}>注册</a>
         )}
@@ -60,7 +63,10 @@ export function Header() {
               使用说明
             </a>
             <a href="/plans" className={`${isActive('/plans') ? 'text-white bg-primary rounded-lg px-3 py-1.5 font-medium transition-all duration-300' : 'text-muted-foreground hover:text-foreground'}`}>
-              套餐计划
+              价格套餐
+            </a>
+            <a href="/posts" className={`${isActive('/posts') ? 'text-white bg-primary rounded-lg px-3 py-1.5 font-medium transition-all duration-300' : 'text-muted-foreground hover:text-foreground'} transition-colors`}>
+              文章
             </a>
             {!user.email && (
               <a href="/register" className={`${isActive('/register') ? 'text-white bg-primary rounded-lg px-3 py-1.5 font-medium transition-all duration-300' : 'text-muted-foreground hover:text-foreground'}`}>注册</a>
