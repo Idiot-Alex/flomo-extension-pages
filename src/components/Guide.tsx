@@ -7,6 +7,14 @@ import { useRef, useState, useEffect } from 'react'
 
 export function Guide() {
   const location = useLocation()
+  {/* 新增 metadata 设置 */}
+  useEffect(() => {
+    document.title = 'Flomo Extension 使用指南 - 浏览器插件安装使用教程'
+    const metaDescription = document.querySelector('meta[name="description"]')
+    if (metaDescription) {
+      metaDescription.setAttribute('content', 'Flomo浏览器扩展完整使用指南，包含插件安装教程、常见问题解答、售后服务说明以及功能演示。帮助您快速掌握Flomo插件的使用方法，提升笔记效率。')
+    }
+  }, [])
   const navigate = useNavigate()
   const [activeSection, setActiveSection] = useState('instruction')
   const observerRef = useRef<IntersectionObserver | null>(null)
