@@ -84,3 +84,19 @@
   opacity: 1;
   background-color: lightgrey;
 }
+
+.prose table {
+  @apply w-full border-collapse;
+}
+
+.prose th {
+  @apply px-4 py-2 text-left bg-gray-100 font-semibold border border-gray-300;
+}
+
+.prose td {
+  @apply px-4 py-2 border border-gray-300;
+}
+
+.prose tr:hover {
+  @apply bg-gray-50;
+}

@@ -3,6 +3,7 @@ import { Header } from "./Header"
 import { Footer } from "./Footer"
 import { remark } from 'remark'
 import remarkHtml from 'remark-html'
+import remarkGfm from 'remark-gfm'
 interface Post {
   slug: string
   title: string
@@ -15,7 +16,7 @@ interface Post {
 
 function getCategoryColor(category: string) {
   switch (category) {
-    case '更新':
+    case '文章':
       return 'bg-blue-100 text-blue-800'
     case '优化':
       return 'bg-green-100 text-green-800'
@@ -64,6 +65,7 @@ function usePosts() {
           }, {} as Record<string, string>)
           
           const processedContent = await remark()
+            .use(remarkGfm)
             .use(remarkHtml)
             .process(content)
           const contentHtml = processedContent.toString()
