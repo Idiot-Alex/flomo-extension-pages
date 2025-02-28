@@ -77,7 +77,7 @@ function usePosts() {
             category: data.category,
             coverImage: data.coverImage,
             content: contentHtml,
-            excerpt: contentHtml.split('\n').slice(0, 4).join('\n') + '...'
+            excerpt: contentHtml.split('\n').slice(0, 1).join('\n') + '...'
           }
         })
       )
@@ -137,19 +137,19 @@ const PostItem = memo(function PostItem({
       className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden cursor-pointer flex flex-col h-full"
       onClick={onClick}
     >
-      <div className="relative aspect-[4/3]">
+      <div className="relative">
         <div className="absolute top-4 right-4 z-10 flex items-center space-x-2">
           <span className={`${getCategoryColor(post.category)} text-sm font-medium px-3 py-1 rounded-full`}>
             {post.category}
           </span>
           <span className="text-gray-500 text-sm">{post.date}</span>
         </div>
-        <div className={`h-full ${post.coverImage ? 'bg-gray-100' : getRandomBgColor()} overflow-hidden`}>
+        <div className={`flex-1 max-h-[300px] ${post.coverImage ? 'bg-gray-100' : getRandomBgColor()} overflow-hidden`}>
           {post.coverImage && (
-            <img 
+              <img 
               src={`${post.coverImage}`}
               alt={post.title}
-              className="w-full h-full object-cover"
+              className="w-full h-1/2 object-cover max-w-full"
             />
           )}
         </div>

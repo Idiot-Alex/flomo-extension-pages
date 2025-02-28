@@ -1,11 +1,12 @@
 ---
 title: Flomo Plus 浏览器插件 - 让记录更简单
-date: 2025-02-28
+date: 2025-02-26
 category: 文章
 coverImage: https://resource.flomoapp.com/101/flomoplus-cover.png!webp
 ---
 
-作为一名 flomo 的忠实用户，我深知记录灵感的重要性。Flomo Plus 正是为了解决我们在记录时遇到的痛点而诞生的！它让记录变得前所未有的简单和愉悦。让我来为你介绍这个改变我工作方式的贴心小助手：
+作为一名 flomo 的忠实用户，我深知记录灵感的重要性。Flomo Plus 正是为了解决我们在记录时遇到的痛点而诞生的！它让记录变得前所未有的简单和愉悦。让我来为你介绍这个改变我工作方式的贴心小助手。
+
 
 ## 为什么我离不开 Flomo Plus？
 

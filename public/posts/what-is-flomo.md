@@ -1,6 +1,6 @@
 ---
 title: 什么是 flomo？如何使用它来记录灵感
-date: 2025-02-28
+date: 2025-02-24
 category: 指南
 coverImage: http://flomo-resource.oss-cn-shanghai.aliyuncs.com/101/newversion.png!webp
 ---
