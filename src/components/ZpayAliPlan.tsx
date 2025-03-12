@@ -26,18 +26,18 @@ export function ZpayAliPlan() {
     },
     {
       color: 'bg-sky-500',
-      title: '需要注册并登录账号',
-      desc: '使用邮箱账号注册或者登录',
+      title: 'flomo 用户最优选择',
+      desc: '无需 flomo 官方会员 ¥99/年',
     },
     {
       color: 'bg-sky-500',
-      title: '每日使用次数无限制',
+      title: '无限制使用次数',
       desc: '使用插件保存 flomo 笔记次数',
     },
     {
       color: 'bg-sky-500',
-      title: '优惠价 ¥1.9 一个月',
-      desc: '限时特价，年付更便宜，赶紧冲哇',
+      title: '限时特价，flomo 会员价格的 1/10',
+      desc: '优惠价 ¥1.9 一个月，年付更划算',
     },
     {
       color: 'bg-sky-500',
@@ -149,7 +149,7 @@ export function ZpayAliPlan() {
   return (<>
     <Card className="mx-auto w-full max-w-sm bg-gradient-to-b from-white to-purple-50 shadow-lg hover:shadow-xl transition-shadow border-t-4 border-purple-500">
       <CardHeader>
-        <CardTitle className="text-2xl">Pay 套餐（支付宝支付）</CardTitle>
+        <CardTitle className="text-2xl">Pay 套餐（支付宝）</CardTitle>
         <CardDescription>
           需要注册账号并付费，每日 <b className="text-zinc-600">无限</b> 次使用插件保存笔记
         </CardDescription>

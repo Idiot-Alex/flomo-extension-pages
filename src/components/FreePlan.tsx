@@ -15,7 +15,12 @@ export function FreePlan() {
       desc: '不会存储用户任何 flomo 笔记数据',
     },
     {
-      color: 'bg-sky-100',
+      color: 'bg-sky-500',
+      title: '轻量级使用用户最佳选择',
+      desc: '无需登录注册、每天重置使用次数',
+    },
+    {
+      color: 'bg-sky-500',
       title: '无需注册账号',
       desc: '不需要注册或者登录',
     },

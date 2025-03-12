@@ -27,8 +27,8 @@ export function LtzfWxPlan() {
     },
     {
       color: 'bg-sky-500',
-      title: '需要注册并登录账号',
-      desc: '使用邮箱账号注册或者登录',
+      title: 'flomo 用户最优选择',
+      desc: '无需 flomo 官方会员 ¥99/年',
     },
     {
       color: 'bg-sky-500',
@@ -37,8 +37,8 @@ export function LtzfWxPlan() {
     },
     {
       color: 'bg-sky-500',
-      title: '优惠价 ¥1.9 一个月',
-      desc: '限时特价，年付更便宜，赶紧冲哇',
+      title: '限时特价，flomo 会员价格的 1/10',
+      desc: '优惠价 ¥1.9 一个月，年付更划算',
     },
     {
       color: 'bg-sky-500',
