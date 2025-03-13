@@ -68,6 +68,7 @@ export function Guide() {
       '/flomo-extension-shot1.png',
       '/flomo-extension-shot2.png',
       '/flomo-extension-shot3.png',
+      '/flomo-extension-shot4.png',
     ]
    
     return (
