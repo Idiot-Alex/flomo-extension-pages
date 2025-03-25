@@ -3,11 +3,8 @@ import path from 'path';
 
 const pages = [
   '/',
-  '/login',
-  '/register',
   '/plans',
   '/guide',
-  '/privacy'
 ];
 
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>

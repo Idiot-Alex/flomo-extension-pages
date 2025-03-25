@@ -1,0 +1,9 @@
+User-agent: *
+Disallow: /api/*
+Disallow: /_next/*
+Disallow: /cdn-cgi/*
+
+Allow: /
+Allow: /images/
+Allow: /css/
+Allow: /js/
