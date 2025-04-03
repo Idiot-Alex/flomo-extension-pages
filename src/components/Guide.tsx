@@ -8,10 +8,10 @@ import { useRef, useState, useEffect } from 'react'
 export function Guide() {
   {/* 新增 metadata 设置 */}
   useEffect(() => {
-    document.title = 'Flomo Extension 使用指南 - 浏览器插件安装使用教程'
+    document.title = 'Flomo Extension 使用指南 - 浮墨笔记浏览器插件安装使用教程' // Added 浮墨笔记
     const metaDescription = document.querySelector('meta[name="description"]')
     if (metaDescription) {
-      metaDescription.setAttribute('content', 'Flomo浏览器扩展完整使用指南，包含插件安装教程、常见问题解答、售后服务说明以及功能演示。帮助您快速掌握Flomo插件的使用方法，提升笔记效率。')
+      metaDescription.setAttribute('content', 'Flomo (浮墨笔记) 浏览器扩展完整使用指南，包含插件安装教程、常见问题解答、售后服务说明以及功能演示。帮助您快速掌握Flomo插件的使用方法，提升笔记效率。') // Added Flomo (浮墨笔记)
     }
   }, [])
   const navigate = useNavigate()
@@ -80,7 +80,7 @@ export function Guide() {
           >
             <img 
               src={img} 
-              alt="flomo extension image" 
+              alt={`Flomo Extension 功能截图 ${index + 1}`}
               className="w-full h-auto transform transition-transform duration-300 group-hover:scale-105"
             />
             <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
@@ -226,7 +226,7 @@ export function Guide() {
                   <div className="grid gap-3 mb-4">
                     <p>如果您遇到了解决不了的问题，请扫描添加下面二维码（烦请备注：flomo插件）:</p>
                     <p>
-                      <img src="/hotstrip-wx.jpg" className="w-60 rounded-lg shadow-md"></img>
+                      <img src="/hotstrip-wx.jpg" alt="Flomo 插件售后服务微信二维码" className="w-60 rounded-lg shadow-md"></img>
                     </p>
                   </div>
                   <div className="grid gap-3 mb-4">
@@ -244,7 +244,7 @@ export function Guide() {
                     <div className="p-4 bg-muted/50 rounded-lg">
                       <h3 className="text-lg font-semibold mb-2">1. 插件无法正常使用怎么办？</h3>
                       <div className="grid gap-2">
-                        <p>• 确保已按照<a href="/?action=install"><b>安装说明</b></a>正确安装插件</p>
+                        <p>• 确保已按照<a href="/guide?action=install"><b>安装说明</b></a>正确安装插件</p>
                         <p>• 检查浏览器是否支持该插件（推荐使用最新版 Chrome 或 Edge）</p>
                         <p>• 尝试重新启动浏览器</p>
                       </div>

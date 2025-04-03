@@ -36,33 +36,32 @@ export function LandingPage() {
   const navigate = useNavigate()
 
   return (
-    <div className="min-h-screen bg-cover bg-center">
+    <div className="min-h-screen bg-white">
       <Header />
-      {/* Overlay */}
-      <div className="absolute inset-0 bg-black/50"></div>
       
       {/* Hero Section */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 relative z-10 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 relative z-10 bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg shadow-md">
         <div className="text-center">
-          <h1 className="text-5xl font-bold text-white mb-6">
-            无需会员，任意网页保存 Flomo 笔记
+          <h1 className="text-4xl font-bold text-gray-800 mb-4 max-w-3xl mx-auto">
+            无需会员也能同步笔记，随时记录灵感
           </h1>
-          <p className="text-xl text-gray-200 mb-8">
-            Flomo Extension - 让你的想法永不丢失，随时随地记录灵感
+          <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto leading-relaxed">
+            Flomo Extension - 强大的 Flomo 网页插件，无需 Flomo 会员，即可在任意网页保存笔记，并同步到你的 Flomo 账户。
           </p>
+          <p className="text-xl text-gray-600 mb-8 max-w-4xl mx-auto leading-relaxed" >让你的想法永不丢失，随时随地记录灵感。</p>
           <div className="flex justify-center gap-4">
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-              <Button 
-                className="px-8 py-4 text-lg"
+              <Button
+                className="px-8 py-4 text-lg bg-blue-500 text-white hover:bg-blue-700"
                 onClick={() => window.open(FLOMO_EXTENSION_WEB_STORE_URL)}
               >
                 立即下载
               </Button>
             </motion.div>
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-              <Button 
-                variant="outline" 
-                className="px-8 py-4 text-lg"
+              <Button
+                variant="outline"
+                className="px-8 py-4 text-lg border-blue-500 text-blue-500 hover:bg-blue-50"
                 onClick={() => navigate('/guide')}
               >
                 了解更多
@@ -73,7 +72,7 @@ export function LandingPage() {
       </div>
 
       {/* 功能截图 */}
-      <div className="bg-white/95 backdrop-blur-sm py-10">
+      <div className="bg-gray-50 py-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold text-center mb-6">功能截图</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -91,7 +90,7 @@ export function LandingPage() {
       </div>
 
       {/* Features Section */}
-      <div className="bg-white/95 backdrop-blur-sm py-10">
+      <div className="bg-gray-50 py-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold text-center mb-6">核心功能</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -99,12 +98,12 @@ export function LandingPage() {
             {[
               {
                 title: "无需 Flomo 会员",
-                description: "即可在任意网页保存笔记",
+                description: "无需 Flomo 会员，即可在任意网页保存笔记，随时记录你的想法。",
                 icon: "📝"
               },
               {
                 title: "多端同步",
-                description: "与 Flomo 无缝集成，数据实时同步",
+                description: "与 Flomo 无缝集成，数据实时同步，在任何设备上都能访问你的笔记。",
                 icon: "🔄"
               },
               {
@@ -150,7 +149,7 @@ export function LandingPage() {
       </div>
 
       {/* 用户评价 Section */}
-      <div className="bg-white/95 backdrop-blur-sm py-20">
+      <div className="bg-gray-50 py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold text-center mb-8">用户评价</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -198,7 +197,7 @@ export function LandingPage() {
       </div>
 
       {/* CTA Section */}
-      <div className="py-20 relative z-10 bg-cover bg-center" style={{ backgroundImage: "url('/landing-bg.jpg')" }}>
+      <div className="py-20 relative z-10 bg-cover bg-center rounded-lg shadow-md" style={{ backgroundImage: "url('/landing-bg.jpg')" }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl font-bold mb-6">立即开始使用</h2>
           <p className="text-xl text-gray-600 mb-8">
@@ -214,7 +213,15 @@ export function LandingPage() {
           </motion.div>
         </div>
       </div>
-
+      {/* 关于 Flomo 插件 Section - Scandinavian Style */}
+      <div className="bg-white py-16">
+       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center"> {/* Added text-center here */}
+         <h2 className="text-3xl font-bold mb-8 text-gray-900">关于 Flomo 插件</h2> {/* Removed text-left */}
+         <p className="text-gray-600 leading-relaxed max-w-3xl mx-auto"> {/* Removed text-left, added mx-auto */}
+           Flomo 插件是一款强大的浏览器扩展，旨在帮助用户随时随地记录和管理灵感。它无需 Flomo 会员，即可在任意网页保存笔记，并同步到你的 Flomo 账户。无论你是在阅读文章、浏览网页还是观看视频，都可以随时记录你的想法和灵感，让你的知识管理更加高效。
+         </p>
+        </div>
+      </div>
       <Footer />
     </div>
   )
