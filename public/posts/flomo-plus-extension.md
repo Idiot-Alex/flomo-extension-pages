@@ -8,7 +8,7 @@ coverImage: https://resource.flomoapp.com/101/flomoplus-cover.png!webp
 作为一名 flomo 的忠实用户，我深知记录灵感的重要性。Flomo Plus 正是为了解决我们在记录时遇到的痛点而诞生的！它让记录变得前所未有的简单和愉悦。让我来为你介绍这个改变我工作方式的贴心小助手。
 
 
-## 为什么我离不开 Flomo Plus？
+### 为什么我离不开 Flomo Plus？
 
 1. **闪电记录**  
    还记得那些转瞬即逝的灵感吗？现在，在任何网页上，只需轻轻一点插件图标，就能立即捕捉你的想法！再也不用担心错过任何灵光一现的时刻。
@@ -25,13 +25,13 @@ coverImage: https://resource.flomoapp.com/101/flomoplus-cover.png!webp
 5. **护眼模式**  
    深夜记录时，开启夜间模式，温柔的界面让眼睛倍感舒适。这个细节让我感受到开发者的用心。
 
-## 三分钟快速上手
+### 三分钟快速上手
 
 1. 访问 [Chrome 网上应用店](https://chrome.google.com/webstore) 搜索 "Flomo Plus"
 2. 点击 "添加至 Chrome" 按钮，等待几秒钟
 3. 安装完成后，点击浏览器右上角那个可爱的小图标，登录你的 flomo 账号
 
-## 我的私房使用技巧
+### 我的私房使用技巧
 
 - 记住这个神奇组合：`Ctrl+Shift+F` (Windows) 或 `Cmd+Shift+F` (Mac)，瞬间召唤记录窗口！
 - 强烈建议开启 "自动添加来源链接"，这样以后回顾笔记时，能快速找到原始出处
