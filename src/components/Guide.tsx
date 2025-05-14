@@ -2,7 +2,7 @@ import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
 import { Button } from '@/components/ui/button'
 import { useNavigate } from 'react-router-dom'
-import { FLOMO_EXTENSION_FILE_URL, FLOMO_EXTENSION_WEB_STORE_URL } from '@/lib/type'
+import { FLOMO_EXTENSION_FILE_URL, FLOMO_EXTENSION_WEB_STORE_URL, FLOMO_EXTENSION_EDGE_STORE_URL } from '@/lib/type'
 import { useRef, useState, useEffect } from 'react'
 
 export function Guide() {
@@ -58,9 +58,6 @@ export function Guide() {
 
   const onDownload = () => {
     window.open(FLOMO_EXTENSION_FILE_URL)
-  }
-  const onWebStore = () => {
-    window.open(FLOMO_EXTENSION_WEB_STORE_URL)
   }
 
   const showImages = () => {
@@ -142,11 +139,18 @@ export function Guide() {
                     立即下载插件
                   </Button>
                   <Button 
-                    onClick={onWebStore}
+                    onClick={() => window.open(FLOMO_EXTENSION_WEB_STORE_URL)}
                     className="w-full"
                     variant="outline"
                   >
-                    浏览器扩展商店安装
+                    Chrome 扩展商店安装
+                  </Button>
+                  <Button
+                    onClick={() => window.open(FLOMO_EXTENSION_EDGE_STORE_URL)}
+                    className="w-full"
+                    variant="outline"
+                  >
+                    Edge 扩展商店安装
                   </Button>
                 </div>
               </nav>
