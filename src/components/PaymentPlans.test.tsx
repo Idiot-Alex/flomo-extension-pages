@@ -71,4 +71,28 @@ describe('payment plan request contracts', () => {
       expect(createAliOrder).toHaveBeenCalledWith(annualOrder)
     })
   })
+
+  it('locks every WeChat option while the selected order is being created', async () => {
+    let finishOrder: ((value: { success: boolean; msg: string }) => void) | undefined
+    vi.mocked(createWxOrder).mockImplementation(() => new Promise((resolve) => {
+      finishOrder = resolve
+    }))
+    const user = userEvent.setup()
+    renderPlan(<LtzfWxPlan />)
+
+    await user.click(screen.getByRole('button', { name: '立即购买' }))
+    const payButtons = await screen.findAllByRole('button', { name: '去支付' })
+    await user.click(payButtons[2])
+
+    const pendingButton = await screen.findByRole('button', { name: '生成中' })
+    expect(pendingButton).toBeDisabled()
+    screen.getAllByRole('button', { name: '去支付' }).forEach((button) => {
+      expect(button).toBeDisabled()
+    })
+
+    finishOrder?.({ success: false, msg: 'test stop' })
+    await waitFor(() => {
+      expect(screen.getAllByRole('button', { name: '去支付' })).toHaveLength(3)
+    })
+  })
 })

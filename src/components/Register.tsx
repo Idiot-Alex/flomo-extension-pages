@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { Loader2 } from 'lucide-react'
 import { REGEXP_ONLY_DIGITS_AND_CHARS } from 'input-otp'
 import { useFormik } from 'formik'
 import * as yup from 'yup'
@@ -157,18 +156,17 @@ export function Register() {
     }
   }
 
-  const isBusy = isSendingCode || isRegistering || isGoogleRegistering
-
   return (
-    <main id="main-content" className="grid min-h-dvh place-items-center bg-secondary/55 px-4 py-12">
+    <main id="main-content" className="grid min-h-dvh place-items-center bg-background px-4 py-12">
       <div className="w-full max-w-md">
         <Link to="/" className="mb-5 inline-flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-primary">
           <img src="/favicon.png" alt="" className="h-8 w-8 rounded-lg" width="128" height="128" />
           返回 Flomo Extension
         </Link>
 
-        <Card className="border-emerald-950/10 bg-white shadow-[0_24px_70px_-48px_rgba(9,67,43,0.65)]">
+        <Card className="border-border bg-card shadow-whisper">
           <CardHeader className="space-y-2 pb-5">
+            <p className="kami-eyebrow">新用户</p>
             <CardTitle className="text-3xl tracking-[-0.03em]">创建账户</CardTitle>
             <CardDescription>注册后可以购买并查看付费套餐状态</CardDescription>
           </CardHeader>
@@ -189,8 +187,15 @@ export function Register() {
                     aria-invalid={Boolean(formik.touched.email && formik.errors.email)}
                     aria-describedby="register-email-error"
                   />
-                  <Button type="button" variant="outline" className="shrink-0 px-3" disabled={countingDown || isBusy} onClick={onSendEmailCode}>
-                    {isSendingCode && <Loader2 className="mr-1 h-4 w-4 animate-spin" />}
+                  <Button
+                    type="button"
+                    variant="outline"
+                    className="shrink-0 px-3"
+                    disabled={countingDown || isRegistering || isGoogleRegistering}
+                    onClick={onSendEmailCode}
+                    loading={isSendingCode}
+                    loadingText="发送中"
+                  >
                     {countingDown ? `${countDown}s` : '发送验证码'}
                   </Button>
                 </div>
@@ -238,8 +243,13 @@ export function Register() {
                 </p>
               </div>
 
-              <Button type="submit" className="w-full" disabled={!formik.isValid || !codeId || isBusy}>
-                {isRegistering && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+              <Button
+                type="submit"
+                className="w-full"
+                disabled={!formik.isValid || !codeId || isSendingCode || isGoogleRegistering}
+                loading={isRegistering}
+                loadingText="注册中"
+              >
                 注册账户
               </Button>
 
@@ -249,12 +259,16 @@ export function Register() {
                 <span className="h-px flex-1 bg-border" />
               </div>
 
-              <Button type="button" variant="outline" className="w-full" onClick={onGoogleRegister} disabled={isBusy}>
-                {isGoogleRegistering ? (
-                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                ) : (
-                  <img className="mr-2 h-4 w-4" src="/google_logo.webp" alt="" width="64" height="64" />
-                )}
+              <Button
+                type="button"
+                variant="outline"
+                className="w-full"
+                onClick={onGoogleRegister}
+                disabled={isSendingCode || isRegistering}
+                loading={isGoogleRegistering}
+                loadingText="连接 Google"
+              >
+                <img className="mr-2 h-4 w-4" src="/google_logo.webp" alt="" width="64" height="64" />
                 使用 Google 注册
               </Button>
             </form>

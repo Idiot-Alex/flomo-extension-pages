@@ -2,15 +2,10 @@ import { Button } from '@/components/ui/button'
 import { Card, CardHeader, CardTitle, CardContent, CardFooter } from '@/components/ui/card'
 import { Header } from './Header'
 import { Footer } from './Footer'
-import { Terms } from './Terms'
 import { useSelector } from 'react-redux'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
 import { useNavigate } from 'react-router-dom'
 import { reloadUser } from '@/lib/api'
 import { useEffect, useState } from 'react'
-import { motion } from 'framer-motion'
-import { Mail, Package, Calendar } from 'lucide-react'
 import type { RootState } from '@/store/store'
 
 export function Account() {
@@ -20,6 +15,7 @@ export function Account() {
     plan: '',
     expiredTime: '',
   })
+  const [isLoadingUser, setIsLoadingUser] = useState(false)
 
   const user = useSelector((state: RootState) => {
     return state.user
@@ -27,16 +23,32 @@ export function Account() {
 
   // 重新加载用户信息
   useEffect(() => {
-    if (user.email) {
-      reloadUser({ email: user.email }).then(res => {
+    if (!user.email) {
+      return
+    }
+
+    let cancelled = false
+    setIsLoadingUser(true)
+    reloadUser({ email: user.email }).then(res => {
+      if (!cancelled) {
         if (res.success) {
           setUserInf(res.data)
         } else {
           setUserInf(user)
         }
-      }).catch(() => {
+      }
+    }).catch(() => {
+      if (!cancelled) {
         setUserInf(user)
-      })
+      }
+    }).finally(() => {
+      if (!cancelled) {
+        setIsLoadingUser(false)
+      }
+    })
+
+    return () => {
+      cancelled = true
     }
   }, [user])
 
@@ -47,95 +59,51 @@ export function Account() {
   return (
     <>
       <Header />
-      <main id="main-content" className="min-h-screen bg-gradient-to-b from-background/50 via-background/95 to-background">
-        <div className="container py-12">
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="space-y-8"
-          >
-            <div className="text-center">
-              <h1 className="text-4xl font-bold tracking-tight bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent">
-                我的账户
-              </h1>
-              <p className="mt-3 text-lg text-muted-foreground">管理您的账户信息和订阅状态</p>
+      <main id="main-content" className="min-h-screen bg-background">
+        <div className="kami-page py-16 sm:py-20">
+          <header className="border-b border-border pb-10 sm:pb-14">
+            <p className="kami-eyebrow">个人中心</p>
+            <h1 className="mt-5 font-editorial text-4xl font-medium tracking-tight sm:text-6xl">我的账户</h1>
+            <p className="mt-5 max-w-2xl text-base leading-8 text-muted-foreground">查看账户信息和当前订阅状态。</p>
+          </header>
+
+          <div className="grid gap-8 py-12 lg:grid-cols-[0.72fr_1.28fr] lg:py-16">
+            <div>
+              <p className="kami-eyebrow">00 · 账户概览</p>
+              <p className="mt-4 max-w-xs text-sm leading-7 text-muted-foreground">
+                套餐状态会在进入页面时自动同步。支付完成后如未更新，请稍后刷新页面。
+              </p>
             </div>
 
-            <div className="mx-auto max-w-4xl">
-              <motion.div
-                whileHover={{ scale: 1.02 }}
-                transition={{ type: "spring", stiffness: 300 }}
-              >
-                <Card className="shadow-lg hover:shadow-xl transition-shadow">
-                  <CardHeader>
-                    <CardTitle className="text-xl">账户信息</CardTitle>
-                  </CardHeader>
-                  <CardContent className="space-y-6">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-6">
-                      <div className="space-y-4">
-                        <div className="flex items-center gap-3">
-                          <Mail className="w-6 h-6 text-primary" />
-                          <div className="flex-1">
-                            <Label htmlFor="email" className="text-sm font-medium text-muted-foreground">邮箱</Label>
-                            <Input
-                              id="email"
-                              type="email"
-                              readOnly
-                              value={userInf.email}
-                              className="w-full mt-1 bg-background/50"
-                            />
-                          </div>
-                        </div>
-
-                        <div className="flex items-center gap-3">
-                          <Package className="w-6 h-6 text-primary" />
-                          <div className="flex-1">
-                            <Label htmlFor="plan" className="text-sm font-medium text-muted-foreground">当前套餐</Label>
-                            <Input
-                              id="plan"
-                              type="text"
-                              readOnly
-                              value={userInf.plan}
-                              className="w-full mt-1 bg-background/50"
-                            />
-                          </div>
-                        </div>
-
-                        <div className="flex items-center gap-3">
-                          <Calendar className="w-6 h-6 text-primary" />
-                          <div className="flex-1">
-                            <Label htmlFor="expiredTime" className="text-sm font-medium text-muted-foreground">套餐到期时间</Label>
-                            <Input
-                              id="expiredTime"
-                              type="text"
-                              readOnly
-                              value={!userInf.expiredTime ? '' : new Date(userInf.expiredTime).toLocaleString()}
-                              className="w-full mt-1 bg-background/50"
-                            />
-                          </div>
-                        </div>
-                      </div>
+            <Card className="border-border bg-card">
+              <CardHeader className="border-b border-border">
+                <CardTitle className="text-2xl">账户信息</CardTitle>
+                <p className="text-sm text-muted-foreground" aria-live="polite">
+                  {isLoadingUser ? '正在读取最新账户信息…' : '已同步当前账户状态'}
+                </p>
+              </CardHeader>
+              <CardContent aria-busy={isLoadingUser}>
+                <dl>
+                  {[
+                    ['邮箱', userInf.email || '—'],
+                    ['当前套餐', userInf.plan || '—'],
+                    ['套餐到期时间', userInf.expiredTime ? new Date(userInf.expiredTime).toLocaleString() : '—'],
+                  ].map(([label, value]) => (
+                    <div key={label} className="grid gap-2 border-b border-border py-5 last:border-0 sm:grid-cols-[10rem_1fr] sm:items-baseline">
+                      <dt className="text-sm text-muted-foreground">{label}</dt>
+                      <dd className="break-all font-editorial text-lg font-medium text-foreground">{value}</dd>
                     </div>
-                  </CardContent>
-                  <CardFooter className="border-t px-6 py-4">
-                    <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                      <Button 
-                        onClick={toPlan} 
-                        className="w-full md:w-auto bg-gradient-to-r from-primary to-purple-600 hover:from-primary/90 hover:to-purple-600/90"
-                      >
-                        查看其他套餐
-                      </Button>
-                    </motion.div>
-                  </CardFooter>
-                </Card>
-              </motion.div>
-            </div>
-          </motion.div>
+                  ))}
+                </dl>
+              </CardContent>
+              <CardFooter className="border-t px-6 py-5">
+                <Button onClick={toPlan}>查看其他套餐</Button>
+              </CardFooter>
+            </Card>
+          </div>
         </div>
-        <Terms />
       </main>
       <Footer />
     </>
-  );
+  )
 }

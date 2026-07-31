@@ -17,6 +17,10 @@ module.exports = {
       },
     },
     extend: {
+      fontFamily: {
+        editorial: ['var(--font-editorial)'],
+        ui: ['var(--font-ui)'],
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -56,6 +60,9 @@ module.exports = {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
+      },
+      boxShadow: {
+        whisper: "0 16px 44px -34px rgba(32, 56, 42, 0.42)",
       },
       keyframes: {
         "accordion-down": {

@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
-import { Loader2 } from 'lucide-react'
 import { useFormik } from 'formik'
 import * as yup from 'yup'
 import CryptoJS from 'crypto-js'
@@ -94,15 +93,16 @@ export function Login() {
   }
 
   return (
-    <main id="main-content" className="grid min-h-dvh place-items-center bg-secondary/55 px-4 py-12">
+    <main id="main-content" className="grid min-h-dvh place-items-center bg-background px-4 py-12">
       <div className="w-full max-w-md">
         <Link to="/" className="mb-5 inline-flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-primary">
           <img src="/favicon.png" alt="" className="h-8 w-8 rounded-lg" width="128" height="128" />
           返回 Flomo Extension
         </Link>
 
-        <Card className="border-emerald-950/10 bg-white shadow-[0_24px_70px_-48px_rgba(9,67,43,0.65)]">
+        <Card className="border-border bg-card shadow-whisper">
           <CardHeader className="space-y-2 pb-5">
+            <p className="kami-eyebrow">账户访问</p>
             <CardTitle className="text-3xl tracking-[-0.03em]">登录账户</CardTitle>
             <CardDescription>继续查看套餐状态和账户信息</CardDescription>
           </CardHeader>
@@ -148,8 +148,13 @@ export function Login() {
                 </p>
               </div>
 
-              <Button type="submit" className="w-full" disabled={!formik.dirty || !formik.isValid || isPasswordLoginPending || isGoogleLoginPending}>
-                {isPasswordLoginPending && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+              <Button
+                type="submit"
+                className="w-full"
+                disabled={!formik.dirty || !formik.isValid || isGoogleLoginPending}
+                loading={isPasswordLoginPending}
+                loadingText="登录中"
+              >
                 登录
               </Button>
 
@@ -159,12 +164,16 @@ export function Login() {
                 <span className="h-px flex-1 bg-border" />
               </div>
 
-              <Button type="button" variant="outline" className="w-full" onClick={onGoogleLogin} disabled={isGoogleLoginPending || isPasswordLoginPending}>
-                {isGoogleLoginPending ? (
-                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                ) : (
-                  <img className="mr-2 h-4 w-4" src="/google_logo.webp" alt="" width="64" height="64" />
-                )}
+              <Button
+                type="button"
+                variant="outline"
+                className="w-full"
+                onClick={onGoogleLogin}
+                disabled={isPasswordLoginPending}
+                loading={isGoogleLoginPending}
+                loadingText="连接 Google"
+              >
+                <img className="mr-2 h-4 w-4" src="/google_logo.webp" alt="" width="64" height="64" />
                 使用 Google 登录
               </Button>
             </form>

@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { Loader2 } from 'lucide-react'
 import { REGEXP_ONLY_DIGITS_AND_CHARS } from 'input-otp'
 import { useFormik } from 'formik'
 import * as yup from 'yup'
@@ -130,15 +129,16 @@ export function ResetPwd() {
   }
 
   return (
-    <main id="main-content" className="grid min-h-dvh place-items-center bg-secondary/55 px-4 py-12">
+    <main id="main-content" className="grid min-h-dvh place-items-center bg-background px-4 py-12">
       <div className="w-full max-w-md">
         <Link to="/login" className="mb-5 inline-flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-primary">
           <img src="/favicon.png" alt="" className="h-8 w-8 rounded-lg" width="128" height="128" />
           返回登录
         </Link>
 
-        <Card className="border-emerald-950/10 bg-white shadow-[0_24px_70px_-48px_rgba(9,67,43,0.65)]">
+        <Card className="border-border bg-card shadow-whisper">
           <CardHeader className="space-y-2 pb-5">
+            <p className="kami-eyebrow">账户恢复</p>
             <CardTitle className="text-3xl tracking-[-0.03em]">重置密码</CardTitle>
             <CardDescription>通过邮箱验证码设置一个新密码</CardDescription>
           </CardHeader>
@@ -159,8 +159,15 @@ export function ResetPwd() {
                     aria-invalid={Boolean(formik.touched.email && formik.errors.email)}
                     aria-describedby="reset-email-error"
                   />
-                  <Button type="button" variant="outline" className="shrink-0 px-3" disabled={countingDown || isSendingCode || isResetting} onClick={onSendEmailCode}>
-                    {isSendingCode && <Loader2 className="mr-1 h-4 w-4 animate-spin" />}
+                  <Button
+                    type="button"
+                    variant="outline"
+                    className="shrink-0 px-3"
+                    disabled={countingDown || isResetting}
+                    onClick={onSendEmailCode}
+                    loading={isSendingCode}
+                    loadingText="发送中"
+                  >
                     {countingDown ? `${countDown}s` : '发送验证码'}
                   </Button>
                 </div>
@@ -208,8 +215,13 @@ export function ResetPwd() {
                 </p>
               </div>
 
-              <Button type="submit" className="w-full" disabled={!formik.isValid || !codeId || isSendingCode || isResetting}>
-                {isResetting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+              <Button
+                type="submit"
+                className="w-full"
+                disabled={!formik.isValid || !codeId || isSendingCode}
+                loading={isResetting}
+                loadingText="重置中"
+              >
                 确认重置
               </Button>
             </form>

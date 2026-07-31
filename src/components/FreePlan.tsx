@@ -10,22 +10,22 @@ export function FreePlan() {
 
   const freePlans = [
     {
-      color: 'bg-sky-500',
+      color: 'bg-primary',
       title: '数据安全，放心使用',
       desc: '不会存储用户任何 flomo 笔记数据',
     },
     {
-      color: 'bg-sky-500',
+      color: 'bg-primary',
       title: '轻量级使用用户最佳选择',
       desc: '无需登录注册、每天重置使用次数',
     },
     {
-      color: 'bg-sky-500',
+      color: 'bg-primary',
       title: '无需注册账号',
       desc: '不需要注册或者登录',
     },
     {
-      color: 'bg-sky-100',
+      color: 'bg-border',
       title: '每日使用次数 2',
       desc: '使用插件保存 flomo 笔记次数',
     },
@@ -50,9 +50,9 @@ export function FreePlan() {
   }
 
   return (
-    <Card className="mx-auto flex h-full w-full max-w-sm flex-col border-border/80 bg-white shadow-sm">
+    <Card className="flex h-full w-full flex-col border-border bg-card">
       <CardHeader>
-        <p className="text-xs font-semibold uppercase tracking-[0.16em] text-muted-foreground">轻量体验</p>
+        <p className="kami-eyebrow">轻量体验</p>
         <CardTitle className="text-2xl">Free 套餐</CardTitle>
         <CardDescription>
           无需注册账号，每日 2 次机会免费使用插件保存笔记

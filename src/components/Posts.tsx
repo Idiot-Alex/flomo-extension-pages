@@ -17,16 +17,9 @@ interface Post {
 }
 
 function getCategoryColor(category: string) {
-  switch (category) {
-    case '文章':
-      return 'bg-blue-100 text-blue-800'
-    case '优化':
-      return 'bg-green-100 text-green-800'
-    case '公告':
-      return 'bg-purple-100 text-purple-800'
-    default:
-      return 'bg-gray-100 text-gray-800'
-  }
+  return category === '公告'
+    ? 'border-primary/30 bg-primary text-primary-foreground'
+    : 'border-primary/20 bg-accent text-accent-foreground'
 }
 
 interface PostsState {
@@ -81,18 +74,6 @@ function usePosts() {
   }
 }
 
-const getPostBgColor = (slug: string) => {
-  const colors = [
-    'bg-blue-100',
-    'bg-green-100', 
-    'bg-purple-100',
-    'bg-pink-100',
-    'bg-indigo-100'
-  ]
-  const colorIndex = [...slug].reduce((total, character) => total + character.charCodeAt(0), 0)
-  return colors[colorIndex % colors.length]
-}
-
 const PostItem = memo(function PostItem({
   post,
   onOpen,
@@ -101,34 +82,33 @@ const PostItem = memo(function PostItem({
   onOpen: () => void
 }) {
   return (
-    <article
-      className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden cursor-pointer flex flex-col h-full"
-    >
+    <article className="flex h-full flex-col overflow-hidden rounded-xl border border-border bg-card transition-colors hover:border-primary/35">
       <div className="relative">
-        <div className="absolute top-4 right-4 z-10 flex items-center space-x-2">
-          <span className={`${getCategoryColor(post.category)} text-sm font-medium px-3 py-1 rounded-full`}>
+        <div className="absolute right-4 top-4 z-10 flex items-center gap-2">
+          <span className={`${getCategoryColor(post.category)} rounded-full border px-3 py-1 text-xs font-medium`}>
             {post.category}
           </span>
-          <span className="text-gray-500 text-sm">{post.displayDate}</span>
         </div>
-        <div className={`flex-1 max-h-[300px] ${post.coverImage ? 'bg-gray-100' : getPostBgColor(post.slug)} overflow-hidden`}>
+        <div className="aspect-[16/9] overflow-hidden border-b border-border bg-secondary">
           {post.coverImage && (
-              <img 
-              src={`${post.coverImage}`}
+            <img
+              src={post.coverImage}
               alt={post.title}
-              className="w-full h-1/2 object-cover max-w-full"
+              className="h-full w-full object-cover"
               loading="lazy"
               decoding="async"
             />
           )}
         </div>
       </div>
-      <div className="p-6 flex-1 flex flex-col">
-        <h2 className="text-xl font-bold text-gray-900 mb-3">{post.title}</h2>
-        <p className="text-gray-600 leading-relaxed line-clamp-3 flex-1">{post.excerpt}...</p>
+      <div className="flex flex-1 flex-col p-6">
+        <p className="mb-3 text-xs font-medium tracking-[0.12em] text-muted-foreground">{post.displayDate}</p>
+        <h2 className="mb-3 font-editorial text-2xl font-medium leading-snug text-foreground">{post.title}</h2>
+        <p className="line-clamp-3 flex-1 text-sm leading-7 text-muted-foreground">{post.excerpt}...</p>
         <button
+          type="button"
           onClick={onOpen}
-          className="mt-4 text-blue-600 hover:text-blue-800 font-medium flex items-center self-start rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2"
+          className="mt-5 flex items-center self-start rounded-sm text-sm font-medium text-primary underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
           aria-label={`阅读《${post.title}》`}
         >
           阅读更多
@@ -150,8 +130,8 @@ const PostModal = memo(function PostModal({
 }) {
   return (
     <Dialog open onOpenChange={(open) => !open && onClose()}>
-      <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto">
-        <DialogTitle className="pr-8 text-2xl font-bold text-gray-900">{post.title}</DialogTitle>
+      <DialogContent className="max-h-[90vh] max-w-3xl overflow-y-auto border-border bg-card">
+        <DialogTitle className="pr-8 font-editorial text-3xl font-medium text-foreground">{post.title}</DialogTitle>
         <DialogDescription>{post.category} · 发布于 {post.displayDate}</DialogDescription>
         <article
           className="prose max-w-none"
@@ -186,18 +166,22 @@ export function Posts() {
   return (
     <>
       <Header />
-      <main id="main-content" className="min-h-[calc(100vh-8rem)] bg-gradient-to-b from-gray-50 to-white py-8">
-        <div className="max-w-6xl mx-auto px-4 pt-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-8">最新动态</h1>
+      <main id="main-content" className="min-h-[calc(100vh-8rem)] bg-background">
+        <div className="kami-page py-16 sm:py-20">
+          <header className="mb-12 border-b border-border pb-10">
+            <p className="kami-eyebrow">更新与思考</p>
+            <h1 className="mt-4 font-editorial text-4xl font-medium tracking-tight text-foreground sm:text-6xl">最新动态</h1>
+            <p className="mt-5 max-w-2xl text-base leading-7 text-muted-foreground">关于产品更新、记录方法与浏览器使用体验。</p>
+          </header>
           
-          {loading && <div className="text-center py-8">加载中...</div>}
-          {error && <div className="text-red-500 text-center py-8">{error}</div>}
+          {loading && <div className="border-y border-border py-10 text-sm text-muted-foreground" aria-live="polite">正在整理文章…</div>}
+          {error && <div className="border-y border-destructive/30 py-10 text-sm text-destructive" role="alert">{error}</div>}
           {slug && !loading && !selectedPost && (
-            <div className="mb-8 rounded-lg bg-amber-50 p-4 text-amber-900">
+            <div className="mb-8 rounded-lg border border-border bg-secondary p-4 text-sm text-foreground">
               没有找到这篇文章，请从下方列表选择其他内容。
             </div>
           )}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
             {posts.map((post) => (
               <PostItem
                 key={post.slug}

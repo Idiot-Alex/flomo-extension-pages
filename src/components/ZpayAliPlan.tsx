@@ -17,32 +17,32 @@ export function ZpayAliPlan() {
     return state.user
   })
   const plan = usePlan()
-  const [isButtonDisabled, setIsButtonDisabled] = useState(false)
+  const [pendingPlanMonth, setPendingPlanMonth] = useState<number | null>(null)
   const navigate = useNavigate()
 
   const aliPlans = [
     {
-      color: 'bg-sky-500',
+      color: 'bg-primary',
       title: '数据安全，放心使用',
       desc: '不会存储用户任何 flomo 笔记数据',
     },
     {
-      color: 'bg-sky-500',
+      color: 'bg-primary',
       title: 'flomo 用户最优选择',
       desc: '无需 flomo 官方会员 ¥99/年',
     },
     {
-      color: 'bg-sky-500',
+      color: 'bg-primary',
       title: '无限制使用次数',
       desc: '使用插件保存 flomo 笔记次数',
     },
     {
-      color: 'bg-sky-500',
+      color: 'bg-primary',
       title: '限时特价，flomo 会员价格的 1/10',
       desc: '优惠价 ¥1.9 一个月，年付更划算',
     },
     {
-      color: 'bg-sky-500',
+      color: 'bg-primary',
       title: '支付宝支付，更加方便',
       desc: '更多功能敬请期待...',
     }
@@ -70,15 +70,15 @@ export function ZpayAliPlan() {
   ]
 
   const renderAliPay = () => {
-    const toPay = (payData: PayOption) => {
-      setIsButtonDisabled(true)
+    const toPay = async (payData: PayOption) => {
+      setPendingPlanMonth(payData.month)
       if (!user.email) {
         toast({
           variant: "destructive",
           description: '请先登录账号才能继续支付...',
           action: <ToastAction className="bg-primary rounded-md px-4 py-2" altText="去登录" onClick={() => navigate('/login')}>去登录</ToastAction>,
         })
-        setIsButtonDisabled(false)
+        setPendingPlanMonth(null)
         return
       }
       toast({
@@ -91,8 +91,9 @@ export function ZpayAliPlan() {
         price: payData.payPrice,
         returnUrl: FLOMO_EXTENSION_WEB_URL,
       }
-      createAliOrder(params).then((res: ApiRes) => {
-        setIsButtonDisabled(false)
+
+      try {
+        const res: ApiRes = await createAliOrder(params)
         if (res.success) {
           toast({
             description: res.msg
@@ -113,13 +114,14 @@ export function ZpayAliPlan() {
             description: res.msg
           })
         }
-      }).catch(() => {
+      } catch {
         toast({
           variant: "destructive",
           description: '下单失败'
         })
-        setIsButtonDisabled(false)
-      })
+      } finally {
+        setPendingPlanMonth(null)
+      }
     }
 
     return (<>
@@ -133,11 +135,19 @@ export function ZpayAliPlan() {
                 <b className="text-2xl">¥{item.payPrice}</b>
               </Label> : 
               <Label className="flex flex-col">
-                <s className="text-gray-400">¥{item.price}</s>
+                <s className="text-muted-foreground">¥{item.price}</s>
                 <b className="text-2xl">¥{item.payPrice}</b>
               </Label>
             }
-            <Button className="w-full" disabled={isButtonDisabled} onClick={() => toPay(item)}>去支付</Button>
+            <Button
+              className="w-full"
+              disabled={pendingPlanMonth !== null}
+              loading={pendingPlanMonth === item.month}
+              loadingText="生成中"
+              onClick={() => toPay(item)}
+            >
+              去支付
+            </Button>
           </div>
         ))
       }
@@ -146,12 +156,12 @@ export function ZpayAliPlan() {
   }
 
   return (<>
-    <Card className="mx-auto flex h-full w-full max-w-sm flex-col border-border/80 bg-white shadow-sm">
+    <Card className="flex h-full w-full flex-col border-border bg-card">
       <CardHeader>
-        <p className="text-xs font-semibold uppercase tracking-[0.16em] text-muted-foreground">支付宝</p>
+        <p className="kami-eyebrow">支付宝</p>
         <CardTitle className="text-2xl">Pay 套餐</CardTitle>
         <CardDescription>
-          需要注册账号并付费，每日 <b className="text-zinc-600">无限</b> 次使用插件保存笔记
+          需要注册账号并付费，每日 <b className="text-foreground">无限</b> 次使用插件保存笔记
         </CardDescription>
       </CardHeader>
       <CardContent className="flex-1">

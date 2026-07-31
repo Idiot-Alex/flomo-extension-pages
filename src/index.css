@@ -1,5 +1,7 @@
 :root {
-  font-family: "Avenir Next", Avenir, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  --font-editorial: "Songti SC", STSong, "Noto Serif CJK SC", "Source Han Serif SC", Georgia, serif;
+  --font-ui: "Avenir Next", Avenir, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", system-ui, sans-serif;
+  font-family: var(--font-ui);
   color: hsl(var(--foreground));
   background: hsl(var(--background));
   font-synthesis: none;
@@ -16,6 +18,10 @@ body {
   min-width: 320px;
   min-height: 100dvh;
   margin: 0;
+}
+
+a {
+  text-underline-offset: 0.2em;
 }
 
 button,

@@ -6,6 +6,7 @@ import { ApiRes, type PayOption } from '@/lib/type'
 import { Label } from '@/components/ui/label'
 import { ToastAction } from '@radix-ui/react-toast'
 import { useNavigate } from 'react-router-dom'
+import { useState } from 'react'
 import { toast } from './ui/use-toast'
 import { useSelector } from 'react-redux'
 import { usePlan } from './ui/use-plan'
@@ -17,25 +18,26 @@ export function AfdianPlan() {
   })
   const plan = usePlan()
   const navigate = useNavigate()
+  const [pendingPlanMonth, setPendingPlanMonth] = useState<number | null>(null)
 
   const afdianPayPlans = [
     {
-      color: 'bg-sky-500',
+      color: 'bg-primary',
       title: '数据安全，放心使用',
       desc: '不会存储用户任何 flomo 笔记数据',
     },
     {
-      color: 'bg-sky-500',
+      color: 'bg-primary',
       title: '需要注册并登录账号',
       desc: '使用邮箱账号注册或者登录',
     },
     {
-      color: 'bg-sky-500',
+      color: 'bg-primary',
       title: '每日使用次数无限制',
       desc: '使用插件保存 flomo 笔记次数',
     },
     {
-      color: 'bg-sky-500',
+      color: 'bg-primary',
       title: '原价 ¥5.0 一个月',
       desc: '限时折扣，¥10.0 半年会员，¥15.0 一年会员，赶紧冲哇',
     }
@@ -57,13 +59,15 @@ export function AfdianPlan() {
       },
     ]
 
-    const toPay = (payData: PayOption) => {
+    const toPay = async (payData: PayOption) => {
+      setPendingPlanMonth(payData.month)
       if (!user.email) {
         toast({
           variant: "destructive",
           description: '请先登录账号才能继续支付...',
           action: <ToastAction className="bg-primary rounded-md px-4 py-2" altText="去登录" onClick={() => navigate('/login')}>去登录</ToastAction>,
         })
+        setPendingPlanMonth(null)
         return
       }
       const params = {
@@ -72,21 +76,25 @@ export function AfdianPlan() {
         month: payData.month,
         price: payData.payPrice,
       }
-      createAfdianOrder(params).then((res: ApiRes) => {
+
+      try {
+        const res: ApiRes = await createAfdianOrder(params)
         if (res.success) {
-          window.open(res.data)
+          window.open(res.data, '_blank', 'noopener,noreferrer')
         } else {
           toast({
             variant: "destructive",
             description: res.msg
           })
         }
-      }).catch(() => {
+      } catch {
         toast({
           variant: 'destructive',
           description: '下单失败，请稍后重试',
         })
-      })
+      } finally {
+        setPendingPlanMonth(null)
+      }
     }
     return (
       afdianPayList.map((item, i) => (
@@ -98,25 +106,34 @@ export function AfdianPlan() {
               <b className="text-2xl">¥{item.payPrice}</b>
             </Label> : 
             <Label className="flex flex-col">
-              <s className="text-gray-400">¥{item.price}</s>
+              <s className="text-muted-foreground">¥{item.price}</s>
               <b className="text-2xl">¥{item.payPrice}</b>
             </Label>
           }
-          <Button className="w-full" onClick={() => toPay(item)}>去支付</Button>
+          <Button
+            className="w-full"
+            disabled={pendingPlanMonth !== null}
+            loading={pendingPlanMonth === item.month}
+            loadingText="生成中"
+            onClick={() => toPay(item)}
+          >
+            去支付
+          </Button>
         </div>
       ))
     )
   }
 
   return (
-    <Card className="mx-auto max-w-sm bg-lightgrey">
+    <Card className="flex h-full w-full flex-col border-border bg-card">
       <CardHeader>
+        <p className="kami-eyebrow">爱发电</p>
         <CardTitle className="text-2xl">Pay 套餐（爱发电渠道）</CardTitle>
         <CardDescription>
-          需要注册账号并付费，每日 <b className="text-zinc-600">无限</b> 次使用插件保存笔记
+          需要注册账号并付费，每日 <b className="text-foreground">无限</b> 次使用插件保存笔记
         </CardDescription>
       </CardHeader>
-      <CardContent>
+      <CardContent className="flex-1">
         { plan.renderPlan(afdianPayPlans) }
       </CardContent>
       <CardFooter className="border-t px-6 py-4">

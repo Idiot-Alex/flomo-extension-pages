@@ -28,11 +28,11 @@ const navItems = [
 ]
 
 const navLinkClass = ({ isActive }: { isActive: boolean }) => [
-  'rounded-md px-3 py-2 text-sm font-medium transition-colors',
+  'relative px-3 py-2 text-sm font-medium transition-colors',
   'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
   isActive
-    ? 'bg-primary/10 text-primary'
-    : 'text-muted-foreground hover:bg-secondary hover:text-foreground',
+    ? 'text-primary after:absolute after:inset-x-3 after:-bottom-[1px] after:h-px after:bg-primary'
+    : 'text-muted-foreground hover:text-foreground',
 ].join(' ')
 
 export function Header() {
@@ -46,15 +46,15 @@ export function Header() {
   }
 
   return (
-    <header className="sticky top-0 z-40 border-b border-emerald-950/10 bg-background/90 backdrop-blur-xl">
-      <div className="mx-auto flex h-16 w-full max-w-7xl items-center gap-4 px-4 sm:px-6 lg:px-8">
+    <header className="sticky top-0 z-40 border-b bg-background/95 backdrop-blur-xl">
+      <div className="mx-auto flex h-[4.5rem] w-full max-w-[1120px] items-center gap-4 px-4 sm:px-8">
         <Link
           to="/"
           className="flex shrink-0 items-center gap-2 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
           aria-label="Flomo Extension 首页"
         >
-          <img src="/favicon.png" alt="" className="h-9 w-9 rounded-xl" width="128" height="128" />
-          <span className="hidden text-sm font-semibold tracking-tight text-foreground sm:inline">Flomo Extension</span>
+          <img src="/favicon.png" alt="" className="h-10 w-10 rounded-lg" width="128" height="128" />
+          <span className="font-editorial hidden text-lg font-medium tracking-tight text-foreground sm:inline">Flomo Extension</span>
         </Link>
 
         <nav className="hidden items-center gap-1 md:flex" aria-label="主导航">
@@ -96,7 +96,7 @@ export function Header() {
                 <Menu className="h-5 w-5" />
               </Button>
             </SheetTrigger>
-            <SheetContent side="right" className="w-[18rem]">
+            <SheetContent side="right" className="w-[18rem] border-border bg-background">
               <SheetTitle className="flex items-center gap-2">
                 <img src="/favicon.png" alt="" className="h-8 w-8 rounded-lg" width="128" height="128" />
                 Flomo Extension

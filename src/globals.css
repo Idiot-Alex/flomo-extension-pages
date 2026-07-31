@@ -4,35 +4,42 @@
 
 @layer base {
   :root {
-    --background: 150 25% 98%;
-    --foreground: 158 28% 12%;
+    --background: 52 29% 95%;
+    --foreground: 60 2% 8%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 158 28% 12%;
+    --card: 48 33% 97%;
+    --card-foreground: 60 2% 8%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 158 28% 12%;
+    --popover: 48 33% 97%;
+    --popover-foreground: 60 2% 8%;
 
-    --primary: 153 61% 30%;
-    --primary-foreground: 0 0% 98%;
+    --primary: 151 55% 31%;
+    --primary-foreground: 48 33% 97%;
 
-    --secondary: 149 30% 93%;
-    --secondary-foreground: 156 35% 18%;
+    --secondary: 50 21% 89%;
+    --secondary-foreground: 60 2% 14%;
 
-    --muted: 150 22% 94%;
-    --muted-foreground: 156 10% 42%;
+    --muted: 48 24% 91%;
+    --muted-foreground: 51 4% 41%;
 
-    --accent: 149 34% 91%;
-    --accent-foreground: 156 35% 18%;
+    --accent: 145 25% 91%;
+    --accent-foreground: 151 49% 22%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
+    --destructive: 10 55% 39%;
+    --destructive-foreground: 48 33% 97%;
 
-    --border: 153 18% 84%;
-    --input: 153 18% 84%;
-    --ring: 153 61% 30%;
+    --border: 49 18% 85%;
+    --input: 49 18% 82%;
+    --ring: 151 55% 31%;
 
-    --radius: 0.5rem;
+    --radius: 0.625rem;
+
+    --kami-brand-light: 151 44% 39%;
+    --kami-ivory: 48 33% 97%;
+    --kami-sand: 50 21% 89%;
+    --kami-ink: 60 2% 8%;
+    --kami-olive: 48 5% 30%;
+    --kami-stone: 51 4% 41%;
   }
 
   .dark {
@@ -73,16 +80,13 @@
   body {
     @apply bg-background text-foreground;
   }
-}
 
-.bg-blanchedalmond {
-  opacity: 1;
-  background-color: blanchedalmond;
-}
-
-.bg-lightgrey {
-  opacity: 1;
-  background-color: lightgrey;
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-editorial);
+    font-weight: 500;
+  }
 }
 
 .prose table {
@@ -90,13 +94,31 @@
 }
 
 .prose th {
-  @apply px-4 py-2 text-left bg-gray-100 font-semibold border border-gray-300;
+  @apply border-b border-border bg-transparent px-4 py-2 text-left font-medium text-foreground;
 }
 
 .prose td {
-  @apply px-4 py-2 border border-gray-300;
+  @apply border-b border-border px-4 py-2;
 }
 
 .prose tr:hover {
-  @apply bg-gray-50;
+  @apply bg-card;
+}
+
+@layer utilities {
+  .font-editorial {
+    font-family: var(--font-editorial);
+  }
+
+  .kami-page {
+    @apply mx-auto w-full max-w-[1120px] px-4 sm:px-8 lg:px-16;
+  }
+
+  .kami-eyebrow {
+    @apply text-xs font-medium uppercase tracking-[0.12em] text-primary;
+  }
+
+  .kami-rule {
+    @apply border-border;
+  }
 }

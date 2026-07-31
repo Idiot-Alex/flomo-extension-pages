@@ -82,48 +82,49 @@ export function PayOrder() {
   return (
     <>
       <Header />
-      <main id="main-content" className="container mx-auto min-h-[calc(100dvh-12rem)] px-4 py-8">
-        <div className="max-w-md mx-auto">
-          <div className="text-center mb-6">
-            <h1 className="mb-2 text-2xl font-bold"><Link to="/">Flomo Extension</Link> 支付二维码</h1>
+      <main id="main-content" className="min-h-[calc(100dvh-12rem)] bg-background">
+        <div className="mx-auto max-w-md px-4 py-14 sm:py-20">
+          <header className="mb-8 border-b border-border pb-7 text-center">
+            <p className="kami-eyebrow">安全支付</p>
+            <h1 className="mt-4 font-editorial text-3xl font-medium"><Link to="/">Flomo Extension</Link> 支付二维码</h1>
             {hasValidOrder && orderData ? (
-              <p className="text-base text-gray-600">请使用 <b>{orderData.channel === 'wx' ? '微信' : '支付宝'}</b> 完成支付</p>
+              <p className="mt-3 text-sm text-muted-foreground">请使用 <b className="text-foreground">{orderData.channel === 'wx' ? '微信' : '支付宝'}</b> 完成支付</p>
             ) : (
-              <p className="text-base text-gray-600">订单信息会在选择套餐后生成</p>
+              <p className="mt-3 text-sm text-muted-foreground">订单信息会在选择套餐后生成</p>
             )}
-          </div>
+          </header>
           
           { 
             hasValidOrder && orderData ? (
-              <div className="bg-white rounded-lg shadow-lg p-4">
+              <section className="rounded-xl border border-border bg-card p-6 shadow-whisper">
                 <div className="flex flex-col items-center space-y-4">
                   {
                     orderData.channel === 'wx' ? 
-                    <img src={orderData.data?.QRcode_url} alt="支付二维码" className="w-56 h-56" /> :
-                    <img src={orderData.data?.img} alt="支付二维码" className="w-56 h-56" />
+                    <img src={orderData.data?.QRcode_url} alt="支付二维码" className="h-56 w-56 rounded-lg border border-border" /> :
+                    <img src={orderData.data?.img} alt="支付二维码" className="h-56 w-56 rounded-lg border border-border" />
                   }
                   
                   <div className="w-full space-y-3">
                     <div className="flex justify-between text-sm">
-                      <span className="text-gray-600">订单号：</span>
-                      <span className="font-medium">{orderData.orderId}</span>
+                      <span className="text-muted-foreground">订单号：</span>
+                      <span className="max-w-[65%] break-all text-right font-medium">{orderData.orderId}</span>
                     </div>
                     <div className="flex justify-between text-sm">
-                      <span className="text-gray-600">交易描述：</span>
-                      <span className="font-medium">{orderData.title}</span>
+                      <span className="text-muted-foreground">交易描述：</span>
+                      <span className="max-w-[65%] text-right font-medium">{orderData.title}</span>
                     </div>
                     <div className="flex justify-between text-sm">
-                      <span className="text-gray-600">交易金额：</span>
-                      <span className="text-xl font-bold text-green-600">¥{orderData.price}</span>
+                      <span className="text-muted-foreground">交易金额：</span>
+                      <span className="font-editorial text-xl font-medium text-primary">¥{orderData.price}</span>
                     </div>
-                    <p className="text-center text-sm text-gray-500" aria-live="polite">{paymentStatus}</p>
+                    <p className="border-t border-border pt-4 text-center text-sm text-muted-foreground" aria-live="polite">{paymentStatus}</p>
                   </div>
                 </div>
-              </div>
+              </section>
             ) : (
-              <div className="bg-white rounded-lg shadow-lg p-6">
+              <section className="rounded-xl border border-border bg-card p-6">
                 <div className="flex flex-col items-center space-y-4">
-                  <p className="text-lg text-gray-600">没有需要支付的订单</p>
+                  <p className="text-base text-muted-foreground">没有需要支付的订单</p>
                   <Button 
                     className="w-48" 
                     onClick={() => navigate('/plans')}
@@ -131,7 +132,7 @@ export function PayOrder() {
                     去选择套餐
                   </Button>
                 </div>
-              </div>
+              </section>
             )
           }
         </div>

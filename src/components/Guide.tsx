@@ -5,6 +5,13 @@ import { useNavigate, useSearchParams } from 'react-router-dom'
 import { FLOMO_EXTENSION_FILE_URL, FLOMO_EXTENSION_WEB_STORE_URL, FLOMO_EXTENSION_EDGE_STORE_URL } from '@/lib/type'
 import { useRef, useState, useEffect } from 'react'
 
+const guideSections = [
+  ['instruction', '插件介绍'],
+  ['install', '安装使用'],
+  ['sale', '售后服务'],
+  ['faq', '常见问题'],
+] as const
+
 export function Guide() {
   const navigate = useNavigate()
   const [searchParams] = useSearchParams()
@@ -72,71 +79,70 @@ export function Guide() {
     ]
    
     return (
-      <div className="space-y-8">
+      <div className="space-y-6">
         {imgList.map((img, index) => (
-          <div 
+          <figure
             key={index}
-            className="group relative overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-all duration-300"
+            className="overflow-hidden rounded-xl border border-border bg-card shadow-whisper"
           >
             <img 
               src={img} 
               alt={`Flomo Extension 功能截图 ${index + 1}`}
-              className="w-full h-auto transform transition-transform duration-300 group-hover:scale-105"
+              className="h-auto w-full"
               loading="lazy"
               decoding="async"
               width="1200"
               height="900"
             />
-            <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-          </div>
+          </figure>
         ))}
       </div>
     )
   }
 
   return (
-    <div className="flex min-h-screen w-full flex-col">
+    <div className="flex min-h-screen w-full flex-col bg-background">
       <Header />
-      <main id="main-content" className="flex min-h-[calc(100vh_-_theme(spacing.16))] flex-1 flex-col gap-4 bg-muted/40 p-4 md:gap-8 md:p-10">
-        <div className="container">
-          <div className="flex flex-col items-center text-center py-16">
-            <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
+      <main id="main-content" className="flex flex-1 flex-col bg-background">
+        <div className="kami-page py-16 sm:py-20">
+          <header className="border-b border-border pb-10 sm:pb-14">
+            <p className="kami-eyebrow">产品手册</p>
+            <h1 className="mt-5 max-w-4xl font-editorial text-4xl font-medium leading-tight tracking-tight sm:text-6xl">
               Flomo Extension 使用指南
             </h1>
-            <p className="mt-4 text-lg text-muted-foreground max-w-2xl">
-              全面了解如何使用 Flomo 浏览器扩展，提升您的笔记效率
+            <p className="mt-5 max-w-2xl text-base leading-8 text-muted-foreground sm:text-lg">
+              从安装到第一次记录，快速了解 Flomo 浏览器扩展的完整使用方式。
             </p>
-          </div>
+          </header>
 
-          <div className="grid md:grid-cols-[240px_1fr] gap-8">
+          <nav className="-mx-4 flex gap-1 overflow-x-auto border-b border-border px-4 py-4 md:hidden" aria-label="指南章节">
+            {guideSections.map(([id, label]) => (
+              <button
+                key={id}
+                type="button"
+                onClick={() => onAction(id)}
+                className={`${activeSection === id ? 'border-primary text-primary' : 'border-transparent text-muted-foreground'} shrink-0 border-b-2 px-3 py-2 text-sm font-medium`}
+              >
+                {label}
+              </button>
+            ))}
+          </nav>
+
+          <div className="grid gap-10 py-12 md:grid-cols-[210px_minmax(0,720px)] md:justify-between md:py-16">
             {/* Navigation */}
             <aside className="hidden md:block">
-              <nav className="sticky top-20 space-y-4">
-                <div className="space-y-1">
-                  <a
-                    onClick={() => onAction('instruction')}
-                    className={`${activeSection === 'instruction' ? 'bg-accent font-medium' : 'text-muted-foreground'} flex items-center px-4 py-2 text-sm rounded-lg transition-colors hover:bg-accent/50 cursor-pointer`}
-                  >
-                    Flomo Extension 介绍
-                  </a>
-                  <a
-                    onClick={() => onAction('install')}
-                    className={`${activeSection === 'install' ? 'bg-accent font-medium' : 'text-muted-foreground'} flex items-center px-4 py-2 text-sm rounded-lg transition-colors hover:bg-accent/50 cursor-pointer`}
-                  >
-                    安装使用说明
-                  </a>
-                  <a
-                    onClick={() => onAction('sale')}
-                    className={`${activeSection === 'sale' ? 'bg-accent font-medium' : 'text-muted-foreground'} flex items-center px-4 py-2 text-sm rounded-lg transition-colors hover:bg-accent/50 cursor-pointer`}
-                  >
-                    售后服务
-                  </a>
-                  <a
-                    onClick={() => onAction('faq')}
-                    className={`${activeSection === 'faq' ? 'bg-accent font-medium' : 'text-muted-foreground'} flex items-center px-4 py-2 text-sm rounded-lg transition-colors hover:bg-accent/50 cursor-pointer`}
-                  >
-                    常见问题
-                  </a>
+              <nav className="sticky top-24 space-y-6" aria-label="指南章节">
+                <div className="border-l border-border">
+                  {guideSections.map(([id, label]) => (
+                    <button
+                      key={id}
+                      type="button"
+                      onClick={() => onAction(id)}
+                      className={`${activeSection === id ? '-ml-px border-primary font-medium text-primary' : 'border-transparent text-muted-foreground hover:text-foreground'} block w-full border-l-2 px-4 py-2 text-left text-sm transition-colors`}
+                    >
+                      {label}
+                    </button>
+                  ))}
                 </div>
                 <div className="space-y-2">
                   <Button 
@@ -164,28 +170,29 @@ export function Guide() {
             </aside>
 
             {/* Content */}
-            <div className="space-y-8">
+            <div className="space-y-16">
               {/* Overview Section */}
-              <section id="instruction" className="content-section space-y-6">
-                <h2 className="text-2xl font-bold">Flomo Extension 是什么？</h2>
+              <section id="instruction" className="content-section scroll-mt-28 space-y-7">
+                <p className="kami-eyebrow">00 · 产品介绍</p>
+                <h2 className="font-editorial text-3xl font-medium">Flomo Extension 是什么？</h2>
                 <div className="prose prose-sm max-w-none">
                   <p className="text-lg">
                     <a href="https://help.flomoapp.com">flomo 浮墨笔记</a>
                     ，是一款全平台的卡片笔记，聚焦帮你记录更多想法与灵感，以及更好回顾过往记录。
                   </p>
-                  <div className="mt-6 p-6 bg-muted/50 rounded-lg">
+                  <div className="mt-6 border-l-2 border-primary bg-accent/55 p-6">
                     <p>本插件是为了方便在浏览器上使用时可以随时同步到 flomo 平台而生，简而言之，Flomo Extension 是一个在浏览器上记录 flomo 笔记的插件。</p>
                   </div>
                 </div>
-                <h2 className="text-2xl font-bold">功能演示</h2>
+                <h2 className="font-editorial text-3xl font-medium">功能演示</h2>
                 <div className="space-y-8">
                   <div>
-                    <h3 className="text-lg font-semibold mb-4">插件运行截图</h3>
+                    <h3 className="mb-4 text-lg font-medium">插件运行截图</h3>
                     {showImages()}
                   </div>
                   <div>
-                    <h3 className="text-lg font-semibold mb-4">快速记录演示</h3>
-                    <div className="rounded-lg overflow-hidden shadow-lg">
+                    <h3 className="mb-4 text-lg font-medium">快速记录演示</h3>
+                    <div className="overflow-hidden rounded-xl border border-border bg-card shadow-whisper">
                       <video className="w-full" controls muted playsInline preload="metadata" poster="/flomo-extension-shot1.webp">
                         <source src="/flomo-extension-usage-1.mp4"></source>
                       </video>
@@ -195,10 +202,11 @@ export function Guide() {
               </section>
 
               {/* Install Section */}
-              <section id="install" className="content-section space-y-6">
-                <h2 className="text-2xl font-bold">如何安装 Flomo Extension</h2>
+              <section id="install" className="content-section scroll-mt-28 space-y-7 border-t border-border pt-12">
+                <p className="kami-eyebrow">01 · 安装使用</p>
+                <h2 className="font-editorial text-3xl font-medium">如何安装 Flomo Extension</h2>
                 <div className="space-y-6">
-                  <div className="grid gap-3 p-4 bg-muted/50 rounded-lg">
+                  <div className="grid gap-3 border-t border-border py-5">
                     <h3 className="text-lg font-semibold">离线安装</h3>
                     <div className="grid gap-3">
                       <p>离线安装步骤：</p>
@@ -209,7 +217,7 @@ export function Guide() {
                       <p>5. 在浏览器的工具栏中点击该插件，即可正常使用</p>
                     </div>
                   </div>
-                  <div className="grid gap-3 p-4 bg-muted/50 rounded-lg">
+                  <div className="grid gap-3 border-t border-border py-5">
                     <h3 className="text-lg font-semibold">浏览器应用商店安装</h3>
                     <div className="grid gap-3">
                       <p>在线安装步骤：</p>
@@ -218,7 +226,7 @@ export function Guide() {
                     </div>
                   </div>
                 </div>
-                <h2 className="text-2xl font-bold">如何使用 Flomo Extension</h2>
+                <h2 className="font-editorial text-3xl font-medium">如何使用 Flomo Extension</h2>
                 <div className="prose prose-sm max-w-none">
                   <div className="grid gap-3 mb-4">
                     <p>1. 下载并安装 flomo extension 扩展，参考这里：<a href="/guide?action=install"><b>安装说明</b></a></p>
@@ -231,13 +239,14 @@ export function Guide() {
               </section>
 
               {/* Sale Section */}
-              <section id="sale" className="content-section space-y-6">
-                <h2 className="text-2xl font-bold">售后服务</h2>
+              <section id="sale" className="content-section scroll-mt-28 space-y-7 border-t border-border pt-12">
+                <p className="kami-eyebrow">02 · 售后服务</p>
+                <h2 className="font-editorial text-3xl font-medium">售后服务</h2>
                 <div className="prose prose-sm max-w-none">
                   <div className="grid gap-3 mb-4">
                     <p>如果您遇到了解决不了的问题，请扫描添加下面二维码（烦请备注：flomo插件）:</p>
                     <p>
-                      <img src="/hotstrip-wx.jpg" alt="Flomo 插件售后服务微信二维码" className="w-60 rounded-lg shadow-md" loading="lazy" decoding="async" width="950" height="1295"></img>
+                      <img src="/hotstrip-wx.jpg" alt="Flomo 插件售后服务微信二维码" className="w-60 rounded-xl border border-border" loading="lazy" decoding="async" width="950" height="1295"></img>
                     </p>
                   </div>
                   <div className="grid gap-3 mb-4">
@@ -248,11 +257,12 @@ export function Guide() {
               </section>
 
               {/* FAQ Section */}
-              <section id="faq" className="content-section space-y-6">
-                <h2 className="text-2xl font-bold">常见问题</h2>
+              <section id="faq" className="content-section scroll-mt-28 space-y-7 border-t border-border pt-12">
+                <p className="kami-eyebrow">03 · 常见问题</p>
+                <h2 className="font-editorial text-3xl font-medium">常见问题</h2>
                 <div className="prose prose-sm max-w-none">
                   <div className="space-y-6">
-                    <div className="p-4 bg-muted/50 rounded-lg">
+                    <div className="border-t border-border py-5">
                       <h3 className="text-lg font-semibold mb-2">1. 插件无法正常使用怎么办？</h3>
                       <div className="grid gap-2">
                         <p>• 确保已按照<a href="/guide?action=install"><b>安装说明</b></a>正确安装插件</p>
@@ -260,7 +270,7 @@ export function Guide() {
                         <p>• 尝试重新启动浏览器</p>
                       </div>
                     </div>
-                    <div className="p-4 bg-muted/50 rounded-lg">
+                    <div className="border-t border-border py-5">
                       <h3 className="text-lg font-semibold mb-2">2. 笔记无法同步怎么办？</h3>
                       <div className="grid gap-2">
                         <p>• 确保已登录 flomo 账号</p>
@@ -268,7 +278,7 @@ export function Guide() {
                         <p>• 尝试刷新页面或重新登录</p>
                       </div>
                     </div>
-                    <div className="p-4 bg-muted/50 rounded-lg">
+                    <div className="border-t border-border py-5">
                       <h3 className="text-lg font-semibold mb-2">3. 如何升级到 PRO 版本？</h3>
                       <div className="grid gap-2">
                         <p>• 访问<a href="/plans"><b>套餐页面</b></a>选择适合的套餐</p>
