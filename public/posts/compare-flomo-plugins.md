@@ -4,13 +4,13 @@ date: 2025-02-28
 updated: 2026-08-01
 author: Flomo Extension
 category: 对比
-coverImage: /flomo-plugs-compare.webp
+coverImage: /flomo-plugins-comparison-v2.webp
 coverWidth: 1024
 coverHeight: 1024
 excerpt: Flomo Plus 更偏向网页端增强、批注和导入，Flomo Extension 更偏向当前网页快速记录。本文按实际使用场景比较两者的定位、权限与选择方法。
 ---
 
-Flomo Plus 和 Flomo Extension 都能缩短浏览器与 flomo 之间的操作路径，但重点不同：Flomo Plus 主要增强 flomo 网页端并提供批注、导入等能力；Flomo Extension 主要用于在当前网页快速写下一条新笔记并同步到自己的 flomo 账户。
+Flomo Plus 和 Flomo Extension 都能缩短浏览器与 flomo 之间的操作路径，但重点不同：Flomo Plus 主要增强 flomo 网页端并提供批注、导入等能力；Flomo Extension 主要用于在当前网页整理本地草稿，再通过已登录的 flomo 网页保存。
 
 > 独立性说明：Flomo Plus 由 extrastu 开发，并被 flomo 帮助中心收录；本站的 Flomo Extension 由另一位第三方开发者提供。两者都不应被误认为 flomo 官方会员产品。本文不接受对比对象付费，也不使用虚构用户评价。信息核对日期为 2026 年 8 月 1 日。
 
@@ -18,14 +18,14 @@ Flomo Plus 和 Flomo Extension 都能缩短浏览器与 flomo 之间的操作路
 
 | 比较维度 | Flomo Plus | Flomo Extension |
 | --- | --- | --- |
-| 主要定位 | 增强 flomo 网页端，并扩展网页批注与内容导入 | 在当前网页快速创建笔记并同步到 flomo |
+| 主要定位 | 增强 flomo 网页端，并扩展网页批注与内容导入 | 在当前网页形成本地草稿，再通过 flomo 网页保存 |
 | 常用入口 | flomo 网页端、网页批注、浏览器地址栏、第三方导入 | Chrome 工具栏中的扩展窗口 |
 | 适合任务 | 网页端增强、批量操作、批注、特定来源导入 | 阅读过程中记录自己的判断、摘录或下一步行动 |
 | 浏览器信息 | 以 flomo 帮助中心和各商店当前页面为准 | 本站当前仅提供 Chrome 版本 |
-| 数据与权限 | 具体范围需查看安装权限和开发者说明 | 账户服务会处理身份与认证信息，详见本站隐私政策 |
+| 数据与权限 | 具体范围需查看安装权限和开发者说明 | v1.20.0 使用 `storage`、`tabs`、`alarms`、`identity`，选区脚本匹配 HTTP/HTTPS 网页 |
 | 价格与会员 | 不在本文固定，需核对当前开发者和 flomo 官方说明 | 免费次数及付费方案以本站套餐页为准 |
 
-表格中的功能和隐私信息来自产品方公开说明，不代表经过独立安全审计。
+Flomo Plus 一栏依据产品方公开说明；Flomo Extension 一栏依据 v1.20.0 源码核验。两者都不代表经过独立安全审计。
 
 ## 两款扩展分别解决什么问题？
 
@@ -45,14 +45,14 @@ Flomo Plus 和 Flomo Extension 都能缩短浏览器与 flomo 之间的操作路
 Flomo Extension 的当前流程更短：
 
 1. 停留在正在阅读的页面；
-2. 点击 Chrome 工具栏中的扩展；
-3. 写下自己的想法；
-4. 保存到已登录的 flomo 账户；
-5. 关闭扩展并继续阅读。
+2. 在当前窗口保留一个已经登录的 flomo 标签页；
+3. 点击 Chrome 工具栏中的扩展，写下自己的想法，或主动把网页选区加入本地草稿；
+4. 点击保存，让扩展把草稿填入 flomo 网页并触发保存按钮；
+5. 回到 flomo 笔记列表确认结果，再继续阅读。
 
 它的重点不是批量整理历史数据，而是减少打开新页面、切换应用和重新寻找阅读位置的次数。
 
-安装与登录流程可查看 [Flomo Extension 使用指南](/guide)，当前商店信息可查看 [Chrome 扩展页面](https://chromewebstore.google.com/detail/flomo-extension/oepgmpdaajlphmdkepgcgchlmnbpmddf)。
+安装与登录流程可查看 [Flomo Extension 使用指南](/guide)，当前商店信息可查看 [Chrome 扩展页面](https://chromewebstore.google.com/detail/flomo-extension/oepgmpdaajlphmdkepgcgchlmnbpmddf)。页面连接、保存结果核对和异常恢复方法见[保存流程与故障排查](/posts/flomo-extension-save-flow-troubleshooting)。
 
 ## 按具体场景选择
 
@@ -125,9 +125,9 @@ flomo 帮助页说明导入数据保存在本地，但这属于产品方公开�
 
 ### Flomo Extension
 
-Chrome 商店披露的处理类别包括身份信息和认证信息。本站[隐私政策](/privacy)进一步说明了账户、广告和统计服务处理的数据类型。
+本站对 v1.20.0 的扩展清单和代码路径进行了逐项核对。草稿、当天使用次数和标签页标识保存在浏览器扩展本地；普通网页脚本会读取用户当前选区，但只有用户点击浮动入口后才把纯文本追加到草稿。
 
-免费使用与注册后的付费服务可能涉及不同数据，应以安装时权限、隐私政策和实际登录流程为准。
+笔记正文不会发送到 Chrome 扩展自身调用的 Flomo Extension 账户 API；保存时，它会通过标签页连接交给已登录的 flomo 网页。邮箱、登录验证与套餐信息属于另一条扩展账户数据流。完整证据和限制见[权限与数据流说明](/posts/flomo-extension-permissions-data-flow)及本站[隐私政策](/privacy)。
 
 ## 五分钟选择方法
 
@@ -166,6 +166,8 @@ Chrome 商店披露的处理类别包括身份信息和认证信息。本站[隐
 - [flomo 官方帮助中心：flomoplus](https://help.flomoapp.com/advance/extension/chrome-extension.html)
 - [flomo 官方快速上手](https://help.flomoapp.com/how-to-use.html)
 - [Flomo Extension 使用指南](/guide)
+- [Flomo Extension 权限与数据流](/posts/flomo-extension-permissions-data-flow)
+- [Flomo Extension 保存流程与故障排查](/posts/flomo-extension-save-flow-troubleshooting)
 - [Flomo Extension Chrome 商店页面](https://chromewebstore.google.com/detail/flomo-extension/oepgmpdaajlphmdkepgcgchlmnbpmddf)
 - [Flomo Extension 隐私政策](/privacy)
 - [Flomo Extension 服务条款](/terms)

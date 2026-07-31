@@ -11,23 +11,18 @@ export function FreePlan() {
   const freePlans = [
     {
       color: 'bg-primary',
-      title: '数据安全，放心使用',
-      desc: '不会存储用户任何 flomo 笔记数据',
+      title: '草稿保存在浏览器本地',
+      desc: '笔记正文不经过 Extension 账户 API，保存由 flomo 网页完成',
     },
     {
       color: 'bg-primary',
-      title: '轻量级使用用户最佳选择',
-      desc: '无需登录注册、每天重置使用次数',
-    },
-    {
-      color: 'bg-primary',
-      title: '无需注册账号',
-      desc: '不需要注册或者登录',
+      title: '无需 Flomo Extension 账户',
+      desc: '免费模式不用注册；保存前仍需登录可用的 flomo 网页账户',
     },
     {
       color: 'bg-border',
-      title: '每日使用次数 2',
-      desc: '使用插件保存 flomo 笔记次数',
+      title: '每日 2 次保存机会',
+      desc: '按浏览器本地日期，并在 flomo 页面脚本返回正向结果后计数',
     },
   ]
 
@@ -55,15 +50,15 @@ export function FreePlan() {
         <p className="kami-eyebrow">轻量体验</p>
         <CardTitle className="text-2xl">Free 套餐</CardTitle>
         <CardDescription>
-          无需注册账号，每日 2 次机会免费使用插件保存笔记
+          无需注册 Flomo Extension 账户；当前每天提供 2 次保存机会
         </CardDescription>
       </CardHeader>
       <CardContent className="flex-1">
         { plan.renderPlan(freePlans) }
       </CardContent>
       <CardFooter className="flex flex-col border-t px-6 py-5">
-        <Button className="w-full" onClick={onDownload}>立即下载使用</Button>
-        <Button className="mt-3 w-full" variant="outline" onClick={onWebStore}>浏览器扩展商店安装</Button>
+        <Button className="w-full" onClick={onWebStore}>前往 Chrome 扩展商店</Button>
+        <Button className="mt-3 w-full" variant="outline" onClick={onDownload}>下载 ZIP 安装包</Button>
       </CardFooter>
     </Card>
   )

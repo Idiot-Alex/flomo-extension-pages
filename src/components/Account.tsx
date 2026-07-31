@@ -8,6 +8,8 @@ import { reloadUser } from '@/lib/api'
 import { useEffect, useState } from 'react'
 import type { RootState } from '@/store/store'
 
+type AccountLoadState = 'idle' | 'loading' | 'success' | 'error'
+
 export function Account() {
   const navigate = useNavigate()
   const [userInf, setUserInf] = useState({
@@ -15,7 +17,8 @@ export function Account() {
     plan: '',
     expiredTime: '',
   })
-  const [isLoadingUser, setIsLoadingUser] = useState(false)
+  const [accountLoadState, setAccountLoadState] = useState<AccountLoadState>('idle')
+  const [reloadRequest, setReloadRequest] = useState(0)
 
   const user = useSelector((state: RootState) => {
     return state.user
@@ -24,37 +27,54 @@ export function Account() {
   // 重新加载用户信息
   useEffect(() => {
     if (!user.email) {
+      setUserInf({
+        email: '',
+        plan: '',
+        expiredTime: '',
+      })
+      setAccountLoadState('idle')
       return
     }
 
     let cancelled = false
-    setIsLoadingUser(true)
+    setAccountLoadState('loading')
     reloadUser({ email: user.email }).then(res => {
       if (!cancelled) {
         if (res.success) {
           setUserInf(res.data)
+          setAccountLoadState('success')
         } else {
           setUserInf(user)
+          setAccountLoadState('error')
         }
       }
     }).catch(() => {
       if (!cancelled) {
         setUserInf(user)
-      }
-    }).finally(() => {
-      if (!cancelled) {
-        setIsLoadingUser(false)
+        setAccountLoadState('error')
       }
     })
 
     return () => {
       cancelled = true
     }
-  }, [user])
+  }, [reloadRequest, user])
 
   const toPlan = () => {
     navigate('/plans')
   }
+
+  const retryLoadUser = () => {
+    setReloadRequest((current) => current + 1)
+  }
+
+  const accountStatusText = accountLoadState === 'loading'
+    ? '正在读取最新账户信息…'
+    : accountLoadState === 'success'
+      ? '已读取最新账户状态'
+      : accountLoadState === 'error'
+        ? '读取失败，当前展示本地缓存'
+        : '尚未登录 Flomo Extension 账户'
 
   return (
     <>
@@ -71,7 +91,7 @@ export function Account() {
             <div>
               <p className="kami-eyebrow">00 · 账户概览</p>
               <p className="mt-4 max-w-xs text-sm leading-7 text-muted-foreground">
-                套餐状态会在进入页面时自动同步。支付完成后如未更新，请稍后刷新页面。
+                支付确认后后台会更新账户权益。若本页读取失败，可重新读取；若扩展仍显示 Free，请在扩展内退出，并使用购买时同一 Flomo Extension 账户重新登录。
               </p>
             </div>
 
@@ -79,10 +99,15 @@ export function Account() {
               <CardHeader className="border-b border-border">
                 <CardTitle className="text-2xl">账户信息</CardTitle>
                 <p className="text-sm text-muted-foreground" aria-live="polite">
-                  {isLoadingUser ? '正在读取最新账户信息…' : '已同步当前账户状态'}
+                  {accountStatusText}
                 </p>
               </CardHeader>
-              <CardContent aria-busy={isLoadingUser}>
+              <CardContent aria-busy={accountLoadState === 'loading'}>
+                {accountLoadState === 'error' && (
+                  <div role="alert" className="mt-5 border-l-2 border-primary bg-accent/55 px-4 py-3 text-sm leading-6 text-muted-foreground">
+                    未能从账户服务读取最新状态，以下内容来自本地缓存。请点击“重新读取账户状态”；若多次失败，可退出本站账户后重新登录。
+                  </div>
+                )}
                 <dl>
                   {[
                     ['邮箱', userInf.email || '—'],
@@ -96,8 +121,17 @@ export function Account() {
                   ))}
                 </dl>
               </CardContent>
-              <CardFooter className="border-t px-6 py-5">
+              <CardFooter className="flex flex-wrap gap-3 border-t px-6 py-5">
                 <Button onClick={toPlan}>查看其他套餐</Button>
+                <Button
+                  variant="outline"
+                  onClick={retryLoadUser}
+                  disabled={!user.email || accountLoadState === 'loading'}
+                  loading={accountLoadState === 'loading'}
+                  loadingText="读取中"
+                >
+                  重新读取账户状态
+                </Button>
               </CardFooter>
             </Card>
           </div>

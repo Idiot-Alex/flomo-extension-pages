@@ -6,7 +6,6 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { LtzfWxPlan } from '@/components/LtzfWxPlan'
 import { ZpayAliPlan } from '@/components/ZpayAliPlan'
 import { createAliOrder, createWxOrder } from '@/lib/api'
-import { FLOMO_EXTENSION_WEB_URL } from '@/lib/type'
 import store from '@/store/store'
 import { clearUser, setUser } from '@/store/actions'
 
@@ -37,7 +36,7 @@ const annualOrder = {
   title: 'Flomo Extension【Pay】套餐 - 一年',
   month: 12,
   price: 9.9,
-  returnUrl: FLOMO_EXTENSION_WEB_URL,
+  returnUrl: 'https://flomo-extension-pages.hotstrips.org',
 }
 
 describe('payment plan request contracts', () => {
@@ -50,7 +49,7 @@ describe('payment plan request contracts', () => {
     vi.clearAllMocks()
   })
 
-  it('keeps the WeChat order payload unchanged', async () => {
+  it('sends the payable price and legacy return URL in the WeChat order payload', async () => {
     vi.mocked(createWxOrder).mockResolvedValue({ success: false, msg: 'test stop' })
     renderPlan(<LtzfWxPlan />)
 
@@ -61,11 +60,15 @@ describe('payment plan request contracts', () => {
     })
   })
 
-  it('keeps the Alipay order payload unchanged', async () => {
+  it('sends the payable price and legacy return URL in the Alipay order payload', async () => {
     vi.mocked(createAliOrder).mockResolvedValue({ success: false, msg: 'test stop' })
     renderPlan(<ZpayAliPlan />)
 
-    await chooseAnnualPlan()
+    const user = userEvent.setup()
+    await user.click(screen.getByRole('button', { name: '立即购买' }))
+    expect(screen.getByLabelText('参考价 ¥60，当前价 ¥9.9')).toBeInTheDocument()
+    const payButtons = await screen.findAllByRole('button', { name: '去支付' })
+    await user.click(payButtons[2])
 
     await waitFor(() => {
       expect(createAliOrder).toHaveBeenCalledWith(annualOrder)

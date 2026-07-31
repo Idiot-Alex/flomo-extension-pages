@@ -9,27 +9,21 @@ import { Footer } from '@/components/Footer'
 const screenshots = [
   {
     src: '/flomo-extension-shot1.webp',
-    title: '写下这一刻',
-    caption: '入口留在浏览器里，思路仍在原来的页面上。',
-    alt: 'Flomo Extension 在浏览器中快速记录笔记的界面',
+    title: '登录与使用引导',
+    caption: '查看扩展账户入口与首次使用说明。',
+    alt: 'Flomo Extension 登录与首次使用引导界面',
   },
   {
     src: '/flomo-extension-shot2.webp',
-    title: '保持熟悉的记录方式',
-    caption: '内容直接同步到自己的 Flomo 账户。',
-    alt: 'Flomo Extension 编辑并同步笔记的界面',
+    title: '编辑器与设置',
+    caption: '在扩展编辑器整理草稿，并查看当前设置入口。',
+    alt: 'Flomo Extension 编辑器与设置界面',
   },
   {
     src: '/flomo-extension-shot3.webp',
-    title: '从网页到笔记',
-    caption: '少一次切换，灵感就少一次丢失。',
-    alt: 'Flomo Extension 从网页保存内容的界面',
-  },
-  {
-    src: '/flomo-extension-shot4.webp',
-    title: '继续阅读',
-    caption: '记完就回到正在发生的思考。',
-    alt: 'Flomo Extension 完成笔记保存后的界面',
+    title: '连接 flomo 网页',
+    caption: '把草稿填入已登录的 flomo 网页并触发保存，再到笔记列表确认结果。',
+    alt: 'Flomo Extension 在已登录的 flomo 网页中打开编辑器的界面',
   },
 ]
 
@@ -42,15 +36,15 @@ const features = [
   },
   {
     number: '02',
-    title: '直接同步到 Flomo',
+    title: '保存到自己的 flomo',
     subtitle: '记录路径更短，回顾方式不变',
-    description: '笔记仍进入你自己的 Flomo 账户，不需要迁移已有内容或建立另一套系统。',
+    description: '扩展把草稿填入已经登录的 flomo 网页并触发保存，再由你回到笔记列表确认结果。保存功能不要求 flomo 官方会员，但必须登录可用的 flomo 网页账户。',
   },
   {
     number: '03',
-    title: '免费版无需注册',
+    title: '免费版无需扩展账户',
     subtitle: '先用起来，再决定是否升级',
-    description: '轻量记录可以直接开始；需要更多每日次数时，再选择适合的套餐。',
+    description: '当前免费规则无需扩展账户，每日提供 2 次保存机会；需要更多次数时，再选择适合的套餐。',
   },
   {
     number: '04',
@@ -63,8 +57,26 @@ const features = [
 const principles = [
   ['01', '打开扩展', '在当前页面点击浏览器工具栏中的 Flomo Extension。'],
   ['02', '写下想法', '记录刚刚出现的判断、摘录或下一步行动。'],
-  ['03', '同步保存', '内容进入自己的 Flomo 账户，继续原来的回顾习惯。'],
-  ['04', '回到阅读', '保存完成后关闭扩展，不让工具占据注意力。'],
+  ['03', '确认保存', '扩展在 flomo 网页中触发保存后，回到笔记列表确认结果。'],
+  ['04', '回到阅读', '在 flomo 确认结果后关闭扩展，不让工具占据注意力。'],
+]
+
+const technicalGuides = [
+  {
+    title: '权限与数据流',
+    description: '逐项解释 storage、tabs、alarms、identity，以及选中文本脚本为什么会在普通网页中运行。',
+    to: '/posts/flomo-extension-permissions-data-flow',
+  },
+  {
+    title: '真实保存流程',
+    description: '了解扩展怎样连接已登录的 flomo 网页，以及为什么最终结果仍需要回到笔记列表确认。',
+    to: '/posts/flomo-extension-save-flow-troubleshooting',
+  },
+  {
+    title: '本地草稿边界',
+    description: '说明网页选区何时进入草稿、哪些格式不会保留，以及重要内容为什么应先复制备份。',
+    to: '/posts/flomo-extension-selection-draft-workflow',
+  },
 ]
 
 export function LandingPage() {
@@ -104,7 +116,7 @@ export function LandingPage() {
                 <span className="text-primary lg:block">不打断阅读。</span>
               </h1>
               <p className="mt-7 max-w-2xl text-pretty font-editorial text-lg leading-8 text-muted-foreground sm:text-xl">
-                浏览网页时直接把想法同步到自己的 Flomo 账户。
+                浏览网页时整理本地草稿，再通过已登录的 flomo 网页触发保存，并到笔记列表确认结果。
               </p>
 
               <div className="mt-9 flex flex-wrap items-center gap-3">
@@ -120,7 +132,7 @@ export function LandingPage() {
               </div>
 
               <div className="mt-8 flex flex-wrap gap-x-5 gap-y-2 text-sm text-muted-foreground">
-                {['免费版无需注册', '支持 Chrome', '不存储 Flomo 笔记内容'].map((item, index) => (
+                {['免费版无需扩展账户', '支持 Chrome', '草稿保存在浏览器本地'].map((item, index) => (
                   <span key={item} className="inline-flex items-center gap-5">
                     {item}
                     {index < 2 && <span className="text-primary/35" aria-hidden="true">·</span>}
@@ -152,7 +164,7 @@ export function LandingPage() {
           <div className="mb-9 max-w-2xl">
             <p className="kami-eyebrow">00 · 产品界面</p>
             <h2 id="gallery-title" className="kami-section-title mt-3">记录发生在原来的页面上</h2>
-            <p className="mt-4 text-base leading-7 text-muted-foreground">四个真实界面，展示从打开扩展到保存完成的完整路径。</p>
+            <p className="mt-4 text-base leading-7 text-muted-foreground">三个当前产品界面，分别展示使用引导、编辑器与连接 flomo 网页的状态。</p>
           </div>
 
           <div>
@@ -229,12 +241,33 @@ export function LandingPage() {
           </ol>
         </section>
 
+        <section className="border-b py-16 sm:py-20" aria-labelledby="technical-guides-title">
+          <div className="mb-8 max-w-2xl">
+            <p className="kami-eyebrow">03 · 实现与边界</p>
+            <h2 id="technical-guides-title" className="kami-section-title mt-3">安装前，先知道扩展具体会做什么</h2>
+            <p className="mt-4 text-base leading-7 text-muted-foreground">以下文档根据 Chrome 版 v1.20.0 源码核验，明确区分浏览器本地草稿、Flomo Extension 账户和 flomo 网页账户。</p>
+          </div>
+
+          <div className="grid border-t md:grid-cols-3">
+            {technicalGuides.map((guide, index) => (
+              <article key={guide.to} className={`flex flex-col border-b py-7 md:px-7 ${index < technicalGuides.length - 1 ? 'md:border-r' : ''} ${index === 0 ? 'md:pl-0' : ''} ${index === technicalGuides.length - 1 ? 'md:pr-0' : ''}`}>
+                <h3 className="font-editorial text-xl font-medium">{guide.title}</h3>
+                <p className="mt-3 flex-1 text-sm leading-7 text-muted-foreground">{guide.description}</p>
+                <Link to={guide.to} className="mt-5 inline-flex text-sm font-medium text-primary underline-offset-4 hover:underline">
+                  阅读完整说明
+                  <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
+                </Link>
+              </article>
+            ))}
+          </div>
+        </section>
+
         <section className="py-16 text-center sm:py-24" aria-labelledby="start-title">
-          <p className="kami-eyebrow">03 · 从免费版开始</p>
+          <p className="kami-eyebrow">04 · 从免费版开始</p>
           <h2 id="start-title" className="kami-section-title mx-auto mt-3 max-w-2xl">下一次灵感出现时，直接把它留下来。</h2>
           <ul className="mx-auto mt-8 max-w-xl space-y-2 font-editorial text-base leading-7 text-foreground/80">
             <li>无需创建另一套笔记系统</li>
-            <li>免费版可以直接使用</li>
+            <li>当前每天提供 2 次保存机会，免费版无需扩展账户</li>
             <li>需要更多次数时再升级套餐</li>
           </ul>
           <p className="mt-7 font-editorial text-xl tabular-nums">付费套餐从 ¥1.9 / 月起</p>
@@ -242,7 +275,7 @@ export function LandingPage() {
             <Button asChild size="lg" variant="outline"><Link to="/plans">查看套餐</Link></Button>
             <Button asChild size="lg"><a href={FLOMO_EXTENSION_WEB_STORE_URL} target="_blank" rel="noreferrer">立即安装</a></Button>
           </div>
-          <p className="mt-5 text-xs leading-5 text-muted-foreground">支持微信与支付宝；支付成功后会员权益自动生效。</p>
+          <p className="mt-5 text-xs leading-5 text-muted-foreground">支持微信与支付宝；支付确认后后台更新权益。若扩展仍显示 Free，请在扩展内退出，并使用购买时同一 Flomo Extension 账户重新登录。</p>
         </section>
       </main>
 

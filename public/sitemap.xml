@@ -1,43 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://flomo-extension-pages.hotstrips.org/</loc>
+    <loc>https://hotstrips.org/</loc>
     <lastmod>2026-08-01</lastmod>
   </url>
   <url>
-    <loc>https://flomo-extension-pages.hotstrips.org/plans</loc>
+    <loc>https://hotstrips.org/plans</loc>
     <lastmod>2026-08-01</lastmod>
   </url>
   <url>
-    <loc>https://flomo-extension-pages.hotstrips.org/guide</loc>
+    <loc>https://hotstrips.org/guide</loc>
     <lastmod>2026-08-01</lastmod>
   </url>
   <url>
-    <loc>https://flomo-extension-pages.hotstrips.org/posts</loc>
+    <loc>https://hotstrips.org/posts</loc>
     <lastmod>2026-08-01</lastmod>
   </url>
   <url>
-    <loc>https://flomo-extension-pages.hotstrips.org/about</loc>
+    <loc>https://hotstrips.org/about</loc>
     <lastmod>2026-08-01</lastmod>
   </url>
   <url>
-    <loc>https://flomo-extension-pages.hotstrips.org/privacy</loc>
+    <loc>https://hotstrips.org/privacy</loc>
     <lastmod>2026-08-01</lastmod>
   </url>
   <url>
-    <loc>https://flomo-extension-pages.hotstrips.org/terms</loc>
+    <loc>https://hotstrips.org/terms</loc>
     <lastmod>2026-08-01</lastmod>
   </url>
   <url>
-    <loc>https://flomo-extension-pages.hotstrips.org/posts/what-is-flomo</loc>
+    <loc>https://hotstrips.org/posts/flomo-extension-selection-draft-workflow</loc>
     <lastmod>2026-08-01</lastmod>
   </url>
   <url>
-    <loc>https://flomo-extension-pages.hotstrips.org/posts/flomo-plus-extension</loc>
+    <loc>https://hotstrips.org/posts/flomo-extension-save-flow-troubleshooting</loc>
     <lastmod>2026-08-01</lastmod>
   </url>
   <url>
-    <loc>https://flomo-extension-pages.hotstrips.org/posts/compare-flomo-plugins</loc>
+    <loc>https://hotstrips.org/posts/flomo-extension-permissions-data-flow</loc>
+    <lastmod>2026-08-01</lastmod>
+  </url>
+  <url>
+    <loc>https://hotstrips.org/posts/compare-flomo-plugins</loc>
+    <lastmod>2026-08-01</lastmod>
+  </url>
+  <url>
+    <loc>https://hotstrips.org/posts/what-is-flomo</loc>
+    <lastmod>2026-08-01</lastmod>
+  </url>
+  <url>
+    <loc>https://hotstrips.org/posts/flomo-plus-extension</loc>
     <lastmod>2026-08-01</lastmod>
   </url>
 </urlset>

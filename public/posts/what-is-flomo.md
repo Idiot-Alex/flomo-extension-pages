@@ -92,18 +92,18 @@ flomo 的重点不是复杂排版。根据其[官方产品说明](https://help.f
 
 ## 浏览网页时如何更快记录？
 
-如果主要在电脑浏览器中阅读，可以使用浏览器扩展缩短记录路径。
+如果主要在电脑浏览器中阅读，可以使用浏览器扩展缩短记录路径。根据本站对 Flomo Extension 1.20.0 源码的核验，它是一个依赖 flomo 网页的记录入口，而不是独立的 flomo 客户端：
 
-Flomo Extension 当前提供的流程是：
+1. 在当前浏览器窗口中打开并登录 `v.flomoapp.com`；
+2. 从 Chrome 工具栏打开扩展，写下自己的想法，或主动把选中的网页文字加入浏览器本地草稿；
+3. 点击保存，由扩展把草稿交给 flomo 页面并触发网页上的保存按钮；
+4. 回到 flomo 笔记列表确认结果，再继续阅读。
 
-1. 在 Chrome 工具栏打开扩展；
-2. 写下想法、摘录或下一步行动；
-3. 保存到已经登录的 flomo 账户；
-4. 关闭扩展，继续阅读当前页面。
+它不会因为鼠标选中文字就自动写入草稿，也不会自动保留页面网址、图片和原始样式。笔记正文不通过 Chrome 扩展自身调用的 Flomo Extension 账户 API 直接提交；该账户体系主要用于登录验证和套餐状态。
 
-完整安装和登录步骤可查看 [Flomo Extension 使用指南](/guide)。Chrome 商店中的功能、版本和权限说明以[扩展商店页面](https://chromewebstore.google.com/detail/flomo-extension/oepgmpdaajlphmdkepgcgchlmnbpmddf)为准。
+完整安装步骤可查看 [Flomo Extension 使用指南](/guide)。选区格式边界见[选中文本工作流](/posts/flomo-extension-selection-draft-workflow)，页面连接与结果核对见[保存流程与故障排查](/posts/flomo-extension-save-flow-troubleshooting)，账户和权限的分工见[权限与数据流说明](/posts/flomo-extension-permissions-data-flow)。Chrome 商店中的当前版本和安装权限以[扩展商店页面](https://chromewebstore.google.com/detail/flomo-extension/oepgmpdaajlphmdkepgcgchlmnbpmddf)为准。
 
-使用浏览器扩展时，仍建议优先记录自己的理解。如果需要保留原文，可附上来源链接，并注意原网页的版权和使用规则。
+使用浏览器扩展时，仍建议优先记录自己的理解。如果需要保留原文，可手动附上来源链接，并注意原网页的版权和使用规则。
 
 ## 常见问题
 

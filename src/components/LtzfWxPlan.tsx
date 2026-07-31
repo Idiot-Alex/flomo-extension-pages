@@ -2,7 +2,7 @@ import { Popover, PopoverTrigger, PopoverContent } from '@/components/ui/popover
 import { Button } from '@/components/ui/button'
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from '@/components/ui/card'
 import { createWxOrder } from '@/lib/api'
-import { FLOMO_EXTENSION_WEB_URL, ApiRes, type PayOption } from '@/lib/type'
+import { FLOMO_EXTENSION_PAYMENT_RETURN_URL, ApiRes, type PayOption } from '@/lib/type'
 import { Label } from '@/components/ui/label'
 import { ToastAction } from '@radix-ui/react-toast'
 import { useState } from 'react'
@@ -23,28 +23,18 @@ export function LtzfWxPlan() {
   const wxPlans = [
     {
       color: 'bg-primary',
-      title: '数据安全，放心使用',
-      desc: '不会存储用户任何 flomo 笔记数据',
+      title: '不受扩展本地每日次数限制',
+      desc: '付费权益有效期内，不受扩展本地每日保存次数限制',
     },
     {
       color: 'bg-primary',
-      title: 'flomo 用户最优选择',
-      desc: '无需 flomo 官方会员 ¥99/年',
+      title: '使用同一 Extension 账户',
+      desc: '购买前请注册或登录，扩展内使用同一账户识别权益',
     },
     {
       color: 'bg-primary',
-      title: '每日使用次数无限制',
-      desc: '使用插件保存 flomo 笔记次数',
-    },
-    {
-      color: 'bg-primary',
-      title: '限时特价，flomo 会员价格的 1/10',
-      desc: '优惠价 ¥1.9 一个月，年付更划算',
-    },
-    {
-      color: 'bg-primary',
-      title: '微信支付，更加方便',
-      desc: '更多功能敬请期待...',
+      title: '不要求 flomo 官方会员',
+      desc: '但必须登录可用的 flomo 网页账户，才能触发保存',
     }
   ]
 
@@ -75,8 +65,8 @@ export function LtzfWxPlan() {
       if (!user.email) {
         toast({
           variant: "destructive",
-          description: '请先登录账号才能继续支付...',
-          action: <ToastAction className="bg-primary rounded-md px-4 py-2" altText="去登录" onClick={() => navigate('/login')}>去登录</ToastAction>,
+          description: '请先登录 Flomo Extension 账户才能继续支付',
+          action: <ToastAction className="bg-primary rounded-md px-4 py-2" altText="登录 Flomo Extension 账户" onClick={() => navigate('/login')}>去登录</ToastAction>,
         })
         setPendingPlanMonth(null)
         return
@@ -89,7 +79,7 @@ export function LtzfWxPlan() {
         title: `Flomo Extension【Pay】套餐 - ${payData.title}`,
         month: payData.month,
         price: payData.payPrice,
-        returnUrl: FLOMO_EXTENSION_WEB_URL,
+        returnUrl: FLOMO_EXTENSION_PAYMENT_RETURN_URL,
       }
 
       try {
@@ -129,16 +119,15 @@ export function LtzfWxPlan() {
         wxPayList.map((item) => (
           <div key={item.month} className="grid grid-cols-3 items-center gap-4 border-b pb-4 last:border-0 last:pb-0">
             <Label>{item.title}</Label>
-            {
-              item.price === item.payPrice ?
-              <Label>
-                <b className="text-2xl">¥{item.payPrice}</b>
-              </Label> : 
-              <Label className="flex flex-col">
-                <s className="text-muted-foreground">¥{item.price}</s>
-                <b className="text-2xl">¥{item.payPrice}</b>
-              </Label>
-            }
+            <Label
+              className="flex flex-col"
+              aria-label={`参考价 ¥${item.price}，当前价 ¥${item.payPrice}`}
+            >
+              <span className="text-xs text-muted-foreground">参考价 <s>¥{item.price}</s></span>
+              <span className="mt-1 text-xs text-muted-foreground">
+                当前价 <b className="text-xl text-foreground">¥{item.payPrice}</b>
+              </span>
+            </Label>
             <Button
               className="w-full"
               disabled={pendingPlanMonth !== null}
@@ -161,7 +150,7 @@ export function LtzfWxPlan() {
         <p className="kami-eyebrow">微信支付</p>
         <CardTitle className="text-2xl">Pay 套餐</CardTitle>
         <CardDescription>
-          需要注册账号并付费，每日 <b className="text-foreground">无限</b> 次使用插件保存笔记
+          请先注册或登录 Flomo Extension 账户；支付确认后，付费期内不受扩展本地每日次数限制
         </CardDescription>
       </CardHeader>
       <CardContent className="flex-1">

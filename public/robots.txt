@@ -3,4 +3,4 @@ Disallow: /api/*
 Disallow: /cdn-cgi/*
 Allow: /
 
-Sitemap: https://flomo-extension-pages.hotstrips.org/sitemap.xml
+Sitemap: https://hotstrips.org/sitemap.xml

@@ -23,23 +23,18 @@ export function AfdianPlan() {
   const afdianPayPlans = [
     {
       color: 'bg-primary',
-      title: '数据安全，放心使用',
-      desc: '不会存储用户任何 flomo 笔记数据',
+      title: '不受扩展本地每日次数限制',
+      desc: '付费权益有效期内，不受扩展本地每日保存次数限制',
     },
     {
       color: 'bg-primary',
-      title: '需要注册并登录账号',
-      desc: '使用邮箱账号注册或者登录',
+      title: '使用同一 Extension 账户',
+      desc: '购买前请注册或登录，扩展内使用同一账户识别权益',
     },
     {
       color: 'bg-primary',
-      title: '每日使用次数无限制',
-      desc: '使用插件保存 flomo 笔记次数',
-    },
-    {
-      color: 'bg-primary',
-      title: '原价 ¥5.0 一个月',
-      desc: '限时折扣，¥10.0 半年会员，¥15.0 一年会员，赶紧冲哇',
+      title: '不要求 flomo 官方会员',
+      desc: '但必须登录可用的 flomo 网页账户，才能触发保存',
     }
   ]
 
@@ -64,8 +59,8 @@ export function AfdianPlan() {
       if (!user.email) {
         toast({
           variant: "destructive",
-          description: '请先登录账号才能继续支付...',
-          action: <ToastAction className="bg-primary rounded-md px-4 py-2" altText="去登录" onClick={() => navigate('/login')}>去登录</ToastAction>,
+          description: '请先登录 Flomo Extension 账户才能继续支付',
+          action: <ToastAction className="bg-primary rounded-md px-4 py-2" altText="登录 Flomo Extension 账户" onClick={() => navigate('/login')}>去登录</ToastAction>,
         })
         setPendingPlanMonth(null)
         return
@@ -100,16 +95,15 @@ export function AfdianPlan() {
       afdianPayList.map((item, i) => (
         <div key={i} className="grid grid-cols-3 items-center gap-4 border-b pb-4">
           <Label>{item.title}</Label>
-          {
-            item.price === item.payPrice ?
-            <Label>
-              <b className="text-2xl">¥{item.payPrice}</b>
-            </Label> : 
-            <Label className="flex flex-col">
-              <s className="text-muted-foreground">¥{item.price}</s>
-              <b className="text-2xl">¥{item.payPrice}</b>
-            </Label>
-          }
+          <Label
+            className="flex flex-col"
+            aria-label={`参考价 ¥${item.price}，当前价 ¥${item.payPrice}`}
+          >
+            <span className="text-xs text-muted-foreground">参考价 <s>¥{item.price}</s></span>
+            <span className="mt-1 text-xs text-muted-foreground">
+              当前价 <b className="text-xl text-foreground">¥{item.payPrice}</b>
+            </span>
+          </Label>
           <Button
             className="w-full"
             disabled={pendingPlanMonth !== null}
@@ -130,7 +124,7 @@ export function AfdianPlan() {
         <p className="kami-eyebrow">爱发电</p>
         <CardTitle className="text-2xl">Pay 套餐（爱发电渠道）</CardTitle>
         <CardDescription>
-          需要注册账号并付费，每日 <b className="text-foreground">无限</b> 次使用插件保存笔记
+          请先注册或登录 Flomo Extension 账户；支付确认后，付费期内不受扩展本地每日次数限制
         </CardDescription>
       </CardHeader>
       <CardContent className="flex-1">

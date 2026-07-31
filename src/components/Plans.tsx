@@ -17,7 +17,11 @@ export function Plans() {
               选择适合你的记录节奏
             </h1>
             <p className="mt-6 max-w-2xl text-base leading-8 text-muted-foreground sm:text-lg">
-              免费体验核心功能，或开通 Pay 套餐解除每日次数限制。支付完成后，会员权益会自动生效。
+              免费模式当前每天提供 2 次保存机会；Pay 套餐在付费期内不受扩展本地每日次数限制。
+              购买的是本站独立开发、维护的 Flomo Extension 使用权益，不包含 flomo 官方会员。
+            </p>
+            <p className="mt-4 max-w-2xl text-sm leading-7 text-muted-foreground">
+              扩展保存功能不要求 flomo 官方会员，但必须登录可用的 flomo 网页账户。支付确认后后台会更新权益；若扩展仍显示 Free，请在扩展内退出，并使用购买时同一 Flomo Extension 账户重新登录。
             </p>
           </header>
 
@@ -52,10 +56,13 @@ export function Plans() {
             </div>
             <dl className="border-t border-border">
               {[
-                ['如何开通会员？', '选择套餐并完成支付后，会员权益会自动激活。'],
-                ['支持哪些支付方式？', '目前支持微信支付和支付宝。'],
-                ['会员有效期多久？', '可选择 1 个月、半年或一年，以购买套餐为准。'],
-                ['如何续费？', '到期后重新购买套餐即可续费。'],
+                ['购买的是什么？', '购买的是第三方 Flomo Extension 的使用权益，不包含 flomo 官方会员或其相关权益。'],
+                ['使用前需要哪些账户？', '保存时必须登录可用的 flomo 网页账户；购买和识别付费权益时，需要注册或登录 Flomo Extension 账户。'],
+                ['如何开通付费权益？', '使用 Flomo Extension 账户选择套餐并完成支付。支付确认后，后台会更新该账户的付费权益。'],
+                ['支付后扩展仍显示 Free？', '请在扩展内退出，并使用购买时同一 Flomo Extension 账户重新登录，以重新读取套餐与到期时间。'],
+                ['支持哪些支付方式？', '目前支持微信支付和支付宝，两种渠道的价格与权益一致。'],
+                ['付费权益有效期多久？', '可选择 1 个月、半年或一年，以实际购买的套餐为准。'],
+                ['如何续费？', '权益到期后，重新购买套餐即可延长使用期限。'],
               ].map(([question, answer]) => (
                 <div key={question} className="grid gap-2 border-b border-border py-6 sm:grid-cols-[12rem_1fr] sm:gap-8">
                   <dt className="font-editorial text-lg font-medium text-foreground">{question}</dt>

@@ -19,6 +19,7 @@ interface Post {
   content: string
   excerpt: string
   author: string
+  index?: boolean
 }
 
 interface PostsState {
@@ -121,7 +122,7 @@ function PostsIndex({ posts }: { posts: Post[] }) {
       <header className="mb-12 border-b border-border pb-10">
         <p className="kami-eyebrow">更新与思考</p>
         <h1 className="kami-page-title mt-4">文章与使用指南</h1>
-        <p className="mt-5 max-w-2xl text-base leading-7 text-muted-foreground">围绕浏览器记录、Flomo 使用方法与扩展选择，提供经过核对的步骤、场景和限制说明。</p>
+        <p className="mt-5 max-w-2xl text-base leading-7 text-muted-foreground">提供经过源码核验的产品文档与有明确来源的功能比较，说明使用步骤、数据边界和故障排查方法。</p>
       </header>
 
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
@@ -207,6 +208,7 @@ export function Posts() {
   const { posts, loading, error } = usePosts()
   const { slug } = useParams()
   const selectedPost = slug ? posts.find((post) => post.slug === slug) : null
+  const indexablePosts = posts.filter((post) => post.index !== false)
 
   useEffect(() => {
     if (!slug || loading) {
@@ -227,11 +229,12 @@ export function Posts() {
     applyPageMeta({
       title: `${selectedPost.title} - Flomo Extension`,
       description: selectedPost.excerpt,
+      index: selectedPost.index !== false,
       image: selectedPost.coverImage,
       type: 'article',
       publishedTime: selectedPost.date,
       modifiedTime: selectedPost.updatedDate,
-      structuredData: {
+      structuredData: selectedPost.index !== false ? {
         '@context': 'https://schema.org',
         '@type': 'BlogPosting',
         headline: selectedPost.title,
@@ -251,7 +254,7 @@ export function Posts() {
         },
         mainEntityOfPage: articleUrl,
         inLanguage: 'zh-CN',
-      },
+      } : undefined,
     }, `/posts/${selectedPost.slug}`)
   }, [loading, selectedPost, slug])
 
@@ -261,9 +264,9 @@ export function Posts() {
       <main id="main-content" className="min-h-[calc(100vh-8rem)] bg-background">
         {loading && <div className="kami-page py-20 text-sm text-muted-foreground" aria-live="polite">正在整理文章…</div>}
         {error && <div className="kami-page py-20 text-sm text-destructive" role="alert">{error}</div>}
-        {!loading && !error && !slug && <PostsIndex posts={posts} />}
+        {!loading && !error && !slug && <PostsIndex posts={indexablePosts} />}
         {!loading && !error && slug && selectedPost && (
-          <PostDetail post={selectedPost} relatedPosts={posts.filter((post) => post.slug !== slug).slice(0, 2)} />
+          <PostDetail post={selectedPost} relatedPosts={indexablePosts.filter((post) => post.slug !== slug).slice(0, 2)} />
         )}
         {!loading && !error && slug && !selectedPost && <PostNotFound />}
       </main>

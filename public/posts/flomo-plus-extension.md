@@ -4,7 +4,7 @@ date: 2025-02-26
 updated: 2026-08-01
 author: Flomo Extension
 category: 指南
-coverImage: /flomo-plugs-compare.webp
+coverImage: /flomo-plugins-comparison-v2.webp
 coverWidth: 1024
 coverHeight: 1024
 excerpt: 了解 Flomo Plus 的开发者来源、网页端增强与导入能力，并在安装前核对下载来源、浏览器权限、数据流向和当前版本说明。
@@ -59,7 +59,7 @@ Flomo Plus 提供多种第三方内容导入能力。支持来源可能随外部
 - 需要把特定第三方平台的已有内容导入 flomo；
 - 希望通过地址栏完成快捷输入。
 
-如果需求只是“在当前网页快速写下一条自己的想法，然后同步到 flomo”，也可以比较其他更轻量的浏览器输入工具，而不必先安装大量增强功能。
+如果需求只是“在当前网页快速写下一条自己的想法，再通过已登录的 flomo 网页保存”，也可以比较其他更轻量的浏览器输入工具，而不必先安装大量增强功能。
 
 ## 安装前应检查什么？
 
@@ -109,9 +109,11 @@ Flomo Plus 是扩展名称；flomo 官方使用自己的会员体系。名称中
 简单来说：
 
 - Flomo Plus 更偏向增强 flomo 网页端，并提供批注和导入能力；
-- Flomo Extension 更偏向在当前网页打开一个记录入口，把新笔记同步到自己的 flomo 账户。
+- Flomo Extension 更偏向在当前网页打开记录入口，形成浏览器本地草稿，再交给已登录的 flomo 网页保存。
 
-完整比较可阅读《[Flomo Plus 与 Flomo Extension 怎么选？](/posts/compare-flomo-plugins)》。
+本站对 Flomo Extension 1.20.0 源码进行了核验：它需要当前浏览器窗口中有已登录的 flomo 标签页；笔记正文不通过 Chrome 扩展自身调用的 Flomo Extension 账户 API 直接提交。选区功能也不会自动归档整页、保留图片或附加来源网址。
+
+这些说明针对本站维护的 Flomo Extension，不代表 Flomo Plus 的实现。完整选择建议可阅读《[Flomo Plus 与 Flomo Extension 怎么选？](/posts/compare-flomo-plugins)》；本站扩展的具体边界见[权限与数据流说明](/posts/flomo-extension-permissions-data-flow)和[保存流程与故障排查](/posts/flomo-extension-save-flow-troubleshooting)。
 
 ## 常见问题
 

@@ -1,7 +1,7 @@
 {
   "name": "Flomo Extension",
   "short_name": "Flomo Extension",
-  "description": "在 Chrome 浏览器当前网页中快速记录想法，并同步到自己的 Flomo 账户。",
+  "description": "在 Chrome 浏览器当前网页中整理本地草稿，再通过已登录的 flomo 网页保存到自己的账户。",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#f5f4ed",

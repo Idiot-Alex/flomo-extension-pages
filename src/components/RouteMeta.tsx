@@ -1,30 +1,32 @@
 import { useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 import { applyPageMeta, type PageMeta } from '@/lib/page-meta'
+import { FLOMO_EXTENSION_WEB_URL } from '@/lib/type'
 
 const defaultMeta: PageMeta = {
   title: 'Flomo Extension｜在 Chrome 浏览器里快速记录 Flomo 笔记',
-  description: '在 Chrome 浏览器当前网页中快速记录想法，并同步到自己的 Flomo 账户。查看真实产品界面、安装指南、套餐说明与使用技巧。',
+  description: '在 Chrome 浏览器当前网页中整理本地草稿，再通过已登录的 flomo 网页保存到自己的账户。查看真实界面、安装指南与数据流说明。',
   structuredData: {
     '@context': 'https://schema.org',
     '@graph': [
       {
         '@type': 'WebSite',
-        '@id': 'https://flomo-extension-pages.hotstrips.org/#website',
-        url: 'https://flomo-extension-pages.hotstrips.org/',
+        '@id': `${FLOMO_EXTENSION_WEB_URL}/#website`,
+        url: `${FLOMO_EXTENSION_WEB_URL}/`,
         name: 'Flomo Extension',
-        description: '在 Chrome 浏览器当前网页中快速记录想法，并同步到自己的 Flomo 账户。',
+        description: '在 Chrome 浏览器当前网页中整理本地草稿，再通过已登录的 flomo 网页保存到自己的账户。',
         inLanguage: 'zh-CN',
       },
       {
         '@type': 'SoftwareApplication',
         name: 'Flomo Extension',
-        url: 'https://flomo-extension-pages.hotstrips.org/',
+        url: `${FLOMO_EXTENSION_WEB_URL}/`,
         downloadUrl: 'https://chromewebstore.google.com/detail/flomo-extension/oepgmpdaajlphmdkepgcgchlmnbpmddf',
         applicationCategory: 'ProductivityApplication',
-        operatingSystem: 'Google Chrome',
+        operatingSystem: 'Any operating system supported by Google Chrome',
+        browserRequirements: 'Requires Google Chrome',
         isAccessibleForFree: true,
-        description: '在 Chrome 浏览器当前网页中快速记录想法，并同步到自己的 Flomo 账户。',
+        description: '在 Chrome 浏览器当前网页中整理本地草稿，再通过已登录的 flomo 网页保存到自己的账户。',
       },
     ],
   },
@@ -42,7 +44,7 @@ const pageMeta: Record<string, PageMeta> = {
   },
   '/posts': {
     title: 'Flomo Extension 文章与使用指南',
-    description: '阅读浏览器记录、Flomo 使用方法与扩展选择相关的实用指南。',
+    description: '阅读基于 Chrome 版 v1.20.0 源码核验的权限、数据流、保存故障与本地草稿指南。',
   },
   '/privacy': {
     title: '隐私政策 - Flomo Extension',

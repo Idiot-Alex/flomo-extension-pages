@@ -1,7 +1,7 @@
 import fs from 'node:fs/promises'
 import path from 'node:path'
 
-const siteOrigin = 'https://flomo-extension-pages.hotstrips.org'
+const siteOrigin = 'https://hotstrips.org'
 const defaultImage = `${siteOrigin}/flomo-extension-shot1.png`
 const distDirectory = 'dist'
 const homeStructuredData = {
@@ -12,7 +12,7 @@ const homeStructuredData = {
       '@id': `${siteOrigin}/#website`,
       url: `${siteOrigin}/`,
       name: 'Flomo Extension',
-      description: '在 Chrome 浏览器当前网页中快速记录想法，并同步到自己的 Flomo 账户。',
+      description: '在 Chrome 浏览器当前网页中整理本地草稿，再通过已登录的 flomo 网页保存到自己的账户。',
       inLanguage: 'zh-CN',
     },
     {
@@ -21,9 +21,10 @@ const homeStructuredData = {
       url: `${siteOrigin}/`,
       downloadUrl: 'https://chromewebstore.google.com/detail/flomo-extension/oepgmpdaajlphmdkepgcgchlmnbpmddf',
       applicationCategory: 'ProductivityApplication',
-      operatingSystem: 'Google Chrome',
+      operatingSystem: 'Any operating system supported by Google Chrome',
+      browserRequirements: 'Requires Google Chrome',
       isAccessibleForFree: true,
-      description: '在 Chrome 浏览器当前网页中快速记录想法，并同步到自己的 Flomo 账户。',
+      description: '在 Chrome 浏览器当前网页中整理本地草稿，再通过已登录的 flomo 网页保存到自己的账户。',
     },
   ],
 }
@@ -32,15 +33,15 @@ const publicRoutes = [
   {
     route: '/',
     title: 'Flomo Extension｜在 Chrome 浏览器里快速记录 Flomo 笔记',
-    description: '在 Chrome 浏览器当前网页中快速记录想法，并同步到自己的 Flomo 账户。查看真实产品界面、安装指南、套餐说明与使用技巧。',
+    description: '在 Chrome 浏览器当前网页中整理本地草稿，再通过已登录的 flomo 网页保存到自己的账户。查看真实界面、安装指南与数据流说明。',
     structuredData: homeStructuredData,
-    fallback: '<h1>在 Chrome 浏览器里快速记录 Flomo 笔记</h1><p>无需离开当前网页，即可写下想法并同步到自己的 Flomo 账户。</p><h2>了解 Flomo Extension</h2><p><a href="/guide">查看安装与使用指南</a>，或阅读<a href="/posts">浏览器记录与 Flomo 使用文章</a>。</p>',
+    fallback: '<h1>在 Chrome 浏览器里快速记录 Flomo 笔记</h1><p>无需离开当前网页，即可整理本地草稿，再通过已登录的 flomo 网页保存。</p><h2>一次保存如何完成</h2><ol><li>直接输入内容，或主动把网页选区加入浏览器本地草稿。</li><li>扩展连接当前窗口中已打开、已登录的 flomo 标签页。</li><li>用户点击保存后，扩展把草稿填入 flomo 网页编辑器并触发页面保存按钮。</li><li>回到 flomo 笔记列表确认最终结果。</li></ol><h2>安装前了解实现边界</h2><p><a href="/guide">查看安装与首次保存指南</a>，阅读<a href="/posts/flomo-extension-permissions-data-flow">权限与数据流</a>、<a href="/posts/flomo-extension-save-flow-troubleshooting">保存故障排查</a>和<a href="/posts/flomo-extension-selection-draft-workflow">本地草稿工作流</a>。</p>',
   },
   {
     route: '/guide',
     title: 'Flomo Extension 使用指南 - 安装与使用教程',
     description: '查看 Flomo Extension 的 Chrome 安装步骤、使用方法、常见问题和售后支持。',
-    fallback: '<h1>Flomo Extension 使用指南</h1><p>从 Chrome 扩展商店安装 Flomo Extension，登录账户后即可在当前网页打开扩展并记录想法。</p><h2>开始使用</h2><ol><li>确认浏览器为 Google Chrome。</li><li>从 Chrome 扩展商店完成安装。</li><li>打开扩展并登录账户。</li><li>写下笔记并保存到 Flomo。</li></ol>',
+    fallback: '<h1>Flomo Extension 使用指南</h1><p>适用于 Chrome 版 v1.20.0，说明扩展账户与 flomo 网页账户的区别，以及本地草稿如何保存。</p><h2>完成第一次保存</h2><ol><li>从 Chrome 扩展商店安装并固定扩展。</li><li>在当前窗口打开 <a href="https://v.flomoapp.com/mine">flomo 全部笔记页面</a>并登录自己的 flomo 账户。</li><li>打开扩展，输入内容或把主动选择的网页文字加入本地草稿。</li><li>点击保存，再回到 flomo 笔记列表确认结果。</li></ol><p>免费模式不要求创建 Flomo Extension 账户；付费权益账户与 flomo 网页账户彼此独立。</p><h2>常见问题</h2><p>保存按钮不可用时，确认 flomo 标签页位于当前窗口。找不到编辑框时，进入“全部笔记”并刷新页面，再重新打开扩展。</p>',
   },
   {
     route: '/plans',
@@ -52,21 +53,21 @@ const publicRoutes = [
   {
     route: '/posts',
     title: 'Flomo Extension 文章与使用指南',
-    description: '阅读浏览器记录、Flomo 使用方法与扩展选择相关的实用指南。',
+    description: '阅读基于 Chrome 版 v1.20.0 源码核验的权限、数据流、保存故障与本地草稿指南。',
   },
   {
     route: '/about',
     title: '关于我们 - Flomo Extension',
     description: '了解 Flomo Extension 的产品目标、独立项目身份、内容原则与联系渠道。',
     ads: false,
-    fallback: '<h1>关于 Flomo Extension</h1><p>Flomo Extension 是由独立开发者维护的 Chrome 浏览器扩展，与 flomo 官方不存在隶属、授权或代言关系。</p><h2>联系与反馈</h2><p>产品、账户或内容问题可发送邮件至 <a href="mailto:flomo-extension@idiotalex.com">flomo-extension@idiotalex.com</a>。</p>',
+    fallback: '<h1>关于 Flomo Extension</h1><p>Flomo Extension 是由独立开发者维护的 Chrome 浏览器扩展，与 flomo 官方不存在隶属、授权或代言关系。</p><h2>内容如何核验</h2><p>当前文档依据 Chrome 版 v1.20.0 的扩展清单、页面脚本、账户接口调用与本地存储实现核对，并明确标注无法由源码单独证明的结论。</p><p><a href="/posts/flomo-extension-permissions-data-flow">查看权限与数据流依据</a>。</p><h2>联系与反馈</h2><p>产品、账户或内容问题可发送邮件至 <a href="mailto:flomo-extension@idiotalex.com">flomo-extension@idiotalex.com</a>。</p>',
   },
   {
     route: '/privacy',
     title: '隐私政策 - Flomo Extension',
     description: '了解 Flomo Extension 如何处理账户信息、Cookies、广告与第三方分析服务。',
     ads: false,
-    fallback: '<h1>隐私政策</h1><p>本政策说明 Flomo Extension 在提供账户、同步、支付、统计和广告服务时如何处理信息，以及您可以如何联系我们行使相关权利。</p><h2>第三方服务</h2><p>本站使用 Google AdSense、Google Analytics、Microsoft Clarity、Cloudflare 和自托管统计服务，详情以完整隐私政策为准。</p>',
+    fallback: '<h1>隐私政策</h1><p>草稿保存在 Chrome 扩展本地存储中；笔记正文不会发送到 Flomo Extension 账户 API，用户发起保存时由已登录的 flomo 网页处理。</p><h2>账户与第三方服务</h2><p>扩展账户服务处理邮箱、登录验证和套餐信息。本站使用 Google Analytics、Microsoft Clarity、Cloudflare 和自托管统计服务；当前未加载 AdSense 广告投放脚本，未来启用广告前会同步更新本政策并配置适用的用户同意机制。</p>',
   },
   {
     route: '/terms',
@@ -175,8 +176,9 @@ function createPageHtml(baseHtml, meta, fallback = '') {
 
 function staticShell(content) {
   return `<main style="max-width: 760px; margin: 0 auto; padding: 64px 24px; font-family: Georgia, 'Songti SC', serif; line-height: 1.75; color: #141413">
-    <nav aria-label="主要导航" style="margin-bottom: 40px"><a href="/">首页</a> · <a href="/guide">使用说明</a> · <a href="/posts">文章</a> · <a href="/about">关于</a></nav>
+    <nav aria-label="主要导航" style="margin-bottom: 40px"><a href="/">主页</a> · <a href="/guide">使用说明</a> · <a href="/plans">价格套餐</a> · <a href="/posts">文章</a></nav>
     ${content}
+    <footer style="margin-top: 64px; padding-top: 24px; border-top: 1px solid #dedbd2"><a href="/about">关于</a> · <a href="/privacy">隐私政策</a> · <a href="/terms">服务条款</a></footer>
   </main>`
 }
 
@@ -185,7 +187,7 @@ function createPostsFallback(posts) {
     <h2><a href="/posts/${escapeAttribute(post.slug)}">${escapeHtml(post.title)}</a></h2>
     <p>${escapeHtml(post.excerpt)}</p>
   </article>`).join('')
-  return staticShell(`<h1>文章与使用指南</h1><p>围绕浏览器记录、Flomo 使用方法与扩展选择，提供经过核对的步骤、场景和限制说明。</p>${items}`)
+  return staticShell(`<h1>文章与使用指南</h1><p>收录包含源码核验的产品文档与有来源的产品比较，说明权限、数据流、保存故障、本地草稿和扩展选择。</p>${items}`)
 }
 
 function createPostFallback(post) {
@@ -211,10 +213,11 @@ async function writeRoute(baseHtml, meta, fallback = '') {
 
 const baseHtml = await fs.readFile(path.join(distDirectory, 'index.html'), 'utf8')
 const posts = JSON.parse(await fs.readFile(path.join(distDirectory, 'posts', 'generated.json'), 'utf8'))
+const indexablePosts = posts.filter((post) => post.index)
 
 for (const meta of [...publicRoutes, ...noindexRoutes]) {
   const fallback = meta.route === '/posts'
-    ? createPostsFallback(posts)
+    ? createPostsFallback(indexablePosts)
     : meta.fallback
       ? staticShell(meta.fallback)
       : ''
@@ -231,6 +234,8 @@ for (const post of posts) {
     description: post.excerpt,
     image,
     type: 'article',
+    index: post.index,
+    ads: post.index,
     publishedTime: post.date,
     modifiedTime: post.updatedDate,
     structuredData: {

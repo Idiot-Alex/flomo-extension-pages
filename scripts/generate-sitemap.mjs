@@ -4,7 +4,7 @@ import { execFile } from 'node:child_process'
 import { promisify } from 'node:util'
 
 const execFileAsync = promisify(execFile)
-const siteOrigin = 'https://flomo-extension-pages.hotstrips.org'
+const siteOrigin = 'https://hotstrips.org'
 const postsDirectory = path.join('public', 'posts')
 
 const staticPages = [
@@ -74,13 +74,18 @@ const postUrls = await Promise.all(postIndex.map(async ({ slug }) => {
   const source = path.join(postsDirectory, `${slug}.md`)
   const markdown = await fs.readFile(source, 'utf8')
   const attributes = parseFrontmatter(markdown)
+  if (attributes.index === 'false') {
+    return null
+  }
   return {
     route: `/posts/${slug}`,
     lastModified: attributes.updated || attributes.date || await getLastModified(source),
   }
 }))
 
-const urls = [...staticUrls, ...postUrls].map(({ route, lastModified }) => [
+const indexablePostUrls = postUrls.filter(Boolean)
+
+const urls = [...staticUrls, ...indexablePostUrls].map(({ route, lastModified }) => [
   '  <url>',
   `    <loc>${escapeXml(`${siteOrigin}${route}`)}</loc>`,
   `    <lastmod>${lastModified}</lastmod>`,
@@ -94,4 +99,4 @@ ${urls}
 `
 
 await fs.writeFile(path.join('public', 'sitemap.xml'), sitemap)
-console.log(`Generated sitemap with ${staticUrls.length + postUrls.length} URLs.`)
+console.log(`Generated sitemap with ${staticUrls.length + indexablePostUrls.length} URLs.`)

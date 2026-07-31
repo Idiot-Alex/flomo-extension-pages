@@ -107,6 +107,16 @@
   @apply bg-card;
 }
 
+@media (max-width: 639px) {
+  .prose table {
+    display: block;
+    max-width: 100%;
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
 @layer utilities {
   .font-editorial {
     font-family: var(--font-editorial);

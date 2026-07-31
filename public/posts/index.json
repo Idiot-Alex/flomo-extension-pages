@@ -1,11 +1,20 @@
 [
   {
+    "slug": "flomo-extension-selection-draft-workflow"
+  },
+  {
+    "slug": "flomo-extension-save-flow-troubleshooting"
+  },
+  {
+    "slug": "flomo-extension-permissions-data-flow"
+  },
+  {
+    "slug": "compare-flomo-plugins"
+  },
+  {
     "slug": "what-is-flomo"
   },
   {
     "slug": "flomo-plus-extension"
-  },
-  {
-    "slug": "compare-flomo-plugins"
   }
 ]

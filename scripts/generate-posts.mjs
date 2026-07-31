@@ -66,6 +66,7 @@ const posts = await Promise.all(postIndex.map(async ({ slug }) => {
     content: processedContent.toString(),
     excerpt: attributes.excerpt || createExcerpt(content),
     author: attributes.author || 'Flomo Extension',
+    index: attributes.index !== 'false',
   }
 }))
 
