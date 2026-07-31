@@ -1,0 +1,17 @@
+{
+  "name": "Flomo Extension",
+  "short_name": "Flomo Extension",
+  "description": "在 Chrome 浏览器当前网页中快速记录想法，并同步到自己的 Flomo 账户。",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f5f4ed",
+  "theme_color": "#f5f4ed",
+  "lang": "zh-CN",
+  "icons": [
+    {
+      "src": "/favicon.png",
+      "sizes": "128x128",
+      "type": "image/png"
+    }
+  ]
+}

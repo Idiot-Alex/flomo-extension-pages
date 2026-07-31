@@ -36,6 +36,10 @@ function createExcerpt(content) {
     .slice(0, 150)
 }
 
+function formatDate(date) {
+  return new Date(`${date}T00:00:00+08:00`).toLocaleDateString('zh-CN')
+}
+
 const postIndex = JSON.parse(
   await fs.readFile(path.join(postsDirectory, 'index.json'), 'utf8'),
 )
@@ -52,11 +56,16 @@ const posts = await Promise.all(postIndex.map(async ({ slug }) => {
     slug,
     title: attributes.title,
     date: attributes.date,
-    displayDate: new Date(`${attributes.date}T00:00:00+08:00`).toLocaleDateString('zh-CN'),
+    updatedDate: attributes.updated || attributes.date,
+    displayDate: formatDate(attributes.date),
+    displayUpdatedDate: formatDate(attributes.updated || attributes.date),
     category: attributes.category,
     coverImage: attributes.coverImage,
+    coverWidth: Number(attributes.coverWidth) || 1200,
+    coverHeight: Number(attributes.coverHeight) || 900,
     content: processedContent.toString(),
-    excerpt: createExcerpt(content),
+    excerpt: attributes.excerpt || createExcerpt(content),
+    author: attributes.author || 'Flomo Extension',
   }
 }))
 

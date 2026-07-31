@@ -63,9 +63,6 @@ export function Header() {
               {item.label}
             </NavLink>
           ))}
-          {!user.email && (
-            <NavLink to="/register" className={navLinkClass}>注册</NavLink>
-          )}
         </nav>
 
         <div className="ml-auto flex items-center gap-2">
@@ -110,11 +107,6 @@ export function Header() {
                     </NavLink>
                   </SheetClose>
                 ))}
-                {!user.email && (
-                  <SheetClose asChild>
-                    <NavLink to="/register" className={navLinkClass}>注册</NavLink>
-                  </SheetClose>
-                )}
               </nav>
             </SheetContent>
           </Sheet>

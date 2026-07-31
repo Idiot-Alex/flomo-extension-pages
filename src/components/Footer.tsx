@@ -12,11 +12,15 @@ export function Footer() {
 
         <div className="text-left text-sm text-muted-foreground sm:max-w-md sm:text-right">
           <nav className="mb-4 text-foreground" aria-label="页脚导航">
+            <Link to="/about" className="transition-colors hover:text-primary">关于我们</Link>
+            <span className="mx-2 text-border" aria-hidden="true">·</span>
             <Link to="/privacy" className="transition-colors hover:text-primary">隐私政策</Link>
             <span className="mx-2 text-border" aria-hidden="true">·</span>
             <Link to="/terms" className="transition-colors hover:text-primary">服务条款</Link>
             <span className="mx-2 text-border" aria-hidden="true">·</span>
             <a href="https://txc.qq.com/products/648748" className="transition-colors hover:text-primary" target="_blank" rel="noreferrer">问题反馈</a>
+            <span className="mx-2 text-border" aria-hidden="true">·</span>
+            <a href="mailto:flomo-extension@idiotalex.com" className="transition-colors hover:text-primary">联系我们</a>
           </nav>
           <p className="font-editorial leading-6">记录不该打断思考，它只需要离你更近一点。</p>
           <p className="mt-2 text-xs">© {new Date().getFullYear()} Flomo Extension</p>

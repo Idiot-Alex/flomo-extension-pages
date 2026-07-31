@@ -1,0 +1,23 @@
+/login
+  X-Robots-Tag: noindex, nofollow, noarchive
+
+/register
+  X-Robots-Tag: noindex, nofollow, noarchive
+
+/reset-pwd
+  X-Robots-Tag: noindex, nofollow, noarchive
+
+/account
+  X-Robots-Tag: noindex, nofollow, noarchive
+
+/pay-order
+  X-Robots-Tag: noindex, nofollow, noarchive
+
+/posts/generated.json
+  X-Robots-Tag: noindex, nofollow, noarchive
+
+/posts/index.json
+  X-Robots-Tag: noindex, nofollow, noarchive
+
+/404.html
+  X-Robots-Tag: noindex, nofollow, noarchive

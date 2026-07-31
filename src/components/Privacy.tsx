@@ -1,75 +1,106 @@
-import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
+import { Header } from '@/components/Header'
+
+const externalLinkProps = {
+  target: '_blank',
+  rel: 'noreferrer',
+} as const
 
 const privacySections = [
   {
-    title: '引言',
-    content: <p>本隐私政策阐述了 Flomo Extension 扩展（以下简称“我们”或“我们的”）如何收集、使用、披露和保护您的个人信息。</p>,
-  },
-  {
-    title: '信息收集',
+    title: '适用范围',
     content: (
       <>
-        <p>我们的扩展可能会收集以下信息以便提供和改进我们的服务：</p>
-        <ul className="mt-2 list-disc space-y-1 pl-5">
-          <li>用户的邮箱账号信息，用于扩展服务的注册</li>
-          <li>用户使用邮箱注册本扩展服务需要设置密码，用于扩展服务的登录验证</li>
+        <p>本隐私政策适用于 Flomo Extension 网站、账户服务与浏览器扩展，说明我们如何处理个人信息、Cookies 和第三方服务产生的数据。</p>
+        <p className="mt-3">Flomo Extension 是第三方独立项目，与 flomo 官方不存在隶属、授权或代言关系。用户在 flomo 平台上的数据同时受 flomo 自身隐私政策约束。</p>
+      </>
+    ),
+  },
+  {
+    title: '我们收集的信息',
+    content: (
+      <>
+        <p>根据您使用的功能，我们可能处理以下信息：</p>
+        <ul className="mt-3 list-disc space-y-2 pl-5">
+          <li>账户信息：注册邮箱、登录验证信息、套餐状态和到期时间</li>
+          <li>服务与诊断信息：访问页面、功能交互、错误信息、浏览器与设备类型</li>
+          <li>网络与日志信息：IP 地址、请求时间、安全日志和反滥用记录</li>
+          <li>支付相关状态：订单标识、支付结果和套餐信息；支付凭据由相应支付服务处理</li>
+        </ul>
+        <p className="mt-3">网站不会要求您公开发布 Flomo 笔记内容。扩展在执行同步操作时会处理您主动输入的内容，以完成您请求的记录操作。</p>
+      </>
+    ),
+  },
+  {
+    title: '信息的使用目的',
+    content: (
+      <ul className="list-disc space-y-2 pl-5">
+        <li>提供账户登录、笔记同步、套餐与售后支持</li>
+        <li>排查故障、保障服务安全并防止滥用</li>
+        <li>了解页面和功能的整体使用情况，改进产品体验</li>
+        <li>展示、衡量和限制广告，并遵守适用的广告政策</li>
+        <li>履行法律义务或响应有权机关的合法要求</li>
+      </ul>
+    ),
+  },
+  {
+    title: 'Cookies 与广告',
+    content: (
+      <>
+        <p>本站使用 Google AdSense。Google 等第三方供应商可能使用 Cookies、Web Beacon、IP 地址或其他标识符来投放和衡量广告。Google 可能根据您此前访问本站或其他网站的情况展示个性化广告。</p>
+        <p className="mt-3">您可以在 <a href="https://adssettings.google.com/" {...externalLinkProps}>Google 广告设置</a>中管理个性化广告，也可以阅读<a href="https://policies.google.com/technologies/partner-sites" {...externalLinkProps}>Google 如何使用合作伙伴网站或应用中的信息</a>。</p>
+        <p className="mt-3">面向欧洲经济区、英国和瑞士投放 Google 广告时，Google 要求站点使用其认证并集成 IAB TCF 的同意管理平台。该设置需要由站点维护者在 AdSense 的“隐私权和消息”中启用。您也可以通过浏览器设置删除或阻止 Cookies，但部分功能可能因此受限。</p>
+      </>
+    ),
+  },
+  {
+    title: '第三方服务',
+    content: (
+      <>
+        <p>本站当前使用以下服务，它们可能按照各自政策处理设备、网络或使用信息：</p>
+        <ul className="mt-3 list-disc space-y-2 pl-5">
+          <li><a href="https://policies.google.com/privacy" {...externalLinkProps}>Google Analytics 与 Google AdSense</a>：访问分析与广告服务</li>
+          <li><a href="https://privacy.microsoft.com/privacystatement" {...externalLinkProps}>Microsoft Clarity</a>：页面使用情况与体验分析</li>
+          <li><a href="https://www.cloudflare.com/privacypolicy/" {...externalLinkProps}>Cloudflare</a>：内容分发、安全防护与性能分析</li>
+          <li>自托管 Umami：汇总访问统计</li>
+          <li><a href="https://flomoapp.com/" {...externalLinkProps}>flomo</a>：用户主动发起笔记同步时的目标平台</li>
         </ul>
       </>
     ),
   },
   {
-    title: '信息使用',
+    title: '信息共享与披露',
     content: (
       <>
-        <p>我们使用收集的信息来：</p>
-        <ul className="mt-2 list-disc space-y-1 pl-5">
-          <li>提供在浏览器上记录 flomo 笔记服务</li>
-          <li>改进我们的扩展功能和用户体验</li>
-        </ul>
+        <p>我们不会出售您的账户信息。仅在提供上述服务、获得您的指示、保护服务与用户安全，或法律要求时，向必要的服务提供商或有权机关披露相关信息。</p>
+        <p className="mt-3">第三方服务可能在其运营所在地处理数据。使用本站即表示相关数据可能根据适用规则进行跨境传输。</p>
       </>
     ),
   },
   {
-    title: '信息分享',
+    title: '保存与安全',
     content: (
       <>
-        <p>我们不会与任何第三方分享您的个人信息，除非：</p>
-        <ul className="mt-2 list-disc pl-5"><li>法律要求我们披露信息</li></ul>
+        <p>我们仅在提供服务、解决争议、履行法律义务和保障安全所需的期限内保存个人信息。不同类型信息的保存期限会因用途和法律要求而不同。</p>
+        <p className="mt-3">我们采取访问控制、传输保护和日志审查等合理措施降低未经授权访问、篡改或泄露的风险，但任何互联网服务都无法承诺绝对安全。</p>
       </>
     ),
   },
   {
-    title: '信息安全',
-    content: <p>我们采取适当的安全措施来保护您的个人信息不被未经授权的访问和泄露。</p>,
-  },
-  {
-    title: '用户权利',
+    title: '您的选择与权利',
     content: (
       <>
-        <p>您有权：</p>
-        <ul className="mt-2 list-disc space-y-1 pl-5">
-          <li>访问您的个人信息</li>
-          <li>要求更正或删除不准确的个人信息</li>
-          <li>撤回您对个人信息处理的同意</li>
-        </ul>
+        <p>您可以联系我们申请访问、更正或删除账户信息，或撤回此前作出的选择。我们会在核实身份并考虑适用法律与安全要求后处理请求。</p>
+        <p className="mt-3">您还可以通过浏览器管理 Cookies，并使用 <a href="https://tools.google.com/dlpage/gaoptout" {...externalLinkProps}>Google Analytics 停用工具</a>或 Google 广告设置调整相关数据使用方式。</p>
       </>
     ),
   },
   {
-    title: '第三方链接',
-    content: <p>我们的扩展可能包含指向第三方网站的链接，这些网站有它们自己的隐私政策。</p>,
-  },
-  {
-    title: '隐私政策更新',
-    content: <p>我们可能会不时更新本隐私政策。任何变更将在本页面上公布。</p>,
-  },
-  {
-    title: '联系我们',
+    title: '政策更新与联系',
     content: (
       <>
-        <p>如有任何关于隐私政策的疑问，请联系我们。</p>
-        <p className="mt-2">电子邮件：<a href="mailto:flomo-extension@idiotalex.com">flomo-extension@idiotalex.com</a></p>
+        <p>当产品、第三方服务或适用规则发生变化时，我们可能更新本政策，并在页面顶部标明最近更新日期。</p>
+        <p className="mt-3">如对隐私政策或个人信息处理有疑问，请发送邮件至 <a href="mailto:flomo-extension@idiotalex.com">flomo-extension@idiotalex.com</a>。</p>
       </>
     ),
   },
@@ -84,7 +115,7 @@ export function Privacy() {
           <header className="border-b border-border pb-10 sm:pb-14">
             <p className="kami-eyebrow">数据与隐私</p>
             <h1 className="kami-page-title mt-5">隐私政策</h1>
-            <p className="mt-5 text-sm text-muted-foreground">生效日期：2024 年 5 月 4 日</p>
+            <p className="mt-5 text-sm text-muted-foreground">生效日期：2024 年 5 月 4 日 · 最近更新：2026 年 8 月 1 日</p>
           </header>
 
           <article className="ml-auto max-w-3xl py-8 sm:py-12">

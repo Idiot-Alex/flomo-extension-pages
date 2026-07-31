@@ -26,6 +26,24 @@ const sections = [
     ],
   },
   {
+    id: 'payment',
+    title: '付费、取消与退款',
+    content: [
+      '套餐价格、周期和权益以购买页面下单时展示的信息为准',
+      '请在付款前确认所选套餐；支付异常或权益未生效时，可通过站点联系邮箱申请核查',
+      '适用的取消或退款条件会根据订单状态、已使用权益及支付渠道规则处理',
+    ],
+  },
+  {
+    id: 'intellectual-property',
+    title: '独立项目与知识产权',
+    content: [
+      'Flomo Extension 是第三方独立项目，与 flomo 官方不存在隶属、授权或代言关系',
+      'flomo 及其他第三方产品名称、商标和内容归各自权利人所有',
+      '用户应遵守原始网页、浏览器商店和目标平台的适用规则',
+    ],
+  },
+  {
     id: 'disclaimer',
     title: '免责声明',
     content: [
@@ -42,6 +60,14 @@ const sections = [
       '修改后的条款将在本页面公布，继续使用本服务即表示您接受修改后的条款。',
     ],
   },
+  {
+    id: 'contact',
+    title: '联系我们',
+    content: [
+      '账户、支付、产品或条款问题可发送邮件至 flomo-extension@idiotalex.com',
+      '为便于核查支付问题，请提供订单标识和问题描述，但不要发送密码或完整支付凭据',
+    ],
+  },
 ]
 
 export function Terms() {
@@ -51,7 +77,7 @@ export function Terms() {
         <header className="border-b border-border pb-10 sm:pb-14">
           <p className="kami-eyebrow">法律与说明</p>
           <h1 className="kami-page-title mt-5">服务条款</h1>
-          <p className="mt-5 text-sm text-muted-foreground">生效日期：2024 年 5 月 4 日</p>
+          <p className="mt-5 text-sm text-muted-foreground">生效日期：2024 年 5 月 4 日 · 最近更新：2026 年 8 月 1 日</p>
         </header>
 
         <div className="ml-auto max-w-3xl py-8 sm:py-12">

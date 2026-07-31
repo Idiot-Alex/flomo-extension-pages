@@ -16,6 +16,7 @@ const Privacy = lazy(() => import('@/components/Privacy').then(({ Privacy }) => 
 const Guide = lazy(() => import('@/components/Guide').then(({ Guide }) => ({ default: Guide })))
 const Posts = lazy(() => import('@/components/Posts').then(({ Posts }) => ({ default: Posts })))
 const TermsPage = lazy(() => import('@/components/TermsPage').then(({ TermsPage }) => ({ default: TermsPage })))
+const About = lazy(() => import('@/components/About').then(({ About }) => ({ default: About })))
 
 function RouteLoading() {
   return (
@@ -44,6 +45,7 @@ function App() {
             <Route path="/reset-pwd" element={<ResetPwd />} />
             <Route path="/privacy" element={<Privacy />} />
             <Route path="/terms" element={<TermsPage />} />
+            <Route path="/about" element={<About />} />
             <Route path="/guide" element={<Guide />} />
             <Route path="/posts" element={<Posts />} />
             <Route path="/posts/:slug" element={<Posts />} />

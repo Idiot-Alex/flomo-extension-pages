@@ -1,0 +1,12 @@
+/guide/ /guide 301
+/plans/ /plans 301
+/posts/ /posts 301
+/posts/:slug/ /posts/:slug 301
+/about/ /about 301
+/privacy/ /privacy 301
+/terms/ /terms 301
+/login/ /login 301
+/register/ /register 301
+/reset-pwd/ /reset-pwd 301
+/account/ /account 301
+/pay-order/ /pay-order 301
