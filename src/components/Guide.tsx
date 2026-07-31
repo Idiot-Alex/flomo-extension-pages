@@ -2,7 +2,7 @@ import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
 import { Button } from '@/components/ui/button'
 import { useNavigate, useSearchParams } from 'react-router-dom'
-import { FLOMO_EXTENSION_FILE_URL, FLOMO_EXTENSION_WEB_STORE_URL, FLOMO_EXTENSION_EDGE_STORE_URL } from '@/lib/type'
+import { FLOMO_EXTENSION_FILE_URL, FLOMO_EXTENSION_WEB_STORE_URL } from '@/lib/type'
 import { useRef, useState, useEffect } from 'react'
 
 const guideSections = [
@@ -107,7 +107,7 @@ export function Guide() {
         <div className="kami-page py-16 sm:py-20">
           <header className="border-b border-border pb-10 sm:pb-14">
             <p className="kami-eyebrow">产品手册</p>
-            <h1 className="mt-5 max-w-4xl font-editorial text-4xl font-medium leading-tight tracking-tight sm:text-6xl">
+            <h1 className="kami-page-title mt-5 max-w-4xl">
               Flomo Extension 使用指南
             </h1>
             <p className="mt-5 max-w-2xl text-base leading-8 text-muted-foreground sm:text-lg">
@@ -158,13 +158,6 @@ export function Guide() {
                   >
                     Chrome 扩展商店安装
                   </Button>
-                  <Button
-                    onClick={() => window.open(FLOMO_EXTENSION_EDGE_STORE_URL, '_blank', 'noopener,noreferrer')}
-                    className="w-full"
-                    variant="outline"
-                  >
-                    Edge 扩展商店安装
-                  </Button>
                 </div>
               </nav>
             </aside>
@@ -175,7 +168,7 @@ export function Guide() {
               <section id="instruction" className="content-section scroll-mt-28 space-y-7">
                 <p className="kami-eyebrow">00 · 产品介绍</p>
                 <h2 className="font-editorial text-3xl font-medium">Flomo Extension 是什么？</h2>
-                <div className="prose prose-sm max-w-none">
+                <div className="prose max-w-none">
                   <p className="text-lg">
                     <a href="https://help.flomoapp.com">flomo 浮墨笔记</a>
                     ，是一款全平台的卡片笔记，聚焦帮你记录更多想法与灵感，以及更好回顾过往记录。
@@ -207,7 +200,7 @@ export function Guide() {
                 <h2 className="font-editorial text-3xl font-medium">如何安装 Flomo Extension</h2>
                 <div className="space-y-6">
                   <div className="grid gap-3 border-t border-border py-5">
-                    <h3 className="text-lg font-semibold">离线安装</h3>
+                    <h3 className="text-lg font-medium">离线安装</h3>
                     <div className="grid gap-3">
                       <p>离线安装步骤：</p>
                       <p>1. 点击左侧【立即下载插件】按钮下载插件的安装文件 zip，下载完成后自行解压</p>
@@ -218,7 +211,7 @@ export function Guide() {
                     </div>
                   </div>
                   <div className="grid gap-3 border-t border-border py-5">
-                    <h3 className="text-lg font-semibold">浏览器应用商店安装</h3>
+                    <h3 className="text-lg font-medium">浏览器应用商店安装</h3>
                     <div className="grid gap-3">
                       <p>在线安装步骤：</p>
                       <p>1. 点击左侧【浏览器扩展商店安装】按钮跳转到浏览器应用商店扩展页面</p>
@@ -227,7 +220,7 @@ export function Guide() {
                   </div>
                 </div>
                 <h2 className="font-editorial text-3xl font-medium">如何使用 Flomo Extension</h2>
-                <div className="prose prose-sm max-w-none">
+                <div className="prose max-w-none">
                   <div className="grid gap-3 mb-4">
                     <p>1. 下载并安装 flomo extension 扩展，参考这里：<a href="/guide?action=install"><b>安装说明</b></a></p>
                     <p>2. 点击 flomo extension 扩展，登录自己的账号</p>
@@ -242,7 +235,7 @@ export function Guide() {
               <section id="sale" className="content-section scroll-mt-28 space-y-7 border-t border-border pt-12">
                 <p className="kami-eyebrow">02 · 售后服务</p>
                 <h2 className="font-editorial text-3xl font-medium">售后服务</h2>
-                <div className="prose prose-sm max-w-none">
+                <div className="prose max-w-none">
                   <div className="grid gap-3 mb-4">
                     <p>如果您遇到了解决不了的问题，请扫描添加下面二维码（烦请备注：flomo插件）:</p>
                     <p>
@@ -260,18 +253,18 @@ export function Guide() {
               <section id="faq" className="content-section scroll-mt-28 space-y-7 border-t border-border pt-12">
                 <p className="kami-eyebrow">03 · 常见问题</p>
                 <h2 className="font-editorial text-3xl font-medium">常见问题</h2>
-                <div className="prose prose-sm max-w-none">
+                <div className="prose max-w-none">
                   <div className="space-y-6">
                     <div className="border-t border-border py-5">
-                      <h3 className="text-lg font-semibold mb-2">1. 插件无法正常使用怎么办？</h3>
+                      <h3 className="mb-2 text-lg font-medium">1. 插件无法正常使用怎么办？</h3>
                       <div className="grid gap-2">
                         <p>• 确保已按照<a href="/guide?action=install"><b>安装说明</b></a>正确安装插件</p>
-                        <p>• 检查浏览器是否支持该插件（推荐使用最新版 Chrome 或 Edge）</p>
+                        <p>• 检查浏览器是否支持该插件（推荐使用最新版 Chrome）</p>
                         <p>• 尝试重新启动浏览器</p>
                       </div>
                     </div>
                     <div className="border-t border-border py-5">
-                      <h3 className="text-lg font-semibold mb-2">2. 笔记无法同步怎么办？</h3>
+                      <h3 className="mb-2 text-lg font-medium">2. 笔记无法同步怎么办？</h3>
                       <div className="grid gap-2">
                         <p>• 确保已登录 flomo 账号</p>
                         <p>• 检查网络连接是否正常</p>
@@ -279,7 +272,7 @@ export function Guide() {
                       </div>
                     </div>
                     <div className="border-t border-border py-5">
-                      <h3 className="text-lg font-semibold mb-2">3. 如何升级到 PRO 版本？</h3>
+                      <h3 className="mb-2 text-lg font-medium">3. 如何升级到 PRO 版本？</h3>
                       <div className="grid gap-2">
                         <p>• 访问<a href="/plans"><b>套餐页面</b></a>选择适合的套餐</p>
                         <p>• 按照提示完成支付</p>

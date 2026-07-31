@@ -103,7 +103,7 @@ export function Login() {
         <Card className="border-border bg-card shadow-whisper">
           <CardHeader className="space-y-2 pb-5">
             <p className="kami-eyebrow">账户访问</p>
-            <CardTitle className="text-3xl tracking-[-0.03em]">登录账户</CardTitle>
+            <CardTitle className="text-[1.75rem] tracking-normal">登录账户</CardTitle>
             <CardDescription>继续查看套餐状态和账户信息</CardDescription>
           </CardHeader>
           <CardContent>

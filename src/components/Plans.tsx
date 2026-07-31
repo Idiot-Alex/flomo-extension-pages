@@ -13,7 +13,7 @@ export function Plans() {
         <div className="kami-page py-16 sm:py-20">
           <header className="border-b border-border pb-10 sm:pb-14">
             <p className="kami-eyebrow">套餐与价格</p>
-            <h1 className="mt-5 max-w-4xl font-editorial text-4xl font-medium leading-[1.08] tracking-tight text-foreground sm:text-6xl">
+            <h1 className="kami-page-title mt-5 max-w-4xl">
               选择适合你的记录节奏
             </h1>
             <p className="mt-6 max-w-2xl text-base leading-8 text-muted-foreground sm:text-lg">
@@ -25,7 +25,7 @@ export function Plans() {
             <div className="mb-8 flex items-end justify-between gap-6 border-b border-border pb-5">
               <div>
                 <p className="kami-eyebrow">00 · 可选方案</p>
-                <h2 id="plans-options-title" className="mt-3 font-editorial text-3xl font-medium sm:text-4xl">
+                <h2 id="plans-options-title" className="kami-section-title mt-3">
                   从轻量体验开始
                 </h2>
               </div>
@@ -46,7 +46,7 @@ export function Plans() {
           <section className="grid gap-10 border-t border-border py-14 sm:py-20 lg:grid-cols-[0.72fr_1.28fr]" aria-labelledby="plans-faq-title">
             <div>
               <p className="kami-eyebrow">01 · 购买说明</p>
-              <h2 id="plans-faq-title" className="mt-3 font-editorial text-3xl font-medium sm:text-4xl">
+              <h2 id="plans-faq-title" className="kami-section-title mt-3">
                 常见问题
               </h2>
             </div>

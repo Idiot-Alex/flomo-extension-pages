@@ -86,6 +86,8 @@
   h3 {
     font-family: var(--font-editorial);
     font-weight: 500;
+    letter-spacing: 0.01em;
+    text-wrap: balance;
   }
 }
 
@@ -108,6 +110,7 @@
 @layer utilities {
   .font-editorial {
     font-family: var(--font-editorial);
+    letter-spacing: 0.01em;
   }
 
   .kami-page {
@@ -116,6 +119,34 @@
 
   .kami-eyebrow {
     @apply text-xs font-medium uppercase tracking-[0.12em] text-primary;
+    font-family: var(--font-ui);
+  }
+
+  .kami-display {
+    font-family: var(--font-editorial);
+    font-size: clamp(2.75rem, 6.25vw, 4.5rem);
+    font-weight: 500;
+    line-height: 1.1;
+    letter-spacing: 0.005em;
+    text-wrap: balance;
+  }
+
+  .kami-page-title {
+    font-family: var(--font-editorial);
+    font-size: clamp(2.25rem, 5vw, 3rem);
+    font-weight: 500;
+    line-height: 1.16;
+    letter-spacing: 0.01em;
+    text-wrap: balance;
+  }
+
+  .kami-section-title {
+    font-family: var(--font-editorial);
+    font-size: clamp(1.875rem, 3.3vw, 2.25rem);
+    font-weight: 500;
+    line-height: 1.22;
+    letter-spacing: 0.01em;
+    text-wrap: balance;
   }
 
   .kami-rule {

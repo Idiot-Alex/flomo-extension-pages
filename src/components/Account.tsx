@@ -63,7 +63,7 @@ export function Account() {
         <div className="kami-page py-16 sm:py-20">
           <header className="border-b border-border pb-10 sm:pb-14">
             <p className="kami-eyebrow">个人中心</p>
-            <h1 className="mt-5 font-editorial text-4xl font-medium tracking-tight sm:text-6xl">我的账户</h1>
+            <h1 className="kami-page-title mt-5">我的账户</h1>
             <p className="mt-5 max-w-2xl text-base leading-8 text-muted-foreground">查看账户信息和当前订阅状态。</p>
           </header>
 

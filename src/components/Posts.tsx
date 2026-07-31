@@ -170,7 +170,7 @@ export function Posts() {
         <div className="kami-page py-16 sm:py-20">
           <header className="mb-12 border-b border-border pb-10">
             <p className="kami-eyebrow">更新与思考</p>
-            <h1 className="mt-4 font-editorial text-4xl font-medium tracking-tight text-foreground sm:text-6xl">最新动态</h1>
+            <h1 className="kami-page-title mt-4">最新动态</h1>
             <p className="mt-5 max-w-2xl text-base leading-7 text-muted-foreground">关于产品更新、记录方法与浏览器使用体验。</p>
           </header>
           

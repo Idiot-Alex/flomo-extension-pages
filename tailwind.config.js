@@ -21,6 +21,11 @@ module.exports = {
         editorial: ['var(--font-editorial)'],
         ui: ['var(--font-ui)'],
       },
+      fontSize: {
+        xs: ['0.8125rem', { lineHeight: '1.5' }],
+        sm: ['0.9375rem', { lineHeight: '1.6' }],
+        base: ['1rem', { lineHeight: '1.7' }],
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",

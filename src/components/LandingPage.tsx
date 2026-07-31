@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { ArrowRight } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { Button } from '@/components/ui/button'
-import { FLOMO_EXTENSION_EDGE_STORE_URL, FLOMO_EXTENSION_WEB_STORE_URL } from '@/lib/type'
+import { FLOMO_EXTENSION_WEB_STORE_URL } from '@/lib/type'
 import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
 
@@ -54,9 +54,9 @@ const features = [
   },
   {
     number: '04',
-    title: 'Chrome 与 Edge 可用',
+    title: 'Chrome 浏览器可用',
     subtitle: '跟着日常使用的浏览器走',
-    description: '可从 Chrome 或 Edge 扩展商店安装，更新与日常使用都留在浏览器生态内。',
+    description: '可从 Chrome 扩展商店安装，更新与日常使用都留在浏览器生态内。',
   },
 ]
 
@@ -93,44 +93,65 @@ export function LandingPage() {
           <div className="flex flex-wrap items-center justify-between gap-4 text-xs text-muted-foreground">
             <p className="kami-eyebrow">浏览器记录工具 · v1.20.0</p>
             <div className="flex items-center gap-5">
-              <a href={FLOMO_EXTENSION_EDGE_STORE_URL} target="_blank" rel="noreferrer" className="transition-colors hover:text-primary">Edge</a>
               <Link to="/guide" className="transition-colors hover:text-primary">使用说明</Link>
             </div>
           </div>
 
-          <h1 className="mt-10 max-w-4xl text-balance font-editorial text-5xl font-medium leading-[1.08] tracking-[-0.03em] sm:text-7xl lg:text-[5.25rem]">
-            在网页里记下这一刻，<span className="text-primary">不打断阅读。</span>
-          </h1>
-          <p className="mt-7 max-w-2xl text-pretty font-editorial text-lg leading-8 text-muted-foreground sm:text-xl">
-            浏览网页时直接把想法同步到自己的 Flomo 账户。
-          </p>
+          <div className="mt-10 grid items-center gap-12 lg:grid-cols-[minmax(0,1fr)_20rem]">
+            <div>
+              <h1 className="kami-display max-w-4xl lg:text-[3.25rem] xl:text-[3.75rem]">
+                <span className="lg:block">在网页里记下这一刻，</span>
+                <span className="text-primary lg:block">不打断阅读。</span>
+              </h1>
+              <p className="mt-7 max-w-2xl text-pretty font-editorial text-lg leading-8 text-muted-foreground sm:text-xl">
+                浏览网页时直接把想法同步到自己的 Flomo 账户。
+              </p>
 
-          <div className="mt-9 flex flex-wrap items-center gap-3">
-            <Button asChild size="lg" variant="outline">
-              <Link to="/guide">查看使用指南</Link>
-            </Button>
-            <Button asChild size="lg" className="group">
-              <a href={FLOMO_EXTENSION_WEB_STORE_URL} target="_blank" rel="noreferrer">
-                安装 Chrome 版
-                <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-              </a>
-            </Button>
-          </div>
+              <div className="mt-9 flex flex-wrap items-center gap-3">
+                <Button asChild size="lg" variant="outline" className="px-4 sm:px-7">
+                  <Link to="/guide">查看使用指南</Link>
+                </Button>
+                <Button asChild size="lg" className="group px-4 sm:px-7">
+                  <a href={FLOMO_EXTENSION_WEB_STORE_URL} target="_blank" rel="noreferrer">
+                    安装 Chrome 版
+                    <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                  </a>
+                </Button>
+              </div>
 
-          <div className="mt-8 flex flex-wrap gap-x-5 gap-y-2 text-sm text-muted-foreground">
-            {['免费版无需注册', '支持 Chrome / Edge', '不存储 Flomo 笔记内容'].map((item, index) => (
-              <span key={item} className="inline-flex items-center gap-5">
-                {item}
-                {index < 2 && <span className="text-primary/35" aria-hidden="true">·</span>}
-              </span>
-            ))}
+              <div className="mt-8 flex flex-wrap gap-x-5 gap-y-2 text-sm text-muted-foreground">
+                {['免费版无需注册', '支持 Chrome', '不存储 Flomo 笔记内容'].map((item, index) => (
+                  <span key={item} className="inline-flex items-center gap-5">
+                    {item}
+                    {index < 2 && <span className="text-primary/35" aria-hidden="true">·</span>}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            <figure className="hidden lg:block">
+              <div className="rounded-[1.75rem] border bg-card p-3 shadow-whisper">
+                <img
+                  src="/flomo-extension-home-1.png"
+                  alt="Flomo Extension 在浏览器中快速记录笔记的编辑界面"
+                  className="h-auto w-full rounded-[1.15rem] border bg-white"
+                  width="524"
+                  height="540"
+                  loading="eager"
+                  decoding="async"
+                />
+              </div>
+              <figcaption className="mt-3 px-4 text-center text-xs leading-5 text-muted-foreground">
+                打开扩展，写下内容，再回到正在阅读的页面。
+              </figcaption>
+            </figure>
           </div>
         </header>
 
         <section className="border-b py-16 sm:py-20" aria-labelledby="gallery-title">
           <div className="mb-9 max-w-2xl">
             <p className="kami-eyebrow">00 · 产品界面</p>
-            <h2 id="gallery-title" className="mt-3 text-3xl font-medium tracking-tight sm:text-4xl">记录发生在原来的页面上</h2>
+            <h2 id="gallery-title" className="kami-section-title mt-3">记录发生在原来的页面上</h2>
             <p className="mt-4 text-base leading-7 text-muted-foreground">四个真实界面，展示从打开扩展到保存完成的完整路径。</p>
           </div>
 
@@ -172,7 +193,7 @@ export function LandingPage() {
         <section className="border-b py-16 sm:py-20" aria-labelledby="features-title">
           <div className="mb-8 max-w-2xl">
             <p className="kami-eyebrow">01 · 为什么更顺手</p>
-            <h2 id="features-title" className="mt-3 text-3xl font-medium tracking-tight sm:text-4xl">只缩短记录路径，不改变你的笔记习惯</h2>
+            <h2 id="features-title" className="kami-section-title mt-3">只缩短记录路径，不改变你的笔记习惯</h2>
           </div>
 
           <ol className="border-t">
@@ -192,7 +213,7 @@ export function LandingPage() {
         <section className="border-b py-16 sm:py-20" aria-labelledby="workflow-title">
           <div className="mb-8 max-w-2xl">
             <p className="kami-eyebrow">02 · 四步记录</p>
-            <h2 id="workflow-title" className="mt-3 text-3xl font-medium tracking-tight sm:text-4xl">记下来，然后继续读</h2>
+            <h2 id="workflow-title" className="kami-section-title mt-3">记下来，然后继续读</h2>
           </div>
 
           <ol className="grid border-t sm:grid-cols-2">
@@ -210,7 +231,7 @@ export function LandingPage() {
 
         <section className="py-16 text-center sm:py-24" aria-labelledby="start-title">
           <p className="kami-eyebrow">03 · 从免费版开始</p>
-          <h2 id="start-title" className="mx-auto mt-3 max-w-2xl text-balance text-3xl font-medium tracking-tight sm:text-4xl">下一次灵感出现时，直接把它留下来。</h2>
+          <h2 id="start-title" className="kami-section-title mx-auto mt-3 max-w-2xl">下一次灵感出现时，直接把它留下来。</h2>
           <ul className="mx-auto mt-8 max-w-xl space-y-2 font-editorial text-base leading-7 text-foreground/80">
             <li>无需创建另一套笔记系统</li>
             <li>免费版可以直接使用</li>

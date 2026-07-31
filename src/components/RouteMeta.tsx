@@ -4,7 +4,7 @@ import { applyPageMeta, type PageMeta } from '@/lib/page-meta'
 
 const defaultMeta: PageMeta = {
   title: 'Flomo Extension - 无需会员，在任意网页轻松记录灵感',
-  description: '使用 Flomo Extension 在浏览网页时快速记录想法，并同步到你的 Flomo 账户。支持 Chrome 和 Edge。',
+  description: '使用 Flomo Extension 在浏览网页时快速记录想法，并同步到你的 Flomo 账户。支持 Chrome。',
 }
 
 const pageMeta: Record<string, PageMeta> = {

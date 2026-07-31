@@ -54,7 +54,7 @@ export function Header() {
           aria-label="Flomo Extension 首页"
         >
           <img src="/favicon.png" alt="" className="h-10 w-10 rounded-lg" width="128" height="128" />
-          <span className="font-editorial hidden text-lg font-medium tracking-tight text-foreground sm:inline">Flomo Extension</span>
+          <span className="font-editorial hidden text-lg font-medium text-foreground sm:inline">Flomo Extension</span>
         </Link>
 
         <nav className="hidden items-center gap-1 md:flex" aria-label="主导航">

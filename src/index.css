@@ -1,7 +1,10 @@
 :root {
-  --font-editorial: "Songti SC", STSong, "Noto Serif CJK SC", "Source Han Serif SC", Georgia, serif;
-  --font-ui: "Avenir Next", Avenir, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", system-ui, sans-serif;
+  --font-editorial: "TsangerJinKai02", Charter, "Iowan Old Style", "Noto Serif SC", "Noto Serif CJK SC", "Source Han Serif SC", "Songti SC", STSong, Georgia, serif;
+  --font-ui: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei UI", "Microsoft YaHei", sans-serif;
   font-family: var(--font-ui);
+  font-size: 16px;
+  line-height: 1.65;
+  letter-spacing: 0.01em;
   color: hsl(var(--foreground));
   background: hsl(var(--background));
   font-synthesis: none;

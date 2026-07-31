@@ -50,7 +50,7 @@ export function Terms() {
       <div className="kami-page py-16 sm:py-20">
         <header className="border-b border-border pb-10 sm:pb-14">
           <p className="kami-eyebrow">法律与说明</p>
-          <h1 className="mt-5 font-editorial text-4xl font-medium tracking-tight sm:text-6xl">服务条款</h1>
+          <h1 className="kami-page-title mt-5">服务条款</h1>
           <p className="mt-5 text-sm text-muted-foreground">生效日期：2024 年 5 月 4 日</p>
         </header>
 

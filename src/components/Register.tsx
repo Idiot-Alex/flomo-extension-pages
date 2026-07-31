@@ -167,7 +167,7 @@ export function Register() {
         <Card className="border-border bg-card shadow-whisper">
           <CardHeader className="space-y-2 pb-5">
             <p className="kami-eyebrow">新用户</p>
-            <CardTitle className="text-3xl tracking-[-0.03em]">创建账户</CardTitle>
+            <CardTitle className="text-[1.75rem] tracking-normal">创建账户</CardTitle>
             <CardDescription>注册后可以购买并查看付费套餐状态</CardDescription>
           </CardHeader>
           <CardContent>

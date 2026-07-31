@@ -139,7 +139,7 @@ export function ResetPwd() {
         <Card className="border-border bg-card shadow-whisper">
           <CardHeader className="space-y-2 pb-5">
             <p className="kami-eyebrow">账户恢复</p>
-            <CardTitle className="text-3xl tracking-[-0.03em]">重置密码</CardTitle>
+            <CardTitle className="text-[1.75rem] tracking-normal">重置密码</CardTitle>
             <CardDescription>通过邮箱验证码设置一个新密码</CardDescription>
           </CardHeader>
           <CardContent>
