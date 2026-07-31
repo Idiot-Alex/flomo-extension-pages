@@ -9,23 +9,26 @@ export function Plans() {
   return (
     <>
       <Header />
-      <div className="min-h-screen bg-gradient-to-b from-blue-50 via-blue-100 to-white">
-        <div className="container py-12">
-          <div className="text-center mb-12">
-            <h1 className="text-4xl font-bold tracking-tight bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
-              Flomo Extension 套餐计划
+      <main id="main-content" className="min-h-screen bg-[#f6f9f6]">
+        <div className="container px-4 py-16 sm:py-20">
+          <div className="mx-auto mb-12 max-w-2xl text-center">
+            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.18em] text-primary">简单透明</p>
+            <h1 className="text-3xl font-bold tracking-tight text-foreground sm:text-5xl">
+              选择适合你的记录方式
             </h1>
-            <p className="mt-3 text-lg text-muted-foreground">选择最适合您的套餐，开启高效记录之旅</p>
+            <p className="mt-4 text-base leading-7 text-muted-foreground sm:text-lg">
+              免费体验核心功能，或开通 Pay 套餐解除每日次数限制。支付成功后会员权益自动生效。
+            </p>
           </div>
-          
-          <div className="mx-auto max-w-5xl grid gap-12 md:grid-cols-1 lg:grid-cols-3 mb-16">
-            <div className="hover:-translate-y-2 transition-transform duration-300">
+
+          <div className="mx-auto mb-20 grid max-w-6xl items-stretch gap-5 lg:grid-cols-3">
+            <div className="h-full">
               <FreePlan />
             </div>
-            <div className="hover:-translate-y-2 transition-transform duration-300">
+            <div className="h-full">
               <LtzfWxPlan />
             </div>
-            <div className="hover:-translate-y-2 transition-transform duration-300">
+            <div className="h-full">
               <ZpayAliPlan />
             </div>
             {/* <div className="hover:-translate-y-2 transition-transform duration-300">
@@ -33,32 +36,34 @@ export function Plans() {
             </div> */}
           </div>
 
-          {/* FAQ 部分 */}
-          <div className="max-w-3xl mx-auto mt-20">
-            <h2 className="text-3xl font-bold text-center mb-8 bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
-              常见问题解答
-            </h2>
-            <div className="space-y-4">
-              <div className="border rounded-lg p-6 bg-white shadow-sm">
-                <h3 className="text-lg font-semibold">如何开通会员？</h3>
-                <p className="mt-2 text-muted-foreground">选择套餐后，根据指引完成支付即可立即开通服务，支付成功后自动激活会员权益。</p>
-              </div>
-              <div className="border rounded-lg p-6 bg-white shadow-sm">
-                <h3 className="text-lg font-semibold">支持哪些支付方式？</h3>
-                <p className="mt-2 text-muted-foreground">目前支持微信支付、支付宝，后续会开通更多支付方式。</p>
-              </div>
-              <div className="border rounded-lg p-6 bg-white shadow-sm">
-                <h3 className="text-lg font-semibold">会员有效期多久？</h3>
-                <p className="mt-2 text-muted-foreground">根据套餐可以选择 1 个月、半年、一年三种有效期。</p>
-              </div>
-              <div className="border rounded-lg p-6 bg-white shadow-sm">
-                <h3 className="text-lg font-semibold">如何续费？</h3>
-                <p className="mt-2 text-muted-foreground">会员到期后可以再次购买新套餐，将重置会员有效期。</p>
-              </div>
+          <section className="mx-auto max-w-4xl" aria-labelledby="plans-faq-title">
+            <div className="mb-8 text-center">
+              <p className="mb-2 text-sm font-semibold text-primary">购买说明</p>
+              <h2 id="plans-faq-title" className="text-3xl font-bold tracking-tight text-foreground">
+                常见问题
+              </h2>
             </div>
-          </div>
+            <div className="grid gap-4 md:grid-cols-2">
+              <article className="rounded-2xl border bg-white p-6">
+                <h3 className="text-base font-semibold">如何开通会员？</h3>
+                <p className="mt-2 text-sm leading-6 text-muted-foreground">选择套餐并完成支付后，会员权益会自动激活。</p>
+              </article>
+              <article className="rounded-2xl border bg-white p-6">
+                <h3 className="text-base font-semibold">支持哪些支付方式？</h3>
+                <p className="mt-2 text-sm leading-6 text-muted-foreground">目前支持微信支付和支付宝。</p>
+              </article>
+              <article className="rounded-2xl border bg-white p-6">
+                <h3 className="text-base font-semibold">会员有效期多久？</h3>
+                <p className="mt-2 text-sm leading-6 text-muted-foreground">可选择 1 个月、半年或一年，以购买套餐为准。</p>
+              </article>
+              <article className="rounded-2xl border bg-white p-6">
+                <h3 className="text-base font-semibold">如何续费？</h3>
+                <p className="mt-2 text-sm leading-6 text-muted-foreground">到期后重新购买套餐即可续费。</p>
+              </article>
+            </div>
+          </section>
         </div>
-      </div>
+      </main>
       <Footer />
     </>
   )

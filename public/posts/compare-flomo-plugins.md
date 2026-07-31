@@ -2,7 +2,7 @@
 title: Flomo Plus VS Flomo Extension
 date: 2025-02-28
 category: 文章
-coverImage: /flomo-plugs-compare.png
+coverImage: /flomo-plugs-compare.webp
 ---
 
 作为一名 flomo 的忠实用户，我深知记录灵感的重要性。Flomo Plus 和 Flomo Extension 都是为了解决我们在记录时遇到的痛点而诞生的！它们让记录变得前所未有的简单和愉悦。让我来为你介绍这两款改变我工作方式的贴心小助手。

@@ -1,9 +1,15 @@
 User-agent: *
 Disallow: /api/*
-Disallow: /_next/*
 Disallow: /cdn-cgi/*
+Disallow: /account
+Disallow: /pay-order
+Disallow: /login
+Disallow: /register
+Disallow: /reset-pwd
 
 Allow: /
 Allow: /images/
 Allow: /css/
 Allow: /js/
+
+Sitemap: https://flomo-extension-pages.hotstrips.org/sitemap.xml

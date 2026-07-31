@@ -7,16 +7,18 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { toast } from '@/components/ui/use-toast'
 import { ToastAction } from '@/components/ui/toast'
-import { ApiRes, FLOMO_EXTENSION_WEB_URL } from '@/lib/type'
+import { ApiRes, FLOMO_EXTENSION_WEB_URL, type PayOption } from '@/lib/type'
 import { createAliOrder } from '@/lib/api'
 import { Label } from '@/components/ui/label'
+import type { RootState } from '@/store/store'
 
 export function ZpayAliPlan() {
-  const user = useSelector((state: any) => {
+  const user = useSelector((state: RootState) => {
     return state.user
   })
-
   const plan = usePlan()
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false)
+  const navigate = useNavigate()
 
   const aliPlans = [
     {
@@ -68,10 +70,7 @@ export function ZpayAliPlan() {
   ]
 
   const renderAliPay = () => {
-    const [isButtonDisabled, setIsButtonDisabled] = useState(false)
-    const navigate = useNavigate()
-
-    const toPay = (payData: any) => {
+    const toPay = (payData: PayOption) => {
       setIsButtonDisabled(true)
       if (!user.email) {
         toast({
@@ -114,7 +113,7 @@ export function ZpayAliPlan() {
             description: res.msg
           })
         }
-      }).catch(_ => {
+      }).catch(() => {
         toast({
           variant: "destructive",
           description: '下单失败'
@@ -125,8 +124,8 @@ export function ZpayAliPlan() {
 
     return (<>
       {
-        aliPayList.map((item, i) => (
-          <div key={i} className="grid grid-cols-3 items-center gap-4 border-b pb-4">
+        aliPayList.map((item) => (
+          <div key={item.month} className="grid grid-cols-3 items-center gap-4 border-b pb-4 last:border-0 last:pb-0">
             <Label>{item.title}</Label>
             {
               item.price === item.payPrice ?
@@ -147,20 +146,21 @@ export function ZpayAliPlan() {
   }
 
   return (<>
-    <Card className="mx-auto w-full max-w-sm bg-gradient-to-b from-white to-purple-50 shadow-lg hover:shadow-xl transition-shadow border-t-4 border-purple-500">
+    <Card className="mx-auto flex h-full w-full max-w-sm flex-col border-border/80 bg-white shadow-sm">
       <CardHeader>
-        <CardTitle className="text-2xl">Pay 套餐（支付宝）</CardTitle>
+        <p className="text-xs font-semibold uppercase tracking-[0.16em] text-muted-foreground">支付宝</p>
+        <CardTitle className="text-2xl">Pay 套餐</CardTitle>
         <CardDescription>
           需要注册账号并付费，每日 <b className="text-zinc-600">无限</b> 次使用插件保存笔记
         </CardDescription>
       </CardHeader>
-      <CardContent>
+      <CardContent className="flex-1">
         { plan.renderPlan(aliPlans) }
       </CardContent>
-      <CardFooter className="border-t px-6 py-4">
+      <CardFooter className="border-t px-6 py-5">
         <Popover>
           <PopoverTrigger asChild>
-            <Button className="w-full" color="orange">立即购买</Button>
+            <Button className="w-full">立即购买</Button>
           </PopoverTrigger>
           <PopoverContent className="w-80">
             <div className="grid gap-4">

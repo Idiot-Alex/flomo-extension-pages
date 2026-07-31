@@ -11,6 +11,7 @@ import { reloadUser } from '@/lib/api'
 import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import { Mail, Package, Calendar } from 'lucide-react'
+import type { RootState } from '@/store/store'
 
 export function Account() {
   const navigate = useNavigate()
@@ -20,7 +21,7 @@ export function Account() {
     expiredTime: '',
   })
 
-  const user = useSelector((state: any) => {
+  const user = useSelector((state: RootState) => {
     return state.user
   })
 
@@ -33,9 +34,11 @@ export function Account() {
         } else {
           setUserInf(user)
         }
+      }).catch(() => {
+        setUserInf(user)
       })
     }
-  }, [])
+  }, [user])
 
   const toPlan = () => {
     navigate('/plans')
@@ -44,7 +47,7 @@ export function Account() {
   return (
     <>
       <Header />
-      <div className="min-h-screen bg-gradient-to-b from-background/50 via-background/95 to-background">
+      <main id="main-content" className="min-h-screen bg-gradient-to-b from-background/50 via-background/95 to-background">
         <div className="container py-12">
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
@@ -131,7 +134,7 @@ export function Account() {
           </motion.div>
         </div>
         <Terms />
-      </div>
+      </main>
       <Footer />
     </>
   );

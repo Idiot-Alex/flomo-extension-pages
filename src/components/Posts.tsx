@@ -1,13 +1,15 @@
 import { useState, useEffect, useCallback, memo } from 'react'
 import { Header } from "./Header"
 import { Footer } from "./Footer"
-import { remark } from 'remark'
-import remarkHtml from 'remark-html'
-import remarkGfm from 'remark-gfm'
+import { useNavigate, useParams } from 'react-router-dom'
+import { Dialog, DialogContent, DialogDescription, DialogTitle } from '@/components/ui/dialog'
+import { applyPageMeta } from '@/lib/page-meta'
+
 interface Post {
   slug: string
   title: string
   date: string
+  displayDate: string
   category: string
   coverImage: string
   content: string
@@ -44,48 +46,15 @@ function usePosts() {
 
   const fetchPosts = useCallback(async () => {
     try {
-      const response = await fetch('/posts/index.json')
-      const postList = await response.json()
-      
-      const postsData = await Promise.all(
-        postList.map(async (post: { slug: string }) => {
-          const mdResponse = await fetch(`/posts/${post.slug}.md`)
-          const mdText = await mdResponse.text()
-          
-          const frontmatterMatch = mdText.match(/^---\n([\s\S]*?)\n---\n/)
-          const frontmatter = frontmatterMatch ? frontmatterMatch[1] : ''
-          const content = frontmatterMatch ? mdText.slice(frontmatterMatch[0].length) : mdText
-          
-          const data = frontmatter.split('\n').reduce((acc, line) => {
-            const [key, ...values] = line.split(':')
-            if (key && values.length) {
-              acc[key.trim()] = values.join(':').trim()
-            }
-            return acc
-          }, {} as Record<string, string>)
-          
-          const processedContent = await remark()
-            .use(remarkGfm)
-            .use(remarkHtml)
-            .process(content)
-          const contentHtml = processedContent.toString()
-          
-          return {
-            slug: post.slug,
-            title: data.title,
-            date: new Date(data.date).toLocaleDateString('zh-CN'),
-            category: data.category,
-            coverImage: data.coverImage,
-            content: contentHtml,
-            excerpt: contentHtml.split('\n').slice(0, 1).join('\n') + '...'
-          }
-        })
-      )
+      const response = await fetch('/posts/generated.json')
+      if (!response.ok) {
+        throw new Error(`Posts request failed: ${response.status}`)
+      }
+      const postsData = await response.json() as Post[]
 
       setState(prev => ({
         ...prev,
-        posts: postsData.sort((a, b) => 
-          new Date(b.date).getTime() - new Date(a.date).getTime()),
+        posts: postsData,
         loading: false
       }))
     } catch (error) {
@@ -112,7 +81,7 @@ function usePosts() {
   }
 }
 
-const getRandomBgColor = () => {
+const getPostBgColor = (slug: string) => {
   const colors = [
     'bg-blue-100',
     'bg-green-100', 
@@ -120,52 +89,47 @@ const getRandomBgColor = () => {
     'bg-pink-100',
     'bg-indigo-100'
   ]
-  return colors[Math.floor(Math.random() * colors.length)]
+  const colorIndex = [...slug].reduce((total, character) => total + character.charCodeAt(0), 0)
+  return colors[colorIndex % colors.length]
 }
 
 const PostItem = memo(function PostItem({
   post,
-  onClick,
-  setSelectedPost
+  onOpen,
 }: {
   post: Post
-  onClick: () => void
-  setSelectedPost: (post: Post) => void
+  onOpen: () => void
 }) {
   return (
-    <div 
+    <article
       className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden cursor-pointer flex flex-col h-full"
-      onClick={onClick}
     >
       <div className="relative">
         <div className="absolute top-4 right-4 z-10 flex items-center space-x-2">
           <span className={`${getCategoryColor(post.category)} text-sm font-medium px-3 py-1 rounded-full`}>
             {post.category}
           </span>
-          <span className="text-gray-500 text-sm">{post.date}</span>
+          <span className="text-gray-500 text-sm">{post.displayDate}</span>
         </div>
-        <div className={`flex-1 max-h-[300px] ${post.coverImage ? 'bg-gray-100' : getRandomBgColor()} overflow-hidden`}>
+        <div className={`flex-1 max-h-[300px] ${post.coverImage ? 'bg-gray-100' : getPostBgColor(post.slug)} overflow-hidden`}>
           {post.coverImage && (
               <img 
               src={`${post.coverImage}`}
               alt={post.title}
               className="w-full h-1/2 object-cover max-w-full"
+              loading="lazy"
+              decoding="async"
             />
           )}
         </div>
       </div>
       <div className="p-6 flex-1 flex flex-col">
         <h2 className="text-xl font-bold text-gray-900 mb-3">{post.title}</h2>
-        <div 
-          className="text-gray-600 leading-relaxed line-clamp-3 prose flex-1"
-          dangerouslySetInnerHTML={{ __html: post.excerpt }}
-        />
+        <p className="text-gray-600 leading-relaxed line-clamp-3 flex-1">{post.excerpt}...</p>
         <button
-          onClick={(e) => {
-            e.stopPropagation()
-            setSelectedPost(post)
-          }}
-          className="mt-4 text-blue-600 hover:text-blue-800 font-medium flex items-center self-start"
+          onClick={onOpen}
+          className="mt-4 text-blue-600 hover:text-blue-800 font-medium flex items-center self-start rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2"
+          aria-label={`阅读《${post.title}》`}
         >
           阅读更多
           <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -173,7 +137,7 @@ const PostItem = memo(function PostItem({
           </svg>
         </button>
       </div>
-    </div>
+    </article>
   )
 })
 
@@ -184,69 +148,61 @@ const PostModal = memo(function PostModal({
   post: Post
   onClose: () => void
 }) {
-  useEffect(() => {
-    // 禁用滚动
-    document.body.style.overflow = 'hidden'
-    return () => {
-      // 恢复滚动
-      document.body.style.overflow = 'auto'
-    }
-  }, [])
-
   return (
-    <div 
-      className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50"
-      onClick={(e) => {
-        if (e.target === e.currentTarget) {
-          onClose()
-        }
-      }}
-    >
-      <div className="bg-white rounded-lg max-w-3xl w-full max-h-[90vh] overflow-y-auto">
-        <div className="p-6">
-          <div className="flex justify-between items-center mb-4">
-            <h2 className="text-2xl font-bold text-gray-900">{post.title}</h2>
-            <button 
-              onClick={onClose}
-              className="text-gray-500 hover:text-gray-700"
-            >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"/>
-              </svg>
-            </button>
-          </div>
-          <div className="space-y-6">
-            <div 
-              className="prose"
-              dangerouslySetInnerHTML={{ __html: post.content }}
-            />
-          </div>
-        </div>
-      </div>
-    </div>
+    <Dialog open onOpenChange={(open) => !open && onClose()}>
+      <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto">
+        <DialogTitle className="pr-8 text-2xl font-bold text-gray-900">{post.title}</DialogTitle>
+        <DialogDescription>{post.category} · 发布于 {post.displayDate}</DialogDescription>
+        <article
+          className="prose max-w-none"
+          dangerouslySetInnerHTML={{ __html: post.content }}
+        />
+      </DialogContent>
+    </Dialog>
   )
 })
 
 export function Posts() {
   const { posts, selectedPost, loading, error, setSelectedPost } = usePosts()
+  const { slug } = useParams()
+  const navigate = useNavigate()
 
+  useEffect(() => {
+    if (!slug) {
+      setSelectedPost(null)
+      return
+    }
+
+    const post = posts.find((item) => item.slug === slug) || null
+    setSelectedPost(post)
+    if (post) {
+      applyPageMeta({
+        title: `${post.title} - Flomo Extension`,
+        description: post.excerpt,
+      }, `/posts/${post.slug}`)
+    }
+  }, [posts, setSelectedPost, slug])
 
   return (
     <>
       <Header />
-      <div className="min-h-[calc(100vh-8rem)] bg-gradient-to-b from-gray-50 to-white py-8">
+      <main id="main-content" className="min-h-[calc(100vh-8rem)] bg-gradient-to-b from-gray-50 to-white py-8">
         <div className="max-w-6xl mx-auto px-4 pt-8">
           <h1 className="text-3xl font-bold text-gray-900 mb-8">最新动态</h1>
           
           {loading && <div className="text-center py-8">加载中...</div>}
           {error && <div className="text-red-500 text-center py-8">{error}</div>}
+          {slug && !loading && !selectedPost && (
+            <div className="mb-8 rounded-lg bg-amber-50 p-4 text-amber-900">
+              没有找到这篇文章，请从下方列表选择其他内容。
+            </div>
+          )}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {posts.map((post) => (
               <PostItem
                 key={post.slug}
                 post={post}
-                onClick={() => setSelectedPost(post)}
-                setSelectedPost={setSelectedPost}
+                onOpen={() => navigate(`/posts/${post.slug}`)}
               />
             ))}
           </div>
@@ -254,11 +210,11 @@ export function Posts() {
           {selectedPost && (
             <PostModal
               post={selectedPost}
-              onClose={() => setSelectedPost(null)}
+              onClose={() => navigate('/posts')}
             />
           )}
         </div>
-      </div>
+      </main>
       <Footer />
     </>
   )

@@ -1,16 +1,22 @@
 
+export interface PlanFeature {
+  color: string
+  title: string
+  desc: string
+}
+
 function usePlan() {
 
-  const renderPlan = (plans: Array<any>) => {
+  const renderPlan = (plans: PlanFeature[]) => {
     return (
-      plans.map((item, i) => (
-        <div key={i} className="mb-4 grid grid-cols-[25px_1fr] items-start pb-4 last:mb-0 last:pb-0">
-          <span className={`flex h-2 w-2 translate-y-1 rounded-full ${item.color}`}/>
+      plans.map((item) => (
+        <div key={item.title} className="mb-5 grid grid-cols-[18px_1fr] items-start last:mb-0">
+          <span className={`mt-1 flex h-2 w-2 rounded-full ${item.color}`} aria-hidden="true" />
           <div className="space-y-1">
-            <p className="text-sm font-medium leading-none">
+            <p className="text-sm font-semibold leading-5 text-foreground">
               {item.title}
             </p>
-            <p className="text-sm text-muted-foreground">
+            <p className="text-sm leading-5 text-muted-foreground">
               {item.desc}
             </p>
           </div>

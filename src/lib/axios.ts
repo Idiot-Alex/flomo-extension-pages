@@ -1,7 +1,9 @@
 import axios from 'axios'
 
+export const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://flomo-extension.hotstrips.org'
+
 const instance = axios.create({
-  baseURL: 'https://flomo-extension.hotstrips.org',
+  baseURL: API_BASE_URL,
   timeout: 3000,
   headers: {
     'Content-Type': 'application/json;charset=UTF-8',
@@ -9,17 +11,14 @@ const instance = axios.create({
 })
 
 instance.interceptors.request.use(config => {
-  return config;
+  return config
 }, (error) => {
-  console.log(error)
   return Promise.reject(error)
 })
 
 instance.interceptors.response.use(response => {
   return response.data
 }, (error) => {
-  console.log(error)
-  alert(error.message)
   return Promise.reject(error)
 })
 

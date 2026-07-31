@@ -2,7 +2,7 @@
 title: 什么是 flomo？如何使用它来记录灵感
 date: 2025-02-24
 category: 指南
-coverImage: http://flomo-resource.oss-cn-shanghai.aliyuncs.com/101/newversion.png!webp
+coverImage: https://flomo-resource.oss-cn-shanghai.aliyuncs.com/101/newversion.png!webp
 ---
 
 作为一名 flomo 的忠实用户，我想和大家分享这个改变了我记录方式的宝藏工具。flomo 不仅仅是一款笔记应用，它更像是一位贴心的思考伙伴，帮助我捕捉生活中那些稍纵即逝的灵感火花。还记得第一次使用 flomo 时，那种轻松自在的记录体验让我眼前一亮 - 原来记录想法可以如此简单而愉悦！

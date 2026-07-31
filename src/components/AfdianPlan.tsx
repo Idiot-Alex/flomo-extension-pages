@@ -2,21 +2,21 @@ import { Popover, PopoverTrigger, PopoverContent } from '@/components/ui/popover
 import { Button } from '@/components/ui/button'
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from '@/components/ui/card'
 import { createAfdianOrder } from '@/lib/api'
-import { ApiRes } from '@/lib/type'
-import { Label } from '@radix-ui/react-dropdown-menu'
+import { ApiRes, type PayOption } from '@/lib/type'
+import { Label } from '@/components/ui/label'
 import { ToastAction } from '@radix-ui/react-toast'
 import { useNavigate } from 'react-router-dom'
 import { toast } from './ui/use-toast'
 import { useSelector } from 'react-redux'
 import { usePlan } from './ui/use-plan'
+import type { RootState } from '@/store/store'
 
 export function AfdianPlan() {
-
-  const user = useSelector((state: any) => {
+  const user = useSelector((state: RootState) => {
     return state.user
   })
-
   const plan = usePlan()
+  const navigate = useNavigate()
 
   const afdianPayPlans = [
     {
@@ -42,8 +42,6 @@ export function AfdianPlan() {
   ]
 
   const renderAfdianPay = () => {
-    const navigate = useNavigate()
-
     const afdianPayList = [
       {
         title: '半年',
@@ -59,7 +57,7 @@ export function AfdianPlan() {
       },
     ]
 
-    const toPay = (payData: any) => {
+    const toPay = (payData: PayOption) => {
       if (!user.email) {
         toast({
           variant: "destructive",
@@ -83,6 +81,11 @@ export function AfdianPlan() {
             description: res.msg
           })
         }
+      }).catch(() => {
+        toast({
+          variant: 'destructive',
+          description: '下单失败，请稍后重试',
+        })
       })
     }
     return (
@@ -119,7 +122,7 @@ export function AfdianPlan() {
       <CardFooter className="border-t px-6 py-4">
         <Popover>
           <PopoverTrigger asChild>
-            <Button className="w-full" color="orange">立即购买</Button>
+          <Button className="w-full">立即购买</Button>
           </PopoverTrigger>
           <PopoverContent className="w-80">
             <div className="grid gap-4">

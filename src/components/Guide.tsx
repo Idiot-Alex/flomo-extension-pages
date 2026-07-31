@@ -1,20 +1,13 @@
 import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
 import { Button } from '@/components/ui/button'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import { FLOMO_EXTENSION_FILE_URL, FLOMO_EXTENSION_WEB_STORE_URL, FLOMO_EXTENSION_EDGE_STORE_URL } from '@/lib/type'
 import { useRef, useState, useEffect } from 'react'
 
 export function Guide() {
-  {/* 新增 metadata 设置 */}
-  useEffect(() => {
-    document.title = 'Flomo Extension 使用指南 - 浮墨笔记浏览器插件安装使用教程' // Added 浮墨笔记
-    const metaDescription = document.querySelector('meta[name="description"]')
-    if (metaDescription) {
-      metaDescription.setAttribute('content', 'Flomo (浮墨笔记) 浏览器扩展完整使用指南，包含插件安装教程、常见问题解答、售后服务说明以及功能演示。帮助您快速掌握Flomo插件的使用方法，提升笔记效率。') // Added Flomo (浮墨笔记)
-    }
-  }, [])
   const navigate = useNavigate()
+  const [searchParams] = useSearchParams()
   const [activeSection, setActiveSection] = useState('instruction')
   const observerRef = useRef<IntersectionObserver | null>(null)
 
@@ -46,6 +39,16 @@ export function Guide() {
     }
   }, [])
 
+  useEffect(() => {
+    const requestedSection = searchParams.get('action')
+    if (!requestedSection || !['instruction', 'install', 'sale', 'faq'].includes(requestedSection)) {
+      return
+    }
+
+    setActiveSection(requestedSection)
+    document.getElementById(requestedSection)?.scrollIntoView({ behavior: 'smooth' })
+  }, [searchParams])
+
   const onAction = (action: string) => {
     const path = `#${action}`
     navigate(path)
@@ -57,15 +60,15 @@ export function Guide() {
   }
 
   const onDownload = () => {
-    window.open(FLOMO_EXTENSION_FILE_URL)
+    window.open(FLOMO_EXTENSION_FILE_URL, '_blank', 'noopener,noreferrer')
   }
 
   const showImages = () => {
     const imgList = [
-      '/flomo-extension-shot1.png',
-      '/flomo-extension-shot2.png',
-      '/flomo-extension-shot3.png',
-      '/flomo-extension-shot4.png',
+      '/flomo-extension-shot1.webp',
+      '/flomo-extension-shot2.webp',
+      '/flomo-extension-shot3.webp',
+      '/flomo-extension-shot4.webp',
     ]
    
     return (
@@ -79,6 +82,10 @@ export function Guide() {
               src={img} 
               alt={`Flomo Extension 功能截图 ${index + 1}`}
               className="w-full h-auto transform transition-transform duration-300 group-hover:scale-105"
+              loading="lazy"
+              decoding="async"
+              width="1200"
+              height="900"
             />
             <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
           </div>
@@ -90,7 +97,7 @@ export function Guide() {
   return (
     <div className="flex min-h-screen w-full flex-col">
       <Header />
-      <main className="flex min-h-[calc(100vh_-_theme(spacing.16))] flex-1 flex-col gap-4 bg-muted/40 p-4 md:gap-8 md:p-10">
+      <main id="main-content" className="flex min-h-[calc(100vh_-_theme(spacing.16))] flex-1 flex-col gap-4 bg-muted/40 p-4 md:gap-8 md:p-10">
         <div className="container">
           <div className="flex flex-col items-center text-center py-16">
             <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
@@ -139,14 +146,14 @@ export function Guide() {
                     立即下载插件
                   </Button>
                   <Button 
-                    onClick={() => window.open(FLOMO_EXTENSION_WEB_STORE_URL)}
+                    onClick={() => window.open(FLOMO_EXTENSION_WEB_STORE_URL, '_blank', 'noopener,noreferrer')}
                     className="w-full"
                     variant="outline"
                   >
                     Chrome 扩展商店安装
                   </Button>
                   <Button
-                    onClick={() => window.open(FLOMO_EXTENSION_EDGE_STORE_URL)}
+                    onClick={() => window.open(FLOMO_EXTENSION_EDGE_STORE_URL, '_blank', 'noopener,noreferrer')}
                     className="w-full"
                     variant="outline"
                   >
@@ -179,7 +186,7 @@ export function Guide() {
                   <div>
                     <h3 className="text-lg font-semibold mb-4">快速记录演示</h3>
                     <div className="rounded-lg overflow-hidden shadow-lg">
-                      <video className="w-full" controls autoPlay muted playsInline>
+                      <video className="w-full" controls muted playsInline preload="metadata" poster="/flomo-extension-shot1.webp">
                         <source src="/flomo-extension-usage-1.mp4"></source>
                       </video>
                     </div>
@@ -230,7 +237,7 @@ export function Guide() {
                   <div className="grid gap-3 mb-4">
                     <p>如果您遇到了解决不了的问题，请扫描添加下面二维码（烦请备注：flomo插件）:</p>
                     <p>
-                      <img src="/hotstrip-wx.jpg" alt="Flomo 插件售后服务微信二维码" className="w-60 rounded-lg shadow-md"></img>
+                      <img src="/hotstrip-wx.jpg" alt="Flomo 插件售后服务微信二维码" className="w-60 rounded-lg shadow-md" loading="lazy" decoding="async" width="950" height="1295"></img>
                     </p>
                   </div>
                   <div className="grid gap-3 mb-4">

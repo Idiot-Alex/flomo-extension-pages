@@ -2,22 +2,23 @@ import { Popover, PopoverTrigger, PopoverContent } from '@/components/ui/popover
 import { Button } from '@/components/ui/button'
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from '@/components/ui/card'
 import { createWxOrder } from '@/lib/api'
-import { FLOMO_EXTENSION_WEB_URL, ApiRes } from '@/lib/type'
-import { Label } from '@radix-ui/react-dropdown-menu'
+import { FLOMO_EXTENSION_WEB_URL, ApiRes, type PayOption } from '@/lib/type'
+import { Label } from '@/components/ui/label'
 import { ToastAction } from '@radix-ui/react-toast'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { toast } from './ui/use-toast'
 import { useSelector } from 'react-redux'
 import { usePlan } from './ui/use-plan'
+import type { RootState } from '@/store/store'
 
 export function LtzfWxPlan() {
-
-  const user = useSelector((state: any) => {
+  const user = useSelector((state: RootState) => {
     return state.user
   })
-
   const plan = usePlan()
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false)
+  const navigate = useNavigate()
 
   const wxPlans = [
     {
@@ -69,10 +70,7 @@ export function LtzfWxPlan() {
   ]
 
   const renderWxPay = () => {
-    const [isButtonDisabled, setIsButtonDisabled] = useState(false)
-    const navigate = useNavigate()
-
-    const toPay = (payData: any) => {
+    const toPay = (payData: PayOption) => {
       setIsButtonDisabled(true)
       if (!user.email) {
         toast({
@@ -115,7 +113,7 @@ export function LtzfWxPlan() {
             description: res.msg
           })
         }
-      }).catch(_ => {
+      }).catch(() => {
         toast({
           variant: "destructive",
           description: '下单失败'
@@ -126,8 +124,8 @@ export function LtzfWxPlan() {
 
     return (<>
       {
-        wxPayList.map((item, i) => (
-          <div key={i} className="grid grid-cols-3 items-center gap-4 border-b pb-4">
+        wxPayList.map((item) => (
+          <div key={item.month} className="grid grid-cols-3 items-center gap-4 border-b pb-4 last:border-0 last:pb-0">
             <Label>{item.title}</Label>
             {
               item.price === item.payPrice ?
@@ -148,20 +146,21 @@ export function LtzfWxPlan() {
   }
 
   return (<>
-    <Card className="mx-auto w-full max-w-sm bg-gradient-to-b from-white to-green-50 shadow-lg hover:shadow-xl transition-shadow border-t-4 border-green-500">
+    <Card className="mx-auto flex h-full w-full max-w-sm flex-col border-primary/40 bg-white shadow-sm ring-1 ring-primary/10">
       <CardHeader>
-        <CardTitle className="text-2xl">Pay 套餐（微信支付）</CardTitle>
+        <p className="text-xs font-semibold uppercase tracking-[0.16em] text-primary">微信支付</p>
+        <CardTitle className="text-2xl">Pay 套餐</CardTitle>
         <CardDescription>
           需要注册账号并付费，每日 <b className="text-zinc-600">无限</b> 次使用插件保存笔记
         </CardDescription>
       </CardHeader>
-      <CardContent>
+      <CardContent className="flex-1">
         { plan.renderPlan(wxPlans) }
       </CardContent>
-      <CardFooter className="border-t px-6 py-4">
+      <CardFooter className="border-t px-6 py-5">
         <Popover>
           <PopoverTrigger asChild>
-            <Button className="w-full" color="orange">立即购买</Button>
+            <Button className="w-full">立即购买</Button>
           </PopoverTrigger>
           <PopoverContent className="w-80">
             <div className="grid gap-4">

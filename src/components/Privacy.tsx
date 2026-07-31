@@ -6,12 +6,12 @@ import { motion } from 'framer-motion'
 
 export function Privacy() {
   return (
-    <div className="min-h-screen bg-cover bg-center" style={{ backgroundImage: "url('/landing-bg.jpg')" }}>
+    <div className="min-h-screen bg-cover bg-center" style={{ backgroundImage: "url('/landing-bg.webp')" }}>
       {/* Overlay */}
       <div className="absolute inset-0 bg-black/50"></div>
       
       <Header />
-      <div className="flex-1 relative z-10">
+      <main id="main-content" className="relative z-10 flex-1">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -123,7 +123,7 @@ export function Privacy() {
             <CardFooter className="border-t px-6 py-4"></CardFooter>
           </Card>
         </motion.div>
-      </div>
+      </main>
       <Footer />
     </div>
   )

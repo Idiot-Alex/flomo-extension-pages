@@ -7,93 +7,118 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
-import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
-import { useSelector } from 'react-redux'
-import { useNavigate, useLocation } from 'react-router-dom'
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetDescription,
+  SheetTitle,
+  SheetTrigger,
+} from '@/components/ui/sheet'
+import { useDispatch, useSelector } from 'react-redux'
+import { Link, NavLink, useNavigate } from 'react-router-dom'
+import { clearUser } from '@/store/actions'
+import type { AppDispatch, RootState } from '@/store/store'
+
+const navItems = [
+  { to: '/', label: '主页' },
+  { to: '/guide', label: '使用说明' },
+  { to: '/plans', label: '价格套餐' },
+  { to: '/posts', label: '文章' },
+]
+
+const navLinkClass = ({ isActive }: { isActive: boolean }) => [
+  'rounded-md px-3 py-2 text-sm font-medium transition-colors',
+  'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
+  isActive
+    ? 'bg-primary/10 text-primary'
+    : 'text-muted-foreground hover:bg-secondary hover:text-foreground',
+].join(' ')
 
 export function Header() {
-  const location = useLocation()
   const navigate = useNavigate()
-  const user = useSelector((state: any) => state.user)
-
-  const isActive = (path: string) => location.pathname === path
+  const dispatch = useDispatch<AppDispatch>()
+  const user = useSelector((state: RootState) => state.user)
 
   const onLogout = () => {
-    localStorage.clear()
+    dispatch(clearUser())
     navigate('/login')
   }
 
-  const onAccount = () => {
-    navigate('/account')
-  }
-
   return (
-    <header className="z-50 sticky top-0 flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6">
-      <img alt="flomo extension logo" src="/favicon.png" className="h-20 mt-16 border rounded-[4rem] border-gray-300" />
-      <nav className="hidden flex-col gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6">
-        <a href="/" className={`${isActive('/') ? 'text-white bg-primary rounded-lg px-3 py-1.5 font-medium transition-all duration-300' : 'text-muted-foreground hover:text-foreground'} transition-colors`}>
-          主页
-        </a>
-        <a href="/guide" className={`${isActive('/guide') ? 'text-white bg-primary rounded-lg px-3 py-1.5 font-medium transition-all duration-300' : 'text-muted-foreground hover:text-foreground'} transition-colors`}>
-          使用说明
-        </a>
-        <a href="/plans" className={`${isActive('/plans') ? 'text-white bg-primary rounded-lg px-3 py-1.5 font-medium transition-all duration-300' : 'text-muted-foreground hover:text-foreground'} transition-colors`}>
-          价格套餐
-        </a>
-        <a href="/posts" className={`${isActive('/posts') ? 'text-white bg-primary rounded-lg px-3 py-1.5 font-medium transition-all duration-300' : 'text-muted-foreground hover:text-foreground'} transition-colors`}>
-          文章
-        </a>
-        {!user.email && (
-          <a href="/register" className={`${isActive('/register') ? 'text-white bg-primary rounded-lg px-3 py-1.5 font-medium transition-all duration-300' : 'text-muted-foreground hover:text-foreground'}`}>注册</a>
-        )}
-      </nav>
-      <Sheet>
-        <SheetTrigger asChild>
-          <Button variant="outline" size="icon" className="shrink-0 md:hidden">
-            <Menu className="h-5 w-5" />
-            <span className="sr-only">Toggle navigation menu</span>
-          </Button>
-        </SheetTrigger>
-        <SheetContent side="left">
-          <nav className="grid gap-6 text-lg font-medium">
-            <a href="/" className={`${isActive('/') ? 'text-white bg-primary rounded-lg px-3 py-1.5 font-medium transition-all duration-300' : 'text-muted-foreground hover:text-foreground'}`}>
-              主页
-            </a>
-            <a href="/guide" className={`${isActive('/guide') ? 'text-white bg-primary rounded-lg px-3 py-1.5 font-medium transition-all duration-300' : 'text-muted-foreground hover:text-foreground'} transition-colors`}>
-              使用说明
-            </a>
-            <a href="/plans" className={`${isActive('/plans') ? 'text-white bg-primary rounded-lg px-3 py-1.5 font-medium transition-all duration-300' : 'text-muted-foreground hover:text-foreground'}`}>
-              价格套餐
-            </a>
-            <a href="/posts" className={`${isActive('/posts') ? 'text-white bg-primary rounded-lg px-3 py-1.5 font-medium transition-all duration-300' : 'text-muted-foreground hover:text-foreground'} transition-colors`}>
-              文章
-            </a>
-            {!user.email && (
-              <a href="/register" className={`${isActive('/register') ? 'text-white bg-primary rounded-lg px-3 py-1.5 font-medium transition-all duration-300' : 'text-muted-foreground hover:text-foreground'}`}>注册</a>
-            )}
-          </nav>
-        </SheetContent>
-      </Sheet>
-      <div className="flex items-center gap-4 md:ml-auto md:gap-2 lg:gap-4">
-        {user.email ? (
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="secondary" size="icon" className="rounded-full">
-                <CircleUser className="h-5 w-5" />
-                <span className="absolute right-20">{user.email}</span>
+    <header className="sticky top-0 z-40 border-b border-emerald-950/10 bg-background/90 backdrop-blur-xl">
+      <div className="mx-auto flex h-16 w-full max-w-7xl items-center gap-4 px-4 sm:px-6 lg:px-8">
+        <Link
+          to="/"
+          className="flex shrink-0 items-center gap-2 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+          aria-label="Flomo Extension 首页"
+        >
+          <img src="/favicon.png" alt="" className="h-9 w-9 rounded-xl" width="128" height="128" />
+          <span className="hidden text-sm font-semibold tracking-tight text-foreground sm:inline">Flomo Extension</span>
+        </Link>
+
+        <nav className="hidden items-center gap-1 md:flex" aria-label="主导航">
+          {navItems.map((item) => (
+            <NavLink key={item.to} to={item.to} end={item.to === '/'} className={navLinkClass}>
+              {item.label}
+            </NavLink>
+          ))}
+          {!user.email && (
+            <NavLink to="/register" className={navLinkClass}>注册</NavLink>
+          )}
+        </nav>
+
+        <div className="ml-auto flex items-center gap-2">
+          {user.email ? (
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" className="max-w-56 gap-2 px-3">
+                  <CircleUser className="h-5 w-5 shrink-0" />
+                  <span className="hidden truncate lg:inline">{user.email}</span>
+                  <span className="sr-only lg:hidden">打开账户菜单</span>
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                <DropdownMenuItem onClick={() => navigate('/account')}>我的账户</DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem onClick={onLogout}>退出登录</DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          ) : (
+            <Button asChild size="sm">
+              <Link to="/login">登录</Link>
+            </Button>
+          )}
+
+          <Sheet>
+            <SheetTrigger asChild>
+              <Button variant="outline" size="icon" className="md:hidden" aria-label="打开导航菜单">
+                <Menu className="h-5 w-5" />
               </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              <DropdownMenuItem onClick={onAccount}>我的账户</DropdownMenuItem>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem onClick={onLogout}>退出登录</DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-        ) : (
-          <Button>
-            <a href="/login" className="text-muted-foreground hover:text-foreground">登录</a>
-          </Button>
-        )}
+            </SheetTrigger>
+            <SheetContent side="right" className="w-[18rem]">
+              <SheetTitle className="flex items-center gap-2">
+                <img src="/favicon.png" alt="" className="h-8 w-8 rounded-lg" width="128" height="128" />
+                Flomo Extension
+              </SheetTitle>
+              <SheetDescription className="sr-only">选择要前往的页面</SheetDescription>
+              <nav className="mt-8 grid gap-2" aria-label="移动端主导航">
+                {navItems.map((item) => (
+                  <SheetClose asChild key={item.to}>
+                    <NavLink to={item.to} end={item.to === '/'} className={navLinkClass}>
+                      {item.label}
+                    </NavLink>
+                  </SheetClose>
+                ))}
+                {!user.email && (
+                  <SheetClose asChild>
+                    <NavLink to="/register" className={navLinkClass}>注册</NavLink>
+                  </SheetClose>
+                )}
+              </nav>
+            </SheetContent>
+          </Sheet>
+        </div>
       </div>
     </header>
   )

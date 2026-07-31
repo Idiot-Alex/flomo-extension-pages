@@ -41,28 +41,29 @@ export function FreePlan() {
 
   const onDownload = () => {
     onConfetti()
-    window.open(FLOMO_EXTENSION_FILE_URL)
+    window.open(FLOMO_EXTENSION_FILE_URL, '_blank', 'noopener,noreferrer')
   }
 
   const onWebStore = () => {
     onConfetti()
-    window.open(FLOMO_EXTENSION_WEB_STORE_URL)
+    window.open(FLOMO_EXTENSION_WEB_STORE_URL, '_blank', 'noopener,noreferrer')
   }
 
   return (
-    <Card className="mx-auto w-full max-w-sm bg-gradient-to-b from-white to-blue-50 shadow-lg hover:shadow-xl transition-shadow border-t-4 border-blue-500">
+    <Card className="mx-auto flex h-full w-full max-w-sm flex-col border-border/80 bg-white shadow-sm">
       <CardHeader>
+        <p className="text-xs font-semibold uppercase tracking-[0.16em] text-muted-foreground">轻量体验</p>
         <CardTitle className="text-2xl">Free 套餐</CardTitle>
         <CardDescription>
           无需注册账号，每日 2 次机会免费使用插件保存笔记
         </CardDescription>
       </CardHeader>
-      <CardContent>
+      <CardContent className="flex-1">
         { plan.renderPlan(freePlans) }
       </CardContent>
-      <CardFooter className="border-t px-6 py-4 flex flex-col">
+      <CardFooter className="flex flex-col border-t px-6 py-5">
         <Button className="w-full" onClick={onDownload}>立即下载使用</Button>
-        <Button className="w-full mt-4" onClick={onWebStore}>浏览器扩展商店安装</Button>
+        <Button className="mt-3 w-full" variant="outline" onClick={onWebStore}>浏览器扩展商店安装</Button>
       </CardFooter>
     </Card>
   )
