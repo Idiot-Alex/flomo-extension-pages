@@ -20,7 +20,7 @@ export interface PayOption {
   payPrice: number
 }
 
-export const FLOMO_EXTENSION_FILE_URL = 'https://flomo-extension-r2.hotstrips.org/flomo-extension-1.30.1-chrome.zip'
+export const FLOMO_EXTENSION_FILE_URL = 'https://flomo-extension-r2.hotstrips.org/flomo-extension-1.40.0-chrome.zip'
 export const FLOMO_EXTENSION_WEB_STORE_URL = 'https://chromewebstore.google.com/detail/flomo-extension/oepgmpdaajlphmdkepgcgchlmnbpmddf'
 export const FLOMO_EXTENSION_WEB_URL = 'https://hotstrips.org'
 // Keep payment callbacks on the legacy origin until its provider allowlists and account-return flow are migrated and verified.

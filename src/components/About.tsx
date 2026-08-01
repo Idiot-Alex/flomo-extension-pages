@@ -47,7 +47,7 @@ export function About() {
             <section className="border-b border-border py-8">
               <h2 className="font-editorial text-3xl font-medium">我们怎样核对产品说明</h2>
               <div className="mt-5 space-y-4 text-base leading-8 text-muted-foreground">
-                <p>当前文档以 Chrome 版 v1.30.1 的扩展清单、页面脚本、弹窗编辑器、账户接口调用和本地存储实现为核验范围，最近一次核验日期为 2026 年 8 月 1 日。</p>
+                <p>当前文档以 Chrome 版 v1.40.0 的扩展清单、页面脚本、弹窗编辑器、账户接口调用和本地存储实现为核验范围，最近一次核验日期为 2026 年 8 月 1 日。</p>
                 <p>我们会区分源码中可以确认的行为、需要在产品页面复核的结果和尚未独立验证的结论，并为实现相关说明标注适用版本。第三方产品的信息则优先引用其官方帮助页或商店页面。</p>
                 <p>
                   详细依据可阅读<Link to="/posts/flomo-extension-permissions-data-flow">权限与数据流说明</Link>、

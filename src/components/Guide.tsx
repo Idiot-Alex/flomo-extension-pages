@@ -127,7 +127,7 @@ export function Guide() {
             <p className="mt-5 max-w-2xl text-base leading-8 text-muted-foreground sm:text-lg">
               从安装到第一次保存，说明扩展与 flomo 网页如何配合、草稿存在哪里，以及保存失败时如何逐项排查。
             </p>
-            <p className="mt-4 text-sm text-muted-foreground">适用于 Chrome 版 v1.30.1 · 内容核验于 2026 年 8 月 1 日</p>
+            <p className="mt-4 text-sm text-muted-foreground">适用于 Chrome 版 v1.40.0 · 内容核验于 2026 年 8 月 1 日</p>
           </header>
 
           <nav className="-mx-4 flex gap-1 overflow-x-auto border-b border-border px-4 py-4 md:hidden" aria-label="指南章节">
