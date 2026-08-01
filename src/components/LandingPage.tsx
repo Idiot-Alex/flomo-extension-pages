@@ -103,7 +103,7 @@ export function LandingPage() {
       <main id="main-content" className="kami-page">
         <header className="border-b py-16 sm:py-20 lg:py-24">
           <div className="flex flex-wrap items-center justify-between gap-4 text-xs text-muted-foreground">
-            <p className="kami-eyebrow">浏览器记录工具 · v1.30.0</p>
+            <p className="kami-eyebrow">浏览器记录工具 · v1.30.1</p>
             <div className="flex items-center gap-5">
               <Link to="/guide" className="transition-colors hover:text-primary">使用说明</Link>
             </div>
@@ -245,7 +245,7 @@ export function LandingPage() {
           <div className="mb-8 max-w-2xl">
             <p className="kami-eyebrow">03 · 实现与边界</p>
             <h2 id="technical-guides-title" className="kami-section-title mt-3">安装前，先知道扩展具体会做什么</h2>
-            <p className="mt-4 text-base leading-7 text-muted-foreground">以下文档根据 Chrome 版 v1.30.0 源码核验，明确区分浏览器本地草稿、Flomo Extension 账户和 flomo 网页账户。</p>
+            <p className="mt-4 text-base leading-7 text-muted-foreground">以下文档根据 Chrome 版 v1.30.1 源码核验，明确区分浏览器本地草稿、Flomo Extension 账户和 flomo 网页账户。</p>
           </div>
 
           <div className="grid border-t md:grid-cols-3">

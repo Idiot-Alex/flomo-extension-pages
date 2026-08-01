@@ -41,7 +41,7 @@ const publicRoutes = [
     route: '/guide',
     title: 'Flomo Extension 使用指南 - 安装与使用教程',
     description: '查看 Flomo Extension 的 Chrome 安装步骤、使用方法、常见问题和售后支持。',
-    fallback: '<h1>Flomo Extension 使用指南</h1><p>适用于 Chrome 版 v1.30.0，说明扩展账户与 flomo 网页账户的区别，以及本地草稿如何保存。</p><h2>完成第一次保存</h2><ol><li>从 Chrome 扩展商店安装并固定扩展。</li><li>在当前窗口打开 <a href="https://v.flomoapp.com/mine">flomo 全部笔记页面</a>并登录自己的 flomo 账户。</li><li>打开扩展，输入内容或把主动选择的网页文字加入本地草稿。</li><li>点击保存，再回到 flomo 笔记列表确认结果。</li></ol><p>免费模式不要求创建 Flomo Extension 账户；付费权益账户与 flomo 网页账户彼此独立。</p><h2>常见问题</h2><p>保存按钮不可用时，确认 flomo 标签页位于当前窗口。找不到编辑框时，进入“全部笔记”并刷新页面，再重新打开扩展。</p>',
+    fallback: '<h1>Flomo Extension 使用指南</h1><p>适用于 Chrome 版 v1.30.1，说明扩展账户与 flomo 网页账户的区别，以及本地草稿如何保存。</p><h2>完成第一次保存</h2><ol><li>从 Chrome 扩展商店安装并固定扩展。</li><li>在当前窗口打开 <a href="https://v.flomoapp.com/mine">flomo 全部笔记页面</a>并登录自己的 flomo 账户。</li><li>打开扩展，输入内容或把主动选择的网页文字加入本地草稿。</li><li>点击保存，再回到 flomo 笔记列表确认结果。</li></ol><p>免费模式不要求创建 Flomo Extension 账户；付费权益账户与 flomo 网页账户彼此独立。</p><h2>常见问题</h2><p>保存按钮不可用时，确认 flomo 标签页位于当前窗口。找不到编辑框时，进入“全部笔记”并刷新页面，再重新打开扩展。</p>',
   },
   {
     route: '/plans',
@@ -53,14 +53,14 @@ const publicRoutes = [
   {
     route: '/posts',
     title: 'Flomo Extension 文章与使用指南',
-    description: '阅读基于 Chrome 版 v1.30.0 源码核验的权限、数据流、保存故障与本地草稿指南。',
+    description: '阅读基于 Chrome 版 v1.30.1 源码核验的权限、数据流、保存故障与本地草稿指南。',
   },
   {
     route: '/about',
     title: '关于我们 - Flomo Extension',
     description: '了解 Flomo Extension 的产品目标、独立项目身份、内容原则与联系渠道。',
     ads: false,
-    fallback: '<h1>关于 Flomo Extension</h1><p>Flomo Extension 是由独立开发者维护的 Chrome 浏览器扩展，与 flomo 官方不存在隶属、授权或代言关系。</p><h2>内容如何核验</h2><p>当前文档依据 Chrome 版 v1.30.0 的扩展清单、页面脚本、账户接口调用与本地存储实现核对，并明确标注无法由源码单独证明的结论。</p><p><a href="/posts/flomo-extension-permissions-data-flow">查看权限与数据流依据</a>。</p><h2>联系与反馈</h2><p>产品、账户或内容问题可发送邮件至 <a href="mailto:hotstrip.zx@gmail.com">hotstrip.zx@gmail.com</a>。</p>',
+    fallback: '<h1>关于 Flomo Extension</h1><p>Flomo Extension 是由独立开发者维护的 Chrome 浏览器扩展，与 flomo 官方不存在隶属、授权或代言关系。</p><h2>内容如何核验</h2><p>当前文档依据 Chrome 版 v1.30.1 的扩展清单、页面脚本、账户接口调用与本地存储实现核对，并明确标注无法由源码单独证明的结论。</p><p><a href="/posts/flomo-extension-permissions-data-flow">查看权限与数据流依据</a>。</p><h2>联系与反馈</h2><p>产品、账户或内容问题可发送邮件至 <a href="mailto:hotstrip.zx@gmail.com">hotstrip.zx@gmail.com</a>。</p>',
   },
   {
     route: '/privacy',

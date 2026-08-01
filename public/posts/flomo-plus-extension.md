@@ -111,7 +111,7 @@ Flomo Plus 是扩展名称；flomo 官方使用自己的会员体系。名称中
 - Flomo Plus 更偏向增强 flomo 网页端，并提供批注和导入能力；
 - Flomo Extension 更偏向在当前网页打开记录入口，形成浏览器本地草稿，再交给已登录的 flomo 网页保存。
 
-本站对 Flomo Extension 1.30.0 源码进行了核验：它需要当前浏览器窗口中有已登录的 flomo 标签页；笔记正文不通过 Chrome 扩展自身调用的 Flomo Extension 账户 API 直接提交。选区功能也不会自动归档整页、保留图片或附加来源网址。
+本站对 Flomo Extension 1.30.1 源码进行了核验：它需要当前浏览器窗口中有已登录的 flomo 标签页；笔记正文不通过 Chrome 扩展自身调用的 Flomo Extension 账户 API 直接提交。选区功能也不会自动归档整页、保留图片或附加来源网址。
 
 这些说明针对本站维护的 Flomo Extension，不代表 Flomo Plus 的实现。完整选择建议可阅读《[Flomo Plus 与 Flomo Extension 怎么选？](/posts/compare-flomo-plugins)》；本站扩展的具体边界见[权限与数据流说明](/posts/flomo-extension-permissions-data-flow)和[保存流程与故障排查](/posts/flomo-extension-save-flow-troubleshooting)。
 
