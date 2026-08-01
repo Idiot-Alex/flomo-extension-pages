@@ -44,7 +44,7 @@ const pageMeta: Record<string, PageMeta> = {
   },
   '/posts': {
     title: 'Flomo Extension 文章与使用指南',
-    description: '阅读基于 Chrome 版 v1.20.0 源码核验的权限、数据流、保存故障与本地草稿指南。',
+    description: '阅读基于 Chrome 版 v1.30.0 源码核验的权限、数据流、保存故障与本地草稿指南。',
   },
   '/privacy': {
     title: '隐私政策 - Flomo Extension',

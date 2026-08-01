@@ -64,7 +64,7 @@ const sections = [
     id: 'contact',
     title: '联系我们',
     content: [
-      '账户、支付、产品或条款问题可发送邮件至 flomo-extension@idiotalex.com',
+      '账户、支付、产品或条款问题可发送邮件至 hotstrip.zx@gmail.com',
       '为便于核查支付问题，请提供订单标识和问题描述，但不要发送密码或完整支付凭据',
     ],
   },

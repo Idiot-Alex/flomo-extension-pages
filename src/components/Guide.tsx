@@ -127,7 +127,7 @@ export function Guide() {
             <p className="mt-5 max-w-2xl text-base leading-8 text-muted-foreground sm:text-lg">
               从安装到第一次保存，说明扩展与 flomo 网页如何配合、草稿存在哪里，以及保存失败时如何逐项排查。
             </p>
-            <p className="mt-4 text-sm text-muted-foreground">适用于 Chrome 版 v1.20.0 · 内容核验于 2026 年 8 月 1 日</p>
+            <p className="mt-4 text-sm text-muted-foreground">适用于 Chrome 版 v1.30.0 · 内容核验于 2026 年 8 月 1 日</p>
           </header>
 
           <nav className="-mx-4 flex gap-1 overflow-x-auto border-b border-border px-4 py-4 md:hidden" aria-label="指南章节">
@@ -309,7 +309,7 @@ export function Guide() {
                 <p className="kami-eyebrow">03 · 联系支持</p>
                 <h2 className="font-editorial text-3xl font-medium">仍未解决？</h2>
                 <div className="prose max-w-none">
-                  <p>发送邮件至 <a href="mailto:flomo-extension@idiotalex.com">flomo-extension@idiotalex.com</a>，或通过<a href="https://txc.qq.com/products/648748" target="_blank" rel="noreferrer">问题反馈页面</a>提交信息。</p>
+                  <p>发送邮件至 <a href="mailto:hotstrip.zx@gmail.com">hotstrip.zx@gmail.com</a>，或通过<a href="https://txc.qq.com/products/648748" target="_blank" rel="noreferrer">问题反馈页面</a>提交信息。</p>
                   <p>请附上 Chrome 版本、扩展版本、看到的完整提示，以及问题发生在“打开扩展”“连接 flomo 页面”还是“点击保存”哪一步。不要发送密码、验证码或完整支付凭据。</p>
                   <p><img src="/hotstrip-wx.jpg" alt="Flomo Extension 微信支持二维码" className="w-60 rounded-xl border border-border" loading="lazy" decoding="async" width="950" height="1295"></img></p>
                 </div>

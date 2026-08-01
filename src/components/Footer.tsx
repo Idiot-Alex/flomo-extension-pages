@@ -20,7 +20,7 @@ export function Footer() {
             <span className="mx-2 text-border" aria-hidden="true">·</span>
             <a href="https://txc.qq.com/products/648748" className="transition-colors hover:text-primary" target="_blank" rel="noreferrer">问题反馈</a>
             <span className="mx-2 text-border" aria-hidden="true">·</span>
-            <a href="mailto:flomo-extension@idiotalex.com" className="transition-colors hover:text-primary">联系我们</a>
+            <a href="mailto:hotstrip.zx@gmail.com" className="transition-colors hover:text-primary">联系我们</a>
           </nav>
           <p className="font-editorial leading-6">记录不该打断思考，它只需要离你更近一点。</p>
           <p className="mt-2 text-xs">© {new Date().getFullYear()} Flomo Extension</p>

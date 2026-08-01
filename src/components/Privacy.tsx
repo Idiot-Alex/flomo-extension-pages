@@ -20,7 +20,7 @@ const privacySections = [
     title: '扩展中的笔记数据流',
     content: (
       <>
-        <p>Chrome 版 v1.20.0 的笔记处理流程如下：</p>
+        <p>Chrome 版 v1.30.0 的笔记处理流程如下：</p>
         <ul className="mt-3 list-disc space-y-2 pl-5">
           <li>在普通网页中选中文字时，扩展会在页面本地读取当前选区并显示操作入口；只有您点击“添加到 flomo extension 草稿”后，选中文字才会写入扩展草稿</li>
           <li>编辑器草稿保存在 Chrome 扩展的本地存储中，用于关闭并重新打开扩展后恢复内容</li>
@@ -28,7 +28,7 @@ const privacySections = [
           <li>Chrome 扩展自身调用的 Flomo Extension 账户 API 仅用于验证码、注册、登录和套餐状态，不包含上传笔记正文的接口</li>
         </ul>
         <p className="mt-3">因此，更准确的表述是：笔记正文不会发送到 Chrome 扩展自身调用的 Flomo Extension 账户 API，但草稿会保存在浏览器本地，并在您发起保存时交给已登录的 flomo 网页处理。flomo 如何保存笔记由其自身政策和服务规则约束。</p>
-        <p className="mt-3">上述流程根据 v1.20.0 源码于 2026 年 8 月 1 日核验。版本更新后，请同时以 Chrome 安装时展示的权限和本页最新说明为准。</p>
+        <p className="mt-3">上述流程根据 v1.30.0 源码于 2026 年 8 月 1 日核验。版本更新后，请同时以 Chrome 安装时展示的权限和本页最新说明为准。</p>
       </>
     ),
   },
@@ -134,7 +134,7 @@ const privacySections = [
     content: (
       <>
         <p>当产品、第三方服务或适用规则发生变化时，我们可能更新本政策，并在页面顶部标明最近更新日期。</p>
-        <p className="mt-3">如对隐私政策或个人信息处理有疑问，请发送邮件至 <a href="mailto:flomo-extension@idiotalex.com">flomo-extension@idiotalex.com</a>。</p>
+        <p className="mt-3">如对隐私政策或个人信息处理有疑问，请发送邮件至 <a href="mailto:hotstrip.zx@gmail.com">hotstrip.zx@gmail.com</a>。</p>
       </>
     ),
   },

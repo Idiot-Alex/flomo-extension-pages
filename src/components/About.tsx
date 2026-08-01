@@ -47,7 +47,7 @@ export function About() {
             <section className="border-b border-border py-8">
               <h2 className="font-editorial text-3xl font-medium">我们怎样核对产品说明</h2>
               <div className="mt-5 space-y-4 text-base leading-8 text-muted-foreground">
-                <p>当前文档以 Chrome 版 v1.20.0 的扩展清单、页面脚本、弹窗编辑器、账户接口调用和本地存储实现为核验范围，最近一次核验日期为 2026 年 8 月 1 日。</p>
+                <p>当前文档以 Chrome 版 v1.30.0 的扩展清单、页面脚本、弹窗编辑器、账户接口调用和本地存储实现为核验范围，最近一次核验日期为 2026 年 8 月 1 日。</p>
                 <p>我们会区分源码中可以确认的行为、需要在产品页面复核的结果和尚未独立验证的结论，并为实现相关说明标注适用版本。第三方产品的信息则优先引用其官方帮助页或商店页面。</p>
                 <p>
                   详细依据可阅读<Link to="/posts/flomo-extension-permissions-data-flow">权限与数据流说明</Link>、
@@ -60,7 +60,7 @@ export function About() {
             <section className="py-8">
               <h2 className="font-editorial text-3xl font-medium">联系与反馈</h2>
               <div className="mt-5 space-y-3 text-base leading-8 text-muted-foreground">
-                <p>产品、账户或内容问题可发送邮件至 <a href="mailto:flomo-extension@idiotalex.com">flomo-extension@idiotalex.com</a>。</p>
+                <p>产品、账户或内容问题可发送邮件至 <a href="mailto:hotstrip.zx@gmail.com">hotstrip.zx@gmail.com</a>。</p>
                 <p>也可以通过<a href="https://txc.qq.com/products/648748" target="_blank" rel="noreferrer">问题反馈页面</a>提交建议或错误信息。</p>
                 <p>关于数据收集、广告与第三方服务的说明，请查看<Link to="/privacy">隐私政策</Link>。</p>
               </div>
